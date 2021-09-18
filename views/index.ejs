@@ -8,10 +8,72 @@
     <link rel="stylesheet" href="/styles/layout.css" type="text/css" />
 
     <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-    <script type="text/javascript" src="/scripts/app.js"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+    integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
+    crossorigin=""/>
+     <!-- Make sure you put this AFTER Leaflet's CSS -->
+   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+   integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
+   crossorigin=""></script>
+   <style>
+    html, body {
+      height: 100%
+    }
+    #mapid { height: 80%;
+       width: 80% }
+  </style>
   </head>
 
   <body>
-    <h1>Hello World!</h1>
+    <div id="mapid"></div>
+    <br>
+    <br>
+    <button id='get-coords'>Coords</button>
+    <br>
+    <br>
+    <button id='locate-current'>Locate me</button>
   </body>
+    <script>
+      $(function() {
+        getCoords();
+        mymap.on('locationfound', function(e) {
+          console.log(e.latlng);
+          mymap.setView(e.latlng);
+        })
+        locateMe();
+      })
+
+      const mymap = L.map('mapid').setView([51.508, -0.11], 13);
+      const coordDatabase = { url: undefined };
+
+      const getCoords = function() {
+        $('#get-coords').click(function() {
+          coordDatabase.url = mymap.getBounds();
+          console.log(coordDatabase);
+          console.log(coordDatabase.url._northEast.lat);
+          console.log(coordDatabase.url._northEast.lng);
+          console.log(coordDatabase.url._southWest.lat);
+          console.log(coordDatabase.url._southWest.lng);
+        })
+      }
+
+      const locateMe = function() {
+        $('#locate-current').click(function() {
+        mymap.locate({setView: true});
+      })
+      }
+
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: 'Map data, imagery &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors</a>',
+        maxZoom: 18,
+      }).addTo(mymap);
+
+      mymap.fitBounds([
+        [40.712, -74.227],
+        [40.774, -74.125]
+      ]);
+
+
+    </script>
 </html>
