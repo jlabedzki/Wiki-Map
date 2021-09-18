@@ -35,8 +35,7 @@ const mapsRoutes = require("./routes/maps");
 app.use('/maps', mapsRoutes);
 app.use('/maps/', mapsRoutes)
 
-// app.use("/api/users", mapsRoutes());
-// app.use("/api/widgets", widgetsRoutes(db));
+// app.use("/api/widgets", widgetsRoutes());
 
 
 

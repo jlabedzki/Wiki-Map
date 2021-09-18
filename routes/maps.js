@@ -1,5 +1,5 @@
 /*
- * All routes for Users are defined here
+ * All routes for Maps are defined here
  * Since this file is loaded in server.js into api/users,
  *   these routes are mounted onto /users
  * See: https://expressjs.com/en/guide/using-middleware.html#middleware.router
@@ -18,15 +18,33 @@ router.get('/', (req, res) => {
     });
 });
 
-// Another Route could be....
-// GET /maps/:maps_id etc.
-
+// GET /maps/:id
 router.get('/:id', (req, res) => {
   const id = req.params.id;
   queries.listMap(id)
     .then((map) => {
       res.json(map);
     });
+});
+
+// POST /maps/:id
+router.post('/', (req, res) => {
+  const userId = 2; // change to cookie later
+  const map = {
+    creator_id: 2,
+    title: 'hi',
+    longitude_1: '4.4',
+    latitude_1: '4.4',
+    longitude_2: '4.4',
+    latitude_2: '4.4',
+    category: 'hi'
+  }
+  // const map = req.body.map; //assuming map comes from req.body =D
+
+
+  queries.addMap(map, userId)
+    .then(res.send('Map created successfully!'))
+    .then(console.log(map));
 });
 
 module.exports = router;
