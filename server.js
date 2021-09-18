@@ -34,10 +34,14 @@ const widgetsRoutes = require("./routes/widgets");
 
 // Mount all resource routes
 // Note: Feel free to replace the example routes below with your own
-app.use("/api/users", mapsRoutes());
+// app.use("/api/users", mapsRoutes());
 app.use("/api/widgets", widgetsRoutes(db));
 // Note: mount other resources here, using the same pattern above
 
+
+// //RD Example Code **********
+// const mapsRouter = require('./routes/maps');
+app.use('/maps', mapsRoutes);
 
 // Home page
 // Warning: avoid creating more routes in this file!
