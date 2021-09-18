@@ -7,19 +7,15 @@
 
 const express = require('express');
 const router = express.Router();
+const queries = require('../lib/queries')
 
-module.exports = (db) => {
+module.exports = () => {
   router.get("/", (req, res) => {
-    db.query(`SELECT * FROM users;`)
-      .then(data => {
-        const users = data.rows;
-        res.json({ users });
+    queries.listAllMaps()
+      .then((maps) => {
+        res.json(maps);
       })
-      .catch(err => {
-        res
-          .status(500)
-          .json({ error: err.message });
-      });
   });
+
   return router;
 };
