@@ -10,21 +10,6 @@ const router = express.Router();
 const queries = require('../lib/queries')
 
 
-//original code before the break. >>>>>>>>>>>>>
-
-// module.exports = () => {
-//   router.get("/", (req, res) => {
-//     queries.listAllMaps()
-//       .then((maps) => {
-//         res.json(maps);
-//       })
-//   });
-
-//   return router;
-// };
-
-// Example code RD // >>>>>>>>>>>>>>>>>>>>>>>
-
 // GET /maps/
 router.get('/', (req, res) => {
   queries.listAllMaps()
@@ -35,5 +20,13 @@ router.get('/', (req, res) => {
 
 // Another Route could be....
 // GET /maps/:maps_id etc.
+
+router.get('/:id', (req, res) => {
+  const id = req.params.id;
+  queries.listMap(id)
+    .then((map) => {
+      res.json(map);
+    });
+});
 
 module.exports = router;
