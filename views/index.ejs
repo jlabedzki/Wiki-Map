@@ -29,23 +29,25 @@
 <body>
   <div id="mapid"></div>
   <br>
-  <br>
   <button id='get-coords'>Coords</button>
   <br>
-  <br>
   <button id='locate-current'>Locate me</button>
+  <br>
+  <button id='enable-pins'>Enable pins</button>
+  <span>placeholding button</span>
 </body>
 <script>
   $(function () {
     getCoords();
-    mymap.on('locationfound', function (e) {
-      console.log(e.latlng);
-      mymap.setView(e.latlng);
-    })
+    // mymap.on('locationfound', function (e) {
+    //   console.log(e.latlng);
+    //   mymap.setView(e.latlng);
+    // })
     locateMe();
+    mymap.on('click', onMapClick);
   })
 
-  const mymap = L.map('mapid').setView([51.508, -0.11], 13);
+  const mymap = L.map('mapid');
   const coordDatabase = { url: undefined };
 
   const getCoords = function () {
@@ -75,6 +77,79 @@
     [40.774, -74.125]
   ]);
 
+
+
+
+
+  const addPin = (pin, id) => {
+
+    const values = [
+      pin.map_id,
+      id,
+      pin.title,
+      pin.description,
+      pin.image_url,
+      pin.longitude,
+      pin.latitude
+    ];
+    return db
+      .query(`
+          INSERT INTO pins
+          VALUES (DEFAULT, $1, $2, $3, $4, %5, %6, %7)
+          RETURNING *;
+      `, values)
+      .then(res => res.rows[0])
+      .catch(err => err.message);
+    }
+
+    const mapsRoutes = require("./routes/maps");
+
+
+  listAllPins();
+
+  const markers = {
+    1: {
+      map_id: 1,
+      creator_id: 1,
+      title: 'Hello World',
+      description: "Welcome to Vancouver!",
+      image_url: null,
+      longitude: 49.2827,
+      latitude: -123.1207
+    }
+  };
+
+  const addMarker = function(eventObj) {
+    markers[eventObj.id] = {
+      map_id: eventObj.map_id,
+      creator_id: eventObj.creator_id,
+      title: eventObj.title,
+      description: eventObj.description,
+      image_url: eventObj.image_url,
+      longitude: eventObj.longitude,
+      latitude: eventObj.latitude
+    }
+  };
+
+  const markers = [];
+
+  function onMapClick(e) {
+
+    const values = addMarker(something);
+
+    const m001 = new L.marker(e.latlng, { draggable: true })
+      .setLatLng(e.latlng)
+      .addTo(mymap)
+      .bindPopup("<h1>Hello World</h1><h2>You clicked the map at " + e.latlng.lat.toString() + ", " + e.latlng.lng.toString() + "</h2>")
+
+    markers.push(m001);
+
+    m001.on('move', e => m001.bindPopup("<h1>Hello World</h1><h2>You clicked the map at " + e.latlng.lat.toString() + ", " + e.latlng.lng.toString() + "</h2>"))
+
+    console.log(markers, m001);
+  }
+
+  mymap.on('click', onMapClick);
 
 </script>
 
