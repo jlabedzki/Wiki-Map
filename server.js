@@ -25,7 +25,7 @@ app.use("/styles", sass({
   debug: true,
   outputStyle: 'expanded'
 }));
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 
 // Separated Routes for each Resource
 const mapsRoutes = require("./routes/maps");

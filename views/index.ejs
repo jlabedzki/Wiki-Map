@@ -2,39 +2,93 @@
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-
+  <!-- External CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin="" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    type="text/css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bangers&family=Source+Sans+Pro:wght@300;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+  <!-- App CSS -->
+
+  <link rel="stylesheet" href="styles/navbar.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/current-map.css">
+  <link rel="stylesheet" href="styles/map-list.css">
+
+  <!-- External JS -->
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <!-- Make sure you put this AFTER Leaflet's CSS -->
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
-  <style>
-    html,
-    body {
-      height: 100%
-    }
 
-    #mapid {
-      height: 80%;
-      width: 80%
-    }
-  </style>
+  <!-- App JS -->
+  <title>Wiki Map</title>
 </head>
 
 <body>
-  <div id="mapid"></div>
-  <br>
-  <br>
-  <button id='get-coords'>Coords</button>
-  <br>
-  <br>
-  <button id='locate-current'>Locate me</button>
+  <nav>
+    <div class="nav-right">
+      <h1 class="logo">Wiki Map</h1>
+      <button class="create-new-map"><strong>Create</strong> new map
+        <i class="fas fa-map-marker-alt"></i></button>
+    </div>
+    <div class="nav-right">
+      <button id="register">Register</button>
+      <button id="login">Login</button>
+      <button id="logout">Logout</button>
+    </div>
+  </nav>
+
+  <div class="main-container">
+    <div class="map-list">
+      <h2>Browse Maps</h2>
+
+      <select name="categories" id="categories">
+        <option value="" disabled selected>Filter by category</option>
+        <option value="pets">Pets</option>
+        <option value="Outdoor activities">Outdoor Activities</option>
+      </select>
+      <ul>
+        <li>Test map 1</li>
+        <li>Test map 2</li>
+        <li>Test map 3</li>
+        <li>Test map 4</li>
+        <li>Test map 5</li>
+        <li>Test map 6</li>
+        <li>Test map 7</li>
+        <li>Test map 8</li>
+        <li>Test map 9</li>
+        <li>Test map 10</li>
+      </ul>
+      <div class="map-list-buttons">
+        <button id="favorites">Favorites</button>
+        <button id="my-maps">My Maps</button>
+        <button id="my-contributions">My contributions</button>
+      </div>
+    </div>
+
+    <div class="current-map">
+      <div id="mapid"></div>
+      <button id='get-coords'>Coords</button>
+      <button id='locate-current'>Locate me</button>
+    </div>
+  </div>
 </body>
+
 <script>
   $(function () {
     getCoords();
@@ -74,8 +128,6 @@
     [40.712, -74.227],
     [40.774, -74.125]
   ]);
-
-
 </script>
 
 </html>

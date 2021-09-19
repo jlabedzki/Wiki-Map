@@ -1,0 +1,12 @@
+.current-map {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-left: 1rem;
+}
+
+#mapid {
+  height: 40vw;
+  width: 90%;
+}
