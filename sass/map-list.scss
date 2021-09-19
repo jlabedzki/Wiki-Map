@@ -23,9 +23,39 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: flex-start;
+  }
+
+  #favorites,
+  #my-maps,
+  #my-contributions {
+    padding: 0.3rem;
+    border: none;
+    background-color: none;
+    font-family: l.$mainFont;
+    color: rgb(65, 110, 246);
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  #favorites:hover,
+  #my-maps:hover,
+  #my-contributions:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+
+  #favorites:active,
+  #my-maps:active,
+  #my-contributions:active {
+    transform: scale(1);
   }
 
   ul {
     padding-left: 0;
+  }
+
+  li {
+    font-size: 14px;
   }
 }
