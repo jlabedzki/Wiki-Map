@@ -1,0 +1,55 @@
+@use 'layout' as l;
+
+.map-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  height: 100%;
+  // border: 2px solid rgb(70, 70, 70);
+  border-radius: 2px;
+  padding: 0.5rem;
+  color: l.$fontColor;
+  font-family: l.$mainFont;
+
+  h2 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+    font-family: 'Bangers', cursive;
+    letter-spacing: 0.1rem;
+  }
+
+  .map-list-buttons {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+  }
+
+  button {
+    padding: 0.3rem;
+    border: none;
+    background-color: none;
+    font-family: l.$mainFont;
+    color: rgb(65, 110, 246);
+    font-weight: bold;
+    font-size: 14px;
+  }
+
+  button:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+
+  button:active {
+    transform: scale(1);
+  }
+
+  ul {
+    padding-left: 0;
+  }
+
+  li {
+    font-size: 14px;
+  }
+}
