@@ -1,5 +1,8 @@
 // See: https://sass-lang.com/
 
+$mainFont: 'Source Sans Pro', sans-serif;
+$fontColor: rgb(55, 55, 55);
+
 body {
   background-color: #EEE;
   display: flex;
@@ -13,7 +16,9 @@ body {
   justify-content: center;
   align-items: flex-start;
   width: 90%;
+  height: 100%;
   margin-top: 2rem;
+  margin-bottom: 1rem;
 
   .map-list {
     width: 30%;
