@@ -31,5 +31,19 @@
     width: 90%;
     resize: vertical;
   }
+
+  #add-to-favorites {
+    border: none;
+    background-color: none;
+  }
+
+  #add-to-favorites:hover {
+    transform: scale(1.05);
+    cursor: pointer;
+  }
+
+  #add-to-favorites:active {
+    transform: scale(1);
+  }
 }
 

@@ -26,9 +26,7 @@
     align-items: flex-start;
   }
 
-  #favorites,
-  #my-maps,
-  #my-contributions {
+  button {
     padding: 0.3rem;
     border: none;
     background-color: none;
@@ -38,16 +36,12 @@
     font-size: 14px;
   }
 
-  #favorites:hover,
-  #my-maps:hover,
-  #my-contributions:hover {
+  button:hover {
     transform: scale(1.05);
     cursor: pointer;
   }
 
-  #favorites:active,
-  #my-maps:active,
-  #my-contributions:active {
+  button:active {
     transform: scale(1);
   }
 
