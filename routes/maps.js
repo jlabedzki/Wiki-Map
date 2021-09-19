@@ -41,7 +41,6 @@ router.post('/', (req, res) => {
   }
   // const map = req.body.map; //assuming map comes from req.body =D
 
-
   queries.addMap(map, userId)
     .then(res.send('Map created successfully!'))
     .then(console.log(map));

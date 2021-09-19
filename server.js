@@ -33,7 +33,6 @@ const mapsRoutes = require("./routes/maps");
 
 // Mount all resource routes
 app.use('/maps', mapsRoutes);
-app.use('/maps/', mapsRoutes)
 
 // app.use("/api/widgets", widgetsRoutes());
 
