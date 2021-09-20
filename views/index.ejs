@@ -41,6 +41,7 @@
   <script src="scripts/map.js"></script>
   <script src="scripts/new-map.js"></script>
   <script src="scripts/app.js"></script>
+  <script src="scripts/homepage.js"></script>
   <title>Wiki Map</title>
 </head>
 
@@ -75,18 +76,7 @@
         <option value="Outdoor activities">Outdoor Activities</option>
       </select>
       <!-- <div class="list-of-maps"> -->
-      <ul>
-        <li>Test map 1</li>
-        <li>Test map 2</li>
-        <li>Test map 3</li>
-        <li>Test map 4</li>
-        <li>Test map 5</li>
-        <li>Test map 6</li>
-        <li>Test map 7</li>
-        <li>Test map 8</li>
-        <li>Test map 9</li>
-        <li>Test map 10</li>
-      </ul>
+      <ul id="list-of-maps"></ul>
       <!-- </div> -->
       <div class="map-list-buttons">
         <button id="favorites">Favorites</button>
@@ -98,7 +88,7 @@
 
     <div class="current-map">
       <h2>Map of the day</h2>
-      <div id="current-mapid"></div>
+      <div id="current-mapid" class='map-container'></div>
       <div class="current-map-footer">
         <button id="add-to-favorites">
           <i class="far fa-heart"></i>
@@ -125,46 +115,5 @@
     </div>
   </div>
 </body>
-
-<!-- <script>
-  $(function () {
-    getCoords();
-    mymap.on('locationfound', function (e) {
-      console.log(e.latlng);
-      mymap.setView(e.latlng);
-    })
-    locateMe();
-  })
-
-  const mymap = L.map('mapid').setView([51.508, -0.11], 13);
-  const coordDatabase = { url: undefined };
-
-  const getCoords = function () {
-    $('#get-coords').click(function () {
-      coordDatabase.url = mymap.getBounds();
-      console.log(coordDatabase);
-      console.log(coordDatabase.url._northEast.lat);
-      console.log(coordDatabase.url._northEast.lng);
-      console.log(coordDatabase.url._southWest.lat);
-      console.log(coordDatabase.url._southWest.lng);
-    })
-  }
-
-  const locateMe = function () {
-    $('#locate-current').click(function () {
-      mymap.locate({ setView: true });
-    })
-  }
-
-  L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: 'Map data, imagery &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors</a>',
-    maxZoom: 18,
-  }).addTo(mymap);
-
-  mymap.fitBounds([
-    [40.712, -74.227],
-    [40.774, -74.125]
-  ]);
-</script> -->
 
 </html>

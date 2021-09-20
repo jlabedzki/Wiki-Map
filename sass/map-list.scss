@@ -58,5 +58,13 @@
 
   li {
     font-size: 14px;
+    color: blue;
+    text-decoration: underline;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  li:hover {
+    cursor: pointer;
   }
 }

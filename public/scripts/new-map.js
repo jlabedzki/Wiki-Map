@@ -6,6 +6,5 @@
       $('.main-container').hide();
       $createMap.hide();
     })
-
   });
 })(jQuery);
