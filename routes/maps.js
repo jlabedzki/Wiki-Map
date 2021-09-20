@@ -46,13 +46,13 @@ router.post('/', (req, res) => {
     .then(console.log(map));
 });
 
-// POST /maps/pin
+// POST /maps/:id/pin
 
 router.post('/pin', (req, res) => {
   const userID = 1; // !!VALUE TO BE REPLACED WITH A COOKIE
   const pin = { // !!OBJECT TO BE REPLACED WITH req.body
     map_id: 1,
-    creator_id: 1,
+    creator_id: userID,
     title: 'Hello World',
     description: "Welcome to Vancouver!",
     image_url: null,
