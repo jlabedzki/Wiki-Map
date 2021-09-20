@@ -27,12 +27,15 @@ router.get('/:id', (req, res) => {
     });
 });
 
-// POST /maps/:id
+// POST /maps
 router.post('/', (req, res) => {
-  const userId = 2; // change to cookie later
+  console.log(req.body);
+
+
+  const userID = req.session.user_id; // change to cookie later
   const map = {
-    creator_id: 2,
-    title: 'hi',
+    creator_id: userID,
+    title: req.body.title,
     longitude_1: '4.4',
     latitude_1: '4.4',
     longitude_2: '4.4',
@@ -41,7 +44,7 @@ router.post('/', (req, res) => {
   }
   // const map = req.body.map; //assuming map comes from req.body =D
 
-  queries.addMap(map, userId)
+  queries.addMap(map, userID)
     .then(res.send('Map created successfully!'))
     .then(console.log(map));
 });

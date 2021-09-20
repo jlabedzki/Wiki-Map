@@ -38,3 +38,9 @@ body {
   width: 90%;
   resize: vertical;
 }
+.new-map #new-map-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+}

@@ -111,7 +111,15 @@
   <div class="new-map">
     <div id="mapid"></div>
     <div class="new-map-footer">
-      </button>
+      <form action="/maps/" method="POST" id="new-map-form">
+        <input type="text" placeholder="Title" name="title" required>
+        <input id="form1" type="number" placeholder="Longitude-1" name="longitude-1" readonly required>
+        <input id="form2" type="number" placeholder="Latitude-1" name="latitude-1" readonly required>
+        <input id="form3" type="number" placeholder="Longitude-2" name="longitude-2" readonly required>
+        <input id="form4" type="number" placeholder="Latitude-2" name="latitude-2" readonly required>
+        <input type="text" placeholder="Category" name="category" required>
+        <button type="submit">Submit</button>
+      </form>
       <button class='get-coords'>Coords</button>
       <button class='locate-current'>Locate me</button>
     </div>

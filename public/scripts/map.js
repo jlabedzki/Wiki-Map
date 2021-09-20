@@ -18,9 +18,13 @@ $(() => {
   const coordDatabase = { url: undefined };
 
   const getCoords = function () {
-    $('#get-coords').click(function () {
+    $('.get-coords').click(function () {
       coordDatabase.url = mymap.getBounds();
       console.log(coordDatabase);
+      $('#form1').val(coordDatabase.url._northEast.lat);
+      $('#form2').val(coordDatabase.url._northEast.lng);
+      $('#form3').val(coordDatabase.url._southWest.lat);
+      $('#form4').val(coordDatabase.url._southWest.lng);
       console.log(coordDatabase.url._northEast.lat);
       console.log(coordDatabase.url._northEast.lng);
       console.log(coordDatabase.url._southWest.lat);
@@ -212,4 +216,6 @@ $(() => {
   //     $("<div>").text(user.name).appendTo($("body"));
   //   }
   // });;
+  module.exports = { getCoords };
 });
+
