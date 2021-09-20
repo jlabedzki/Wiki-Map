@@ -63,6 +63,8 @@ body {
 }
 .map-list ul {
   padding-left: 0;
+  height: 100px;
+  overflow: auto;
 }
 .map-list li {
   font-size: 14px;
