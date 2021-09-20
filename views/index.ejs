@@ -28,6 +28,7 @@
   <link rel="stylesheet" href="styles/layout.css">
   <link rel="stylesheet" href="styles/current-map.css">
   <link rel="stylesheet" href="styles/map-list.css">
+  <link rel="stylesheet" href="styles/new-map.css">
 
   <!-- External JS -->
   <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
@@ -37,6 +38,9 @@
     crossorigin=""></script>
 
   <!-- App JS -->
+  <script src="scripts/map.js"></script>
+  <script src="scripts/new-map.js"></script>
+  <script src="scripts/app.js"></script>
   <title>Wiki Map</title>
 </head>
 
@@ -44,13 +48,19 @@
   <nav>
     <div class="nav-right">
       <h1 class="logo">Wiki Map</h1>
-      <button class="create-new-map"><strong>Create</strong> new map
-        <i class="fas fa-map-marker-alt"></i></button>
+      <% if (userID) { %>
+        <button id="create-new-map"><strong>Create</strong> new map
+          <i class="fas fa-map-marker-alt"></i></button>
+        <% } %>
     </div>
     <div class="nav-right">
-      <button id="register">Register</button>
-      <button id="login">Login</button>
-      <button id="logout">Logout</button>
+      <% if (!userID) { %>
+        <button id="register">Register</button>
+        <button id="login">Login</button>
+        <% } %>
+          <% if (userID) { %>
+            <button id="logout">Logout</button>
+            <% } %>
     </div>
   </nav>
 
@@ -88,19 +98,35 @@
 
     <div class="current-map">
       <h2>Map of the day</h2>
-      <div id="mapid"></div>
+      <div id="current-mapid"></div>
       <div class="current-map-footer">
         <button id="add-to-favorites">
           <i class="far fa-heart"></i>
         </button>
-        <button id='get-coords'>Coords</button>
-        <button id='locate-current'>Locate me</button>
+        <button class='get-coords'>Coords</button>
+        <button class='locate-current'>Locate me</button>
       </div>
+    </div>
+  </div>
+  <div class="new-map">
+    <div id="mapid"></div>
+    <div class="new-map-footer">
+      <form action="/maps/" method="POST" id="new-map-form">
+        <input type="text" placeholder="Title" name="title" required>
+        <input id="form1" type="number" placeholder="Longitude_1" name="longitude_1" readonly required>
+        <input id="form2" type="number" placeholder="Latitude_1" name="latitude_1" readonly required>
+        <input id="form3" type="number" placeholder="Longitude_2" name="longitude_2" readonly required>
+        <input id="form4" type="number" placeholder="Latitude_2" name="latitude_2" readonly required>
+        <input type="text" placeholder="Category" name="category">
+        <button type="submit">Submit</button>
+      </form>
+      <button class='get-coords'>Coords</button>
+      <button class='locate-current'>Locate me</button>
     </div>
   </div>
 </body>
 
-<script>
+<!-- <script>
   $(function () {
     getCoords();
     mymap.on('locationfound', function (e) {
@@ -139,6 +165,6 @@
     [40.712, -74.227],
     [40.774, -74.125]
   ]);
-</script>
+</script> -->
 
 </html>
