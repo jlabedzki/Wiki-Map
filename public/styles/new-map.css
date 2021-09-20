@@ -22,39 +22,19 @@ body {
   width: 70%;
 }
 
-.current-map {
+.new-map {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-left: 1rem;
+  width: 90%;
+  margin-top: 2rem;
   padding-top: 0.5rem;
-  border-left: 2px solid #464646;
   font-family: "Source Sans Pro", sans-serif;
   color: #373737;
 }
-.current-map h2 {
-  margin-top: 0;
-  font-family: "Bangers", cursive;
-  padding-left: 0.3rem;
-  padding-right: 0.3rem;
-  padding-top: 0.1rem;
-  padding-bottom: 0.1rem;
-  letter-spacing: 0.1rem;
-}
-.current-map #current-mapid {
+.new-map #mapid {
   height: 200px;
   width: 90%;
   resize: vertical;
-}
-.current-map #add-to-favorites {
-  border: none;
-  background-color: none;
-}
-.current-map #add-to-favorites:hover {
-  transform: scale(1.05);
-  cursor: pointer;
-}
-.current-map #add-to-favorites:active {
-  transform: scale(1);
 }

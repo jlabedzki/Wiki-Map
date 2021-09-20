@@ -1,0 +1,19 @@
+@use 'layout' as l;
+
+.new-map {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  margin-top: 2rem;
+  padding-top: 0.5rem;
+  font-family: l.$mainFont;
+  color: l.$fontColor;
+
+  #mapid {
+    height: 200px;
+    width: 90%;
+    resize: vertical;
+  }
+}
