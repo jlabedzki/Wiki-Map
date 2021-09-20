@@ -19,6 +19,11 @@
     letter-spacing: 0.1rem;
   }
 
+  // .list-of-maps {
+  //   height: 200px;
+  //   overflow: auto;
+  // }
+
   .map-list-buttons {
     display: flex;
     flex-direction: column;
@@ -47,6 +52,8 @@
 
   ul {
     padding-left: 0;
+    height: 100px;
+    overflow: auto;
   }
 
   li {
