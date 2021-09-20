@@ -14,7 +14,7 @@ const queries = require('../lib/queries')
 router.get('/', (req, res) => {
   queries.listAllMaps()
     .then((maps) => {
-      res.json(maps);
+      res.send({ maps });
     });
 });
 
@@ -23,26 +23,15 @@ router.get('/:id', (req, res) => {
   const id = req.params.id;
   queries.listMap(id)
     .then((map) => {
-      res.json(map);
+      res.send({ map });
     });
 });
 
 // POST /maps
 router.post('/', (req, res) => {
 
-  const userID = req.session.user_id; // change to cookie later
+  const userID = req.session.user_id;
   const map = req.body;
-
-  // const map = {
-  //   creator_id: userID,
-  //   title: map.title,
-  //   longitude_1: map['longitude-1'],
-  //   latitude_1: '4.4',
-  //   longitude_2: '4.4',
-  //   latitude_2: '4.4',
-  //   category: 'hi'
-  // }
-  // const map = req.body.map; //assuming map comes from req.body =D
 
   queries.addMap(map, userID)
     .then(res.send('Map created successfully!'))

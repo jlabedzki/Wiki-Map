@@ -50,7 +50,6 @@ app.use('/login', userRoutes);
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
   const userID = req.session.user_id;
-  console.log(userID);
 
   const templateVars = { userID }
 
