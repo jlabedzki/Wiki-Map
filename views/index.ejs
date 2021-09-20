@@ -78,21 +78,22 @@
   ]);
 
 
-  // const addPin = (pin, id) => {
+  // const addPin = (pin, user_id) => {
 
   //   const values = [
   //     pin.map_id,
-  //     id,
+  //     user_id,
   //     pin.title,
   //     pin.description,
   //     pin.image_url,
   //     pin.longitude,
   //     pin.latitude
   //   ];
+
   //   return db
   //     .query(`
   //         INSERT INTO pins
-  //         VALUES (DEFAULT, $1, $2, $3, $4, %5, %6, %7)
+  //         VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7)
   //         RETURNING *;
   //     `, values)
   //     .then(res => res.rows[0])
