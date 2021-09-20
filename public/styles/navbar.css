@@ -28,7 +28,7 @@ nav .nav-left {
   justify-self: flex-end;
   align-self: flex-end;
 }
-nav .create-new-map {
+nav #create-new-map {
   align-self: center;
   height: 1.5rem;
   margin-left: 1rem;
@@ -37,7 +37,7 @@ nav .create-new-map {
   color: #464646;
   font-size: 0.8rem;
 }
-nav .create-new-map .fa-map-marker-alt {
+nav #create-new-map .fa-map-marker-alt {
   margin-left: 0.2rem;
 }
 nav button {
