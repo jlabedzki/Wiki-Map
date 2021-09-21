@@ -2,223 +2,118 @@
 <html lang="en">
 
 <head>
-  <title>Home Page</title>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-
+  <!-- External CSS -->
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
     integrity="sha512-xodZBNTC5n17Xt2atTPuE1HxjVMSvLVW9ocqUKLsCC5CXdbqCmblAshOMAS6/keqq/sMZMZ19scR4PsZChSR7A=="
     crossorigin="" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    type="text/css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Bungee&family=Bangers&family=Source+Sans+Pro:wght@300;600&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css"
+    integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
 
+
+  <!-- App CSS -->
+
+  <link rel="stylesheet" href="styles/navbar.css">
+  <link rel="stylesheet" href="styles/layout.css">
+  <link rel="stylesheet" href="styles/current-map.css">
+  <link rel="stylesheet" href="styles/map-list.css">
+  <link rel="stylesheet" href="styles/new-map.css">
+
+  <!-- External JS -->
+  <script type="text/javascript" src="/vendor/jquery-3.0.0.js"></script>
   <!-- Make sure you put this AFTER Leaflet's CSS -->
   <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
     integrity="sha512-XQoYMqMTK8LvdxXYG3nZ448hOEQiglfqkJs1NOQV44cWnUrBc8PkAOcXy20w0vlaXaVUearIOBhiXZ5V3ynxwA=="
     crossorigin=""></script>
 
-  <style>
-    html,
-    body {
-      height: 100%
-    }
-
-    #mapid {
-      height: 60%;
-      width: 80%
-    }
-
-    #mapid:hover {
-      cursor: default;
-    }
-
-    .fa-hand-point-down {
-      font-size: 2.5em;
-      color: darkgoldenrod;
-    }
-
-  </style>
+  <!-- App JS -->
+  <script src="scripts/map.js"></script>
+  <script src="scripts/new-map.js"></script>
+  <script src="scripts/app.js"></script>
+  <script src="scripts/homepage.js"></script>
+  <title>Wiki Map</title>
 </head>
 
 <body>
-  <div id="mapid"></div>
-  <button id='get-coords'>Coords</button>
-  <button id='locate-current'>Locate me</button>
-  <br>
-  <form class="add-pin" action="/" method="POST" data-pin-id="">
-    <input type="text" class="add-pin" id="pin-title" placeholder="Enter a title">
-    <br>
-    <input type="url" class="add-pin" id="pin-img" placeholder="image URL">
-    <br>
-    <textarea class="add-pin" id="pin-descript" placeholder="and some description"></textarea>
-    <br>
-    <button class="add-pin" id="pin-submit" type="submit">Add Pin</button>
-    <span id="test"></span>
-  </form>
+  <nav>
+    <div class="nav-right">
+      <h1 class="logo">Wiki Map</h1>
+      <% if (userID) { %>
+        <button id="create-new-map"><strong>Create</strong> new map
+          <i class="fas fa-map-marker-alt"></i></button>
+        <% } %>
+    </div>
+    <div class="nav-right">
+      <% if (!userID) { %>
+        <button id="register">Register</button>
+        <button id="login">Login</button>
+        <% } %>
+          <% if (userID) { %>
+            <button id="logout">Logout</button>
+            <% } %>
+    </div>
+  </nav>
+
+  <div class="main-container">
+    <div class="map-list">
+      <h2 class="map-list-title">Discover</h2>
+
+      <select name="categories" id="categories">
+        <option value="" disabled selected>Filter by category</option>
+        <option value="Most recent">Most Recent</option>
+        <option value="pets">Pets</option>
+        <option value="Outdoor activities">Outdoor Activities</option>
+      </select>
+      <!-- <div class="list-of-maps"> -->
+      <ul id="list-of-maps"></ul>
+      <!-- </div> -->
+      <div class="map-list-buttons">
+        <button id="favorites">Favorites</button>
+        <button id="my-maps">My Maps</button>
+        <button id="my-contributions">My Contributions</button>
+        <button id="discover">Discover</button>
+      </div>
+    </div>
+
+    <div class="current-map">
+      <h2>Map of the day</h2>
+      <div id="current-mapid"></div>
+      <div class="current-map-footer">
+        <button id="add-to-favorites">
+          <i class="far fa-heart"></i>
+        </button>
+        <button class='get-coords'>Coords</button>
+        <button class='locate-current'>Locate me</button>
+      </div>
+    </div>
+  </div>
+  <div class="new-map">
+    <div id="mapid"></div>
+    <div class="new-map-footer">
+      <form action="/maps/" method="POST" id="new-map-form">
+        <input type="text" placeholder="Title" name="title" required>
+        <input id="form1" type="number" placeholder="Longitude_1" name="longitude_1" readonly required>
+        <input id="form2" type="number" placeholder="Latitude_1" name="latitude_1" readonly required>
+        <input id="form3" type="number" placeholder="Longitude_2" name="longitude_2" readonly required>
+        <input id="form4" type="number" placeholder="Latitude_2" name="latitude_2" readonly required>
+        <input type="text" placeholder="Category" name="category">
+        <button type="submit">Submit</button>
+      </form>
+      <button class='get-coords'>Coords</button>
+      <button class='locate-current'>Locate me</button>
+    </div>
+  </div>
 </body>
 
-<script>
-$(function () {
-
-  // mymap.on('locationfound', function (e) {
-  //   console.log(e.latlng);
-  //   mymap.setView(e.latlng);
-  // })
-
-  getCoords();
-  locateMe();
-  mymap.on('click', onMapClick);
-})
-
-const mymap = L.map('mapid');
-const coordDatabase = { url: undefined };
-
-const getCoords = function () {
-  $('#get-coords').click(function () {
-    coordDatabase.url = mymap.getBounds();
-    console.log(coordDatabase);
-    console.log(coordDatabase.url._northEast.lat);
-    console.log(coordDatabase.url._northEast.lng);
-    console.log(coordDatabase.url._southWest.lat);
-    console.log(coordDatabase.url._southWest.lng);
-  })
-}
-
-const locateMe = function () {
-  $('#locate-current').click(function () {
-    mymap.locate({ setView: true });
-  })
-};
-
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-  attribution: 'Map data, imagery &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors</a>',
-  maxZoom: 18,
-}).addTo(mymap);
-
-mymap.fitBounds([
-  [40.712, -74.227],
-  [40.774, -74.125]
-]);
-
-const myIcon = L.divIcon({ iconAnchor: [9, 32], className: 'fas fa-hand-point-down' });
-let tempMarker = L.marker(null, { icon: myIcon });
-
-$('.add-pin').prop('disabled', true);
-
-function onMapClick(e) {
-
-  tempMarker
-  .setLatLng(e.latlng)
-  .addTo(mymap);
-
-  $('.add-pin').prop('disabled', false);
-  $('#pin-title').val('');
-  $('#pin-descript').val('');
-  $('#pin-img').val('');
-  $('form .add-pin').data('pin-id', null);
-  $('#pin-delete').remove();
-  $('#pin-submit').html('Add Pin');
-  $('#pin-submit').off('click');
-  $('.add-pin').off('submit');
-  $('.add-pin').submit(function(event) {
-    event.preventDefault();
-    console.log($('form .add-pin').data('pin-id'));
-    pinSubmit($('form .add-pin').data('pin-id'), e.latlng);
-  });
-};
-
-const markerData = {};
-const markers = {};
-let markerCount = 1;
-const currentMap = 1;
-const userID = 1;
-
-const marked = function(data) {
-  tempMarker.remove();
-  markers[data.pinID] = new L.marker([data.latitude, data.longitude], { draggable: true })
-    .addTo(mymap)
-    .bindPopup(`<h1>${data.pinTitle}</h1><h2>${data.pinDescript}</h2><img width="100%" src ="${data.pinImg}" />`).openPopup();
-};
-
-const delPin = function(pinID) {
-  markers[pinID].remove();
-  delete markers[pinID];
-  delete markerData[pinID];
-}
-
-const pinSubmit = function(id, coords) {
-
-  const pinID = id || markerCount++;
-  const mapID = currentMap; // !!VARIABLE TO BE REPLACED WITH SOMETHING
-  const creatorID = userID; // !!VARIABLE TO BE REPLACED WITH A COOKIE ID
-  const pinTitle = $('#pin-title').val();
-  const pinDescript = $('#pin-descript').val();
-  const pinImg = $('#pin-img').val();
-  const longitude = coords.lng;
-  const latitude = coords.lat;
-
-  markerData[pinID] = {
-    pinID,
-    mapID,
-    creatorID,
-    pinTitle,
-    pinDescript,
-    pinImg,
-    longitude,
-    latitude
-  };
-
-  $('#pin-title').val('');
-  $('#pin-descript').val('');
-  $('#pin-img').val('');
-  $('.add-pin').prop('disabled', true);
-
-  console.log('pinsubmit: ', id);
-  if (!id) {
-    marked(markerData[pinID])
-  }
-
-  markers[pinID].bindPopup(`<h1>${pinTitle}</h1><h2>${pinDescript}</h2><img width="100%" src ="${pinImg}" />`).openPopup();
-  markers[pinID].off('click');
-  markers[pinID].on('click', function(e) {
-    tempMarker.remove();
-    markers[pinID].openPopup();
-    console.log('marked: ', pinTitle);
-
-    $('.add-pin').prop('disabled', false);
-    $('.add-pin button').text('Edit Pin');
-    $('form .add-pin').data('pin-id', `${pinID}`)
-    $('#pin-title').val(`${pinTitle}`);
-    $('#pin-descript').val(`${pinDescript}`);
-    $('#pin-img').val(`${pinImg}`);
-    $('#pin-delete').remove();
-    $('<button class="add-pin" id="pin-delete" type="button">Delete Pin</button>').insertAfter('#pin-submit');
-
-    $('#pin-delete').on('click', function() {
-      delPin(pinID);
-      $('#pin-title').val('');
-      $('#pin-descript').val('');
-      $('#pin-img').val('');
-      $('.add-pin').prop('disabled', true);
-      $(this).remove();
-    });
-
-    $('.add-pin').off('submit');
-    $('.add-pin').submit(function(event) {
-      event.preventDefault();
-      console.log($('form .add-pin').data('pin-id'));
-      pinSubmit($('form .add-pin').data('pin-id'), { lat: latitude, lng: longitude });
-      $('#pin-delete').remove();
-    });
-  });
-  markers[pinID].on('moveend', function(e) {
-    console.log('moveend: ', e)
-    markerData[pinID].latitude = e.target._latlng.lat;
-    markerData[pinID].longitude = e.target._latlng.lng;
-    console.log('moveend: ', markerData[pinID]);
-  });
-  console.log(markerData);
-  console.log(markers);
-};
-</script>
 </html>

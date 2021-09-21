@@ -10,12 +10,18 @@ const bodyParser = require("body-parser");
 const sass = require("node-sass-middleware");
 const app = express();
 const morgan = require('morgan');
+const cookieSession = require('cookie-session');
+
 
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
 //         The :status token will be colored red for server error codes, yellow for client error codes, cyan for redirection codes, and uncolored for all other codes.
 app.use(morgan('dev'));
+app.use(cookieSession({
+  name: 'session',
+  keys: ['key1', 'key2']
+}))
 
 app.set("view engine", "ejs");
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -25,15 +31,16 @@ app.use("/styles", sass({
   debug: true,
   outputStyle: 'expanded'
 }));
-app.use(express.static("public"));
+app.use(express.static(__dirname + "/public"));
 
 // Separated Routes for each Resource
 const mapsRoutes = require("./routes/maps");
+const userRoutes = require("./routes/users");
 // const widgetsRoutes = require("./routes/widgets");
 
 // Mount all resource routes
 app.use('/maps', mapsRoutes);
-
+app.use('/login', userRoutes);
 // app.use("/api/widgets", widgetsRoutes());
 
 
@@ -42,7 +49,11 @@ app.use('/maps', mapsRoutes);
 // Warning: avoid creating more routes in this file!
 // Separate them into separate routes files (see above).
 app.get("/", (req, res) => {
-  res.render("index");
+  const userID = req.session.user_id;
+
+  const templateVars = { userID }
+
+  res.render("index", templateVars);
 });
 
 app.listen(PORT, () => {
