@@ -32,7 +32,6 @@ router.post('/', (req, res) => {
 
   const userID = req.session.user_id;
   const map = req.body;
-  console.log(map);
 
   queries.addMap(map, userID)
     .then(res.redirect('/'));
