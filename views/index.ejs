@@ -45,7 +45,7 @@
   <button id='get-coords'>Coords</button>
   <button id='locate-current'>Locate me</button>
   <br>
-  <form class="add-pin" action="/" method="POST">
+  <form class="add-pin" action="/" method="POST" data-pin-id="">
     <input type="text" class="add-pin" id="pin-title" placeholder="Enter a title">
     <br>
     <input type="url" class="add-pin" id="pin-img" placeholder="image URL">
@@ -53,11 +53,13 @@
     <textarea class="add-pin" id="pin-descript" placeholder="and some description"></textarea>
     <br>
     <button class="add-pin" id="pin-submit" type="submit">Add Pin</button>
+    <span id="test"></span>
   </form>
 </body>
 
 <script>
 $(function () {
+
   // mymap.on('locationfound', function (e) {
   //   console.log(e.latlng);
   //   mymap.setView(e.latlng);
@@ -66,7 +68,6 @@ $(function () {
   getCoords();
   locateMe();
   mymap.on('click', onMapClick);
-  pinSubmitList();
 })
 
 const mymap = L.map('mapid');
@@ -87,7 +88,7 @@ const locateMe = function () {
   $('#locate-current').click(function () {
     mymap.locate({ setView: true });
   })
-}
+};
 
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
   attribution: 'Map data, imagery &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors</a>',
@@ -99,163 +100,125 @@ mymap.fitBounds([
   [40.774, -74.125]
 ]);
 
-
-// const addPin = (pin, user_id) => {
-
-//   const values = [
-//     pin.map_id,
-//     user_id,
-//     pin.title,
-//     pin.description,
-//     pin.image_url,
-//     pin.longitude,
-//     pin.latitude
-//   ];
-
-//   return db
-//     .query(`
-//         INSERT INTO pins
-//         VALUES (DEFAULT, $1, $2, $3, $4, $5, $6, $7)
-//         RETURNING *;
-//     `, values)
-//     .then(res => res.rows[0])
-//     .catch(err => err.message);
-//   }
-
-//   const mapsRoutes = require("./routes/maps");
-
-// listAllPins();
-
-// const markers = {
-//   1: {
-//     map_id: 1,
-//     creator_id: 1,
-//     title: 'Hello World',
-//     description: "Welcome to Vancouver!",
-//     image_url: null,
-//     longitude: 49.2827,
-//     latitude: -123.1207
-//   }
-// };
-
-// const addMarker = function(eventObj) {
-//   markers[eventObj.id] = {
-//     map_id: eventObj.map_id,
-//     creator_id: eventObj.creator_id,
-//     title: eventObj.title,
-//     description: eventObj.description,
-//     image_url: eventObj.image_url,
-//     longitude: eventObj.longitude,
-//     latitude: eventObj.latitude
-//   }
-// };
-
-
 const myIcon = L.divIcon({ iconAnchor: [9, 32], className: 'fas fa-hand-point-down' });
-let marker = L.marker(null, { icon: myIcon, draggable: true });
-
-let markerStatus = 'temp';
-let markerCoords;
+let tempMarker = L.marker(null, { icon: myIcon });
 
 $('.add-pin').prop('disabled', true);
 
 function onMapClick(e) {
-  markerCoords = e;
-  if (markerStatus === 'temp') {
-    marker
-    .setLatLng(e.latlng)
-    .addTo(mymap);
-    $('.add-pin').prop('disabled', false);
-    $('#pin-title').val('');
-    $('#pin-descript').val('');
-    $('#pin-img').val('');
-    $('.add-pin button').text('Add Pin');
-  }
-}
 
-const pinSubmitList = function() {
-  $('#pin-submit').on('click', function(e) {
-    pinSubmit();
+  tempMarker
+  .setLatLng(e.latlng)
+  .addTo(mymap);
+
+  $('.add-pin').prop('disabled', false);
+  $('#pin-title').val('');
+  $('#pin-descript').val('');
+  $('#pin-img').val('');
+  $('form .add-pin').data('pin-id', null);
+  $('#pin-delete').remove();
+  $('#pin-submit').html('Add Pin');
+  $('#pin-submit').off('click');
+  $('.add-pin').off('submit');
+  $('.add-pin').submit(function(event) {
+    event.preventDefault();
+    console.log($('form .add-pin').data('pin-id'));
+    pinSubmit($('form .add-pin').data('pin-id'), e.latlng);
   });
-}
-
-// m001.on('move', e => m001.bindPopup("<h1>Hello World</h1><h2>You clicked the map at " + e.latlng.lat.toString() + ", " + e.latlng.lng.toString() + "</h2>"))
-
+};
 
 const markerData = {};
 const markers = {};
-let markerCount = 0
+let markerCount = 1;
 const currentMap = 1;
 const userID = 1;
 
 const marked = function(data) {
-  marker.remove();
-  markers[data.pinID] = new L.marker(markerCoords.latlng, { draggable: true })
+  tempMarker.remove();
+  markers[data.pinID] = new L.marker([data.latitude, data.longitude], { draggable: true })
     .addTo(mymap)
-    .bindPopup(`<h1>${data.pinTitle}</h1><h2>${data.pinDescript}</h2><img src ="${data.pinImg}"`);
-  markers[data.pinID]._icon.id = data.pinID;
-  markers[data.pinID].on('click', function(e) {
-    $('.add-pin').prop('disabled', false);
-    $('.add-pin button').text('EDIT Pin');
-    $('#pin-title').val(`${data.pinTitle}`);
-    $('#pin-descript').val(`${data.pinDescript}`);
-    $('#pin-img').val(`${data.pinImg}`);
-
-  })
-  ;
-}
-
-const pinSubmit = function(id) {
-  $('.add-pin').submit(function(event) {
-    event.preventDefault();
-    const pinID = id || markerCount++;
-    const mapID = currentMap;
-    const creatorID = userID;
-    const pinTitle = $('#pin-title').val();
-    const pinDescript = $('#pin-descript').val();
-    const pinImg = $('#pin-img').val();
-    const longitude = markerCoords.latlng.lng;
-    const latitude = markerCoords.latlng.lat;
-    // const $mapID = currentMap; // !!VARIABLE TO BE REPLACED WITH SOMETHING
-    // const $creatorID = userID; // !!VARIABLE TO BE REPLACED WITH A COOKIE ID
-    // const $pinTitle = $('#pin-title :input').val();
-    // const $pinDescript = $('#pin-descript :input').val();
-    // const $pinImg = $('#pin-img :input').val();
-    // const $longitude = e.latlng.lng;
-    // const $latitude = e.latlng.lat;
-
-    markerData[pinID] = {
-      pinID,
-      mapID,
-      creatorID,
-      pinTitle,
-      pinDescript,
-      pinImg,
-      longitude,
-      latitude
-    };
-
-    $('#pin-submit').off('click');
-    $('#pin-title').val('');
-    $('#pin-descript').val('');
-    $('#pin-img').val('');
-    $('.add-pin').prop('disabled', true);
-
-      marked(markerData[pinID])
-
-    console.log(markerData);
-  });
-    // TO BE CONTINUED...
+    .bindPopup(`<h1>${data.pinTitle}</h1><h2>${data.pinDescript}</h2><img width="100%" src ="${data.pinImg}" />`).openPopup();
 };
 
-// const markerListener = function() {
-//   $('body .leaflet-marker-icon').on('click', function(e) {
-//     console.log(e.target);
-//   });
-// }
+const delPin = function(pinID) {
+  markers[pinID].remove();
+  delete markers[pinID];
+  delete markerData[pinID];
+}
 
-// const editMarker = function() {};
+const pinSubmit = function(id, coords) {
 
+  const pinID = id || markerCount++;
+  const mapID = currentMap; // !!VARIABLE TO BE REPLACED WITH SOMETHING
+  const creatorID = userID; // !!VARIABLE TO BE REPLACED WITH A COOKIE ID
+  const pinTitle = $('#pin-title').val();
+  const pinDescript = $('#pin-descript').val();
+  const pinImg = $('#pin-img').val();
+  const longitude = coords.lng;
+  const latitude = coords.lat;
+
+  markerData[pinID] = {
+    pinID,
+    mapID,
+    creatorID,
+    pinTitle,
+    pinDescript,
+    pinImg,
+    longitude,
+    latitude
+  };
+
+  $('#pin-title').val('');
+  $('#pin-descript').val('');
+  $('#pin-img').val('');
+  $('.add-pin').prop('disabled', true);
+
+  console.log('pinsubmit: ', id);
+  if (!id) {
+    marked(markerData[pinID])
+  }
+
+  markers[pinID].bindPopup(`<h1>${pinTitle}</h1><h2>${pinDescript}</h2><img width="100%" src ="${pinImg}" />`).openPopup();
+  markers[pinID].off('click');
+  markers[pinID].on('click', function(e) {
+    tempMarker.remove();
+    markers[pinID].openPopup();
+    console.log('marked: ', pinTitle);
+
+    $('.add-pin').prop('disabled', false);
+    $('.add-pin button').text('Edit Pin');
+    $('form .add-pin').data('pin-id', `${pinID}`)
+    $('#pin-title').val(`${pinTitle}`);
+    $('#pin-descript').val(`${pinDescript}`);
+    $('#pin-img').val(`${pinImg}`);
+    $('#pin-delete').remove();
+    $('<button class="add-pin" id="pin-delete" type="button">Delete Pin</button>').insertAfter('#pin-submit');
+
+    $('#pin-delete').on('click', function() {
+      delPin(pinID);
+      $('#pin-title').val('');
+      $('#pin-descript').val('');
+      $('#pin-img').val('');
+      $('.add-pin').prop('disabled', true);
+      $(this).remove();
+    });
+
+    $('.add-pin').off('submit');
+    $('.add-pin').submit(function(event) {
+      event.preventDefault();
+      console.log($('form .add-pin').data('pin-id'));
+      pinSubmit($('form .add-pin').data('pin-id'), { lat: latitude, lng: longitude });
+      $('#pin-delete').remove();
+    });
+  });
+  markers[pinID].on('moveend', function(e) {
+    console.log('moveend: ', e)
+    markerData[pinID].latitude = e.target._latlng.lat;
+    markerData[pinID].longitude = e.target._latlng.lng;
+    console.log('moveend: ', markerData[pinID]);
+  });
+  console.log(markerData);
+  console.log(markers);
+};
 </script>
-
 </html>
