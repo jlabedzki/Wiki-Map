@@ -1,7 +1,4 @@
 $(() => {
-
-
-
   $(function () {
     // mymap.on('locationfound', function (e) {
     //   console.log(e.latlng);
@@ -47,6 +44,7 @@ $(() => {
     [49.321123176418546, -123.04224325741416],
     [49.22143848014641, -123.20257498348838]
   ]);
+  mymap.invalidateSize();
 
 
   // const addPin = (pin, user_id) => {
