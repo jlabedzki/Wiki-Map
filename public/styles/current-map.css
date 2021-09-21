@@ -48,6 +48,7 @@ body {
   resize: vertical;
 }
 .current-map #add-to-favorites {
+  font-size: 1.5rem;
   border: none;
   background-color: none;
 }

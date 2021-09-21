@@ -81,7 +81,7 @@
       <div class="map-list-buttons">
         <button id="favorites">Favorites</button>
         <button id="my-maps">My Maps</button>
-        <button id="my-contributions">My Contributions</button>
+        <button id="my-contributions">Contributions</button>
         <button id="discover">Discover</button>
       </div>
     </div>
@@ -93,25 +93,23 @@
         <button id="add-to-favorites">
           <i class="far fa-heart"></i>
         </button>
-        <button class='get-coords'>Coords</button>
-        <button class='locate-current'>Locate me</button>
       </div>
     </div>
   </div>
   <div class="new-map">
     <div id="mapid"></div>
     <div class="new-map-footer">
+      <button class='locate-current'>Jump to my location</button>
       <form action="/maps/" method="POST" id="new-map-form">
+        <input type="hidden" name="creator_id" value="<%= userID %>" required>
         <input type="text" placeholder="Title" name="title" required>
-        <input id="form1" type="number" placeholder="Longitude_1" name="longitude_1" readonly required>
-        <input id="form2" type="number" placeholder="Latitude_1" name="latitude_1" readonly required>
-        <input id="form3" type="number" placeholder="Longitude_2" name="longitude_2" readonly required>
-        <input id="form4" type="number" placeholder="Latitude_2" name="latitude_2" readonly required>
+        <input id="form1" type="hidden" name="longitude_1" required>
+        <input id="form2" type="hidden" name="latitude_1" required>
+        <input id="form3" type="hidden" name="longitude_2" required>
+        <input id="form4" type="hidden" name="latitude_2" required>
         <input type="text" placeholder="Category" name="category">
         <button type="submit">Submit</button>
       </form>
-      <button class='get-coords'>Coords</button>
-      <button class='locate-current'>Locate me</button>
     </div>
   </div>
 </body>
