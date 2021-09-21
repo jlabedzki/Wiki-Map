@@ -90,9 +90,13 @@
       <h2>Map of the day</h2>
       <div id="current-mapid"></div>
       <div class="current-map-footer">
-        <button id="add-to-favorites">
-          <i class="far fa-heart"></i>
-        </button>
+        <form action="/favorites/:id" method="POST" id="add-to-favorites">
+          <input type="hidden" name="user_id" value="<%= userID %>" required>
+          <input type="hidden" name="map_id" id="favorites-mapid" required>
+          <button type="submit">
+            <i class="far fa-heart"></i>
+          </button>
+        </form>
       </div>
     </div>
   </div>

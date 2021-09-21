@@ -1,13 +1,33 @@
 (function ($) {
   $(() => {
     let mymap;
-    let mapID = 1;
+    let currentMapID = 1;
+    console.log(currentMapID);
 
     $('.new-map').hide();
-    displayMapByID(mapID);
+    displayMapByID(currentMapID);
     displayListOfMaps();
+    injectMapIDToForm(currentMapID);
+
+    $('#add-to-favorites').on('submit', function (e) {
+      e.preventDefault();
+      const favArr = $(this).serializeArray();
+      const favObj = {};
+
+      for (const favorite of favArr) {
+        favObj[favorite.name] = favorite.value;
+      }
+
+      $.post('/favorites/', favObj);
+    })
+
   });
 
+  const injectMapIDToForm = (currentMapID) => {
+    $('#favorites-mapid').val(`${currentMapID}`);
+  }
+
+  //accept route parameter, use template literal to change route in get request
   const displayListOfMaps = () => {
     $.get('/maps', data => {
       let counter = 1;
@@ -21,8 +41,9 @@
         for (const map of data.maps) {
           $(`#list-item-${counter}`).click(function () {
             mymap.remove();
-            mapID = $(this).val();
-            displayMapByID(mapID);
+            currentMapID = $(this).val();
+            injectMapIDToForm(currentMapID);
+            displayMapByID(currentMapID);
           });
           counter++;
         }
@@ -39,8 +60,6 @@
 
   const loadMapByCoords = (coords) => {
     mymap = L.map('current-mapid');
-
-    console.log(mymap);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: 'Map data, imagery &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors</a>',

@@ -36,13 +36,14 @@ app.use(express.static(__dirname + "/public"));
 // Separated Routes for each Resource
 const mapsRoutes = require("./routes/maps");
 const userRoutes = require("./routes/users");
+const favRoutes = require("./routes/favorites")
 // const widgetsRoutes = require("./routes/widgets");
 
 // Mount all resource routes
 app.use('/maps', mapsRoutes);
 app.use('/login', userRoutes);
+app.use('/favorites', favRoutes)
 // app.use("/api/widgets", widgetsRoutes());
-
 
 
 // Home page
