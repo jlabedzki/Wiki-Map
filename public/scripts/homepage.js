@@ -1,5 +1,6 @@
 (function ($) {
   $(() => {
+    let mymap;
     let mapID = 1;
 
     $('.new-map').hide();
@@ -19,6 +20,7 @@
         let counter = 1;
         for (const map of data.maps) {
           $(`#list-item-${counter}`).click(function () {
+            mymap.remove();
             mapID = $(this).val();
             displayMapByID(mapID);
           });
@@ -36,7 +38,9 @@
   }
 
   const loadMapByCoords = (coords) => {
-    const mymap = L.map('current-mapid');
+    mymap = L.map('current-mapid');
+
+    console.log(mymap);
 
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: 'Map data, imagery &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors</a>',
@@ -50,9 +54,9 @@
   }
 
   const reloadMap = (map) => {
-    if (map) {
-      map.off()
+    if (map != null) {
       map.remove();
+      map = null;
     }
   }
 })(jQuery);
