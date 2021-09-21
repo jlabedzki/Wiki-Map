@@ -5,9 +5,6 @@
       $('.new-map').show();
       $('.main-container').hide();
       $createMap.hide();
-
-
-
     })
   });
 })(jQuery);

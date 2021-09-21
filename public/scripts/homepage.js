@@ -52,11 +52,4 @@
       [coords[2], coords[3]]
     ]);
   }
-
-  const reloadMap = (map) => {
-    if (map != null) {
-      map.remove();
-      map = null;
-    }
-  }
 })(jQuery);
