@@ -12,7 +12,9 @@ const queries = require('../lib/queries');
 
 // GET /maps/
 router.get('/', (req, res) => {
-  queries.listAllMaps()
+  const userID = req.session.user_id;
+
+  queries.listAllMaps(userID)
     .then((maps) => {
       res.send({ maps });
     });
