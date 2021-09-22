@@ -8,19 +8,23 @@
     $('#add-to-favorites').on('submit', addMapToFavorites);
     $('#remove-from-favorites').on('submit', removeMapFromFavorites);
     $('#new-map-form').on('submit', createNewMap);
+    $('#remove-from-favorites').hide();
 
     //map list buttons
     $('#favorites').click(() => {
+      $('.map-list-title').text('Favorites');
       displayListOfMaps('/favorites/');
     });
     $('#my-maps').click(() => {
+      $('.map-list-title').text('My Maps');
       displayListOfMaps('/maps/mymaps');
     });
     $('#my-contributions').click(() => {
-      console.log('clicked')
+      $('.map-list-title').text('Contributions');
       displayListOfMaps('/maps/contributions');
     });
     $('#discover').click(() => {
+      $('.map-list-title').text('Discover');
       displayListOfMaps('/maps');
     });
 
@@ -38,8 +42,6 @@
       $('.current-map h2').text("Create a new map")
     })
 
-
-    mymap.invalidateSize();
   });
 
   let mymap;
@@ -81,9 +83,6 @@
 
   const addMapToFavorites = function (e) {
     e.preventDefault();
-    // $('#heart')
-    //   .removeClass('far')
-    //   .addClass('fas');
 
     const favArr = $(this).serializeArray();
     const favObj = {};
@@ -93,6 +92,9 @@
     }
 
     $.post('/favorites/', favObj)
+      .then(() => {
+        displayListOfMaps('/maps');
+      })
     $(this).slideUp('slow');
   };
 
@@ -106,7 +108,6 @@
       favObj[favorite.name] = favorite.value;
     }
 
-    // $.delete('/favorites/', favObj)
     $.ajax({
       url: '/favorites/',
       type: 'DELETE',
@@ -131,21 +132,6 @@
 
   const displayListOfMaps = (route) => {
 
-    if (route === '/maps') $('.map-list-title').text('Discover');
-    if (route === '/maps/mymaps') $('.map-list-title').text('My Maps');
-    if (route === '/maps/contributions') $('.map-list-title').text('Contributions');
-
-
-    if (route === '/favorites/') {
-      $('.map-list-title').text('Favorites')
-      $('#remove-from-favorites').show();
-      $('#add-to-favroties').hide();
-    } else {
-      $('#remove-from-favorites').hide();
-      $('#add-to-favroties').show();
-    }
-
-
     $.get(route, data => {
       $('#list-of-maps').hide();
       $('#list-of-maps').empty();
@@ -162,13 +148,17 @@
         for (const map of data.maps) {
           $(`#list-item-${counter}`).click(function () {
 
-            //show favourite button if it's hidden (as a result of being clicked previously)
-            // if ($('#add-to-favorites').is(':hidden')) {
-            //   $('#add-to-favorites').show();
-            //   $('#heart')
-            //     .removeClass('fas')
-            //     .addClass('far');
-            // }
+            //if user on discover, show add-to-favorites, if user on favorites, show remove-from-favorites
+
+            if (route === '/maps') {
+              $('#add-to-favorites').show();
+              $('#remove-from-favorites').hide();
+            };
+            if (route === '/favorites/') {
+              $('#add-to-favorites').hide();
+              $('#remove-from-favorites').show();
+
+            }
 
             //replace "Map of the day" with the map title
             $('.current-map h2').text(`${map.title}`);
