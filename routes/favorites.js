@@ -21,8 +21,13 @@ router.post('/', (req, res) => {
     });
 })
 
-router.delete('/delete', (req, res) => {
-  console.log(req.body);
+router.delete('/', (req, res) => {
+  const favorite = req.body
+
+  queries.removeMapFromFavorites(favorite)
+    .then((favorite) => {
+      res.send({ favorite })
+    });
 })
 
 module.exports = router;

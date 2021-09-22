@@ -102,7 +102,7 @@
       <div id="current-mapid"></div>
       <div class="current-map-footer">
 
-        <form action="/favorites/:id" method="POST" id="add-to-favorites">
+        <form action="/favorites/" method="POST" id="add-to-favorites">
           <input type="hidden" name="user_id" value="<%= userID %>" required>
           <input type="hidden" name="map_id" id="favorites-mapid" required>
           <button type="submit">

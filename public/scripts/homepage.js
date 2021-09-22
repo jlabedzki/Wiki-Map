@@ -6,6 +6,7 @@
     displayListOfMaps('/maps');
     injectMapIDToForm(currentMapID);
     $('#add-to-favorites').on('submit', addMapToFavorites);
+    $('#remove-from-favorites').on('submit', removeMapFromFavorites);
 
     //map list buttons
     $('#favorites').click(() => {
@@ -50,9 +51,9 @@
 
   const addMapToFavorites = function (e) {
     e.preventDefault();
-    $('#heart')
-      .removeClass('far')
-      .addClass('fas');
+    // $('#heart')
+    //   .removeClass('far')
+    //   .addClass('fas');
 
     const favArr = $(this).serializeArray();
     const favObj = {};
@@ -67,14 +68,35 @@
 
 
 
-  // const removeMapFromFavorites = function (e) {
-  //   displayListOfMaps('/favorites/')
-  // }
+
+
+  const removeMapFromFavorites = function (e) {
+    e.preventDefault();
+
+    const favArr = $(this).serializeArray()
+    const favObj = {};
+
+    for (const favorite of favArr) {
+      favObj[favorite.name] = favorite.value;
+    }
+
+    // $.delete('/favorites/', favObj)
+    $.ajax({
+      url: '/favorites/',
+      type: 'DELETE',
+      data: favObj
+    })
+      .then(() => {
+        displayListOfMaps('/favorites/');
+        $('#remove-from-favorites').slideUp('slow');
+      });
+  }
 
 
 
   const injectMapIDToForm = (currentMapID) => {
     $('#favorites-mapid').val(`${currentMapID}`);
+    $('#remove-from-favorites-mapid').val(`${currentMapID}`);
   };
 
   //accept route parameter, use template literal to change route in get request
@@ -83,10 +105,20 @@
 
   const displayListOfMaps = (route) => {
 
-    // if (route === '/favorites/') {
-    //   $('removefromfavorites').show()
-    //   $('addtofavroties').hide()
-    // }
+    if (route === '/maps') $('.map-list-title').text('Discover');
+    if (route === '/maps/mymaps') $('.map-list-title').text('My Maps');
+    if (route === '/maps/contributions') $('.map-list-title').text('Contributions');
+
+
+    if (route === '/favorites/') {
+      $('.map-list-title').text('Favorites')
+      $('#remove-from-favorites').show();
+      $('#add-to-favroties').hide();
+    } else {
+      $('#remove-from-favorites').hide();
+      $('#add-to-favroties').show();
+    }
+
 
     $.get(route, data => {
       $('#list-of-maps').hide();
@@ -105,12 +137,12 @@
           $(`#list-item-${counter}`).click(function () {
 
             //show favourite button if it's hidden (as a result of being clicked previously)
-            if ($('#add-to-favorites').is(':hidden')) {
-              $('#add-to-favorites').show();
-              $('#heart')
-                .removeClass('fas')
-                .addClass('far');
-            }
+            // if ($('#add-to-favorites').is(':hidden')) {
+            //   $('#add-to-favorites').show();
+            //   $('#heart')
+            //     .removeClass('fas')
+            //     .addClass('far');
+            // }
 
             //replace "Map of the day" with the map title
             $('.current-map h2').text(`${map.title}`);
