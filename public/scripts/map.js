@@ -5,33 +5,33 @@
 //   })
 
 //   //Add coordinates into new map form on submit and make post request to /maps
-$('#new-map-form').on('submit', function (e) {
-  e.preventDefault();
-  getCoords();
+// $('#new-map-form').on('submit', function (e) {
+//   e.preventDefault();
+//   getCoords();
 
-  const mapArr = $(this).serializeArray();
-  const mapObj = {};
+//   const mapArr = $(this).serializeArray();
+//   const mapObj = {};
 
-  for (const keyValue of mapArr) {
-    mapObj[keyValue.name] = keyValue.value;
-  }
+//   for (const keyValue of mapArr) {
+//     mapObj[keyValue.name] = keyValue.value;
+//   }
 
-  // add ajax post request to maps and redirect to homepage
-  $.post(`/maps/`, mapObj)
-    .done(() => {
-      window.location.replace('/');
-    })
-})
+//   // add ajax post request to maps and redirect to homepage
+//   $.post(`/maps/`, mapObj)
+//     .done(() => {
+//       window.location.replace('/');
+//     })
+// })
 
-const getCoords = function () {
-  // $('.get-coords').click(function () {
-  coordDatabase.url = newMap.getBounds();
-  $('#form1').val(coordDatabase.url._northEast.lat);
-  $('#form2').val(coordDatabase.url._northEast.lng);
-  $('#form3').val(coordDatabase.url._southWest.lat);
-  $('#form4').val(coordDatabase.url._southWest.lng);
-  // })
-}
+// const getCoords = function () {
+//   // $('.get-coords').click(function () {
+//   coordDatabase.url = newMap.getBounds();
+//   $('#form1').val(coordDatabase.url._northEast.lat);
+//   $('#form2').val(coordDatabase.url._northEast.lng);
+//   $('#form3').val(coordDatabase.url._southWest.lat);
+//   $('#form4').val(coordDatabase.url._southWest.lng);
+//   // })
+// }
 //   let newMap = L.map('mapid');
 
 //   L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -44,9 +44,9 @@ const getCoords = function () {
 //     [49.22143848014641, -123.20257498348838]
 //   ]);
 
-//   newMap.invalidateSize();
+  // newMap.invalidateSize();
 
-//   const coordDatabase = { url: undefined };
+  // const coordDatabase = { url: undefined };
 
 
 //   const locateMe = function () {

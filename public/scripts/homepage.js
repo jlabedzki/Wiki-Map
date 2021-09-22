@@ -7,6 +7,7 @@
     injectMapIDToForm(currentMapID);
     $('#add-to-favorites').on('submit', addMapToFavorites);
     $('#remove-from-favorites').on('submit', removeMapFromFavorites);
+    $('#new-map-form').on('submit', createNewMap);
 
     //map list buttons
     $('#favorites').click(() => {
@@ -23,23 +24,22 @@
       displayListOfMaps('/maps');
     });
 
-    $(() => {
-      const $createMap = $('#create-new-map');
-      $createMap.click(() => {
-        // $('.new-map').show();
-        $('.current-map-footer').hide();
-        $('.map-list').hide();
-        $createMap.hide();
-        markers = {};
-        markerData = {};
-        markerGroup.clearLayers();
-        currentMapID = undefined;
-        $('.current-map').css('border-left-style', 'none');
-        $('.current-map h2').text("Create a new map")
-      })
-    });
+    const $createMap = $('#create-new-map');
+    $createMap.click(() => {
+      // $('.new-map').show();
+      $('.current-map-footer').hide();
+      $('.map-list').hide();
+      $createMap.hide();
+      markers = {};
+      markerData = {};
+      markerGroup.clearLayers();
+      currentMapID = undefined;
+      $('.current-map').css('border-left-style', 'none');
+      $('.current-map h2').text("Create a new map")
+    })
 
 
+    mymap.invalidateSize();
   });
 
   let mymap;
@@ -48,6 +48,36 @@
   let markerGroup;
   let markerData = {};
   let markers = {};
+  const coordDatabase = { url: undefined };
+
+
+  const createNewMap = function (e) {
+    e.preventDefault();
+    getCoords();
+
+    const mapArr = $(this).serializeArray();
+    const mapObj = {};
+
+    for (const keyValue of mapArr) {
+      mapObj[keyValue.name] = keyValue.value;
+    }
+
+    // add ajax post request to maps and redirect to homepage
+    $.post(`/maps/`, mapObj)
+      .done(() => {
+        window.location.replace('/');
+      })
+  };
+
+  const getCoords = function () {
+    // $('.get-coords').click(function () {
+    coordDatabase.url = mymap.getBounds();
+    $('#form1').val(coordDatabase.url._northEast.lat);
+    $('#form2').val(coordDatabase.url._northEast.lng);
+    $('#form3').val(coordDatabase.url._southWest.lat);
+    $('#form4').val(coordDatabase.url._southWest.lng);
+    // })
+  }
 
   const addMapToFavorites = function (e) {
     e.preventDefault();
@@ -65,10 +95,6 @@
     $.post('/favorites/', favObj)
     $(this).slideUp('slow');
   };
-
-
-
-
 
   const removeMapFromFavorites = function (e) {
     e.preventDefault();
