@@ -3,21 +3,24 @@
 
     $('.new-map').hide();
     displayMapByID(currentMapID);
-    displayListOfMaps();
+    displayListOfMaps('/maps');
     injectMapIDToForm(currentMapID);
+    $('#add-to-favorites').on('submit', addMapToFavorites);
 
-
-    $('#add-to-favorites').on('submit', function (e) {
-      e.preventDefault();
-      const favArr = $(this).serializeArray();
-      const favObj = {};
-
-      for (const favorite of favArr) {
-        favObj[favorite.name] = favorite.value;
-      }
-
-      $.post('/favorites/', favObj);
-    })
+    //map list buttons
+    $('#favorites').click(() => {
+      displayListOfMaps('/favorites/');
+    });
+    $('#my-maps').click(() => {
+      displayListOfMaps('/maps/mymaps');
+    });
+    $('#my-contributions').click(() => {
+      console.log('clicked')
+      displayListOfMaps('/maps/contributions');
+    });
+    $('#discover').click(() => {
+      displayListOfMaps('/maps');
+    });
   });
 
   let mymap;
@@ -27,15 +30,36 @@
   let markerData = {};
   let markers = {};
 
+  const addMapToFavorites = function (e) {
+    e.preventDefault();
+    $('#heart')
+      .removeClass('far')
+      .addClass('fas');
+
+    const favArr = $(this).serializeArray();
+    const favObj = {};
+
+    for (const favorite of favArr) {
+      favObj[favorite.name] = favorite.value;
+    }
+
+    $.post('/favorites/', favObj)
+    $(this).slideUp('slow');
+  };
+
   const injectMapIDToForm = (currentMapID) => {
     $('#favorites-mapid').val(`${currentMapID}`);
-  }
+  };
 
   //accept route parameter, use template literal to change route in get request
-  const displayListOfMaps = () => {
 
+  //favorites.onclick( displaylistofmaps(/favorites)
 
-    $.get('/maps', data => {
+  const displayListOfMaps = (route) => {
+
+    $.get(route, data => {
+      $('#list-of-maps').empty();
+      console.log(data);
       let counter = 1;
       for (const map of data.maps) {
         $('#list-of-maps').append(`<li value="${map.id}" id="list-item-${counter}">${map.title}</li>`);
@@ -44,8 +68,21 @@
     })
       .then((data) => {
         let counter = 1;
+        //this loop adds an onclick handler to each map in the map list which renders a new map when clicked
         for (const map of data.maps) {
           $(`#list-item-${counter}`).click(function () {
+
+            //show favourite button if it's hidden (as a result of being clicked previously)
+            if ($('#add-to-favorites').is(':hidden')) {
+              $('#add-to-favorites').show();
+              $('#heart')
+                .removeClass('fas')
+                .addClass('far');
+            }
+
+            //replace "Map of the day" with the map title
+            $('.current-map h2').text(`${map.title}`);
+
             mymap.remove();
             currentMapID = $(this).val();
             injectMapIDToForm(currentMapID);
@@ -107,8 +144,8 @@
   function onMapClick(e) {
 
     tempMarker
-    .setLatLng(e.latlng)
-    .addTo(mymap);
+      .setLatLng(e.latlng)
+      .addTo(mymap);
 
     $('.add-pin').prop('disabled', false);
     $('#pin-title').val('');
@@ -140,14 +177,12 @@
   };
 
 
-
   const generateMarker = function (data) {
     tempMarker.remove();
     markers[data.pinID] = new L.marker([data.latitude, data.longitude])
       .addTo(mymap)
       .bindPopup(`<h1>${data.pinTitle}</h1><h2>${data.pinDescription}</h2><img width="100%" src ="${data.pinImg}" />`).openPopup();
   };
-
 
   const delPin = function(pin) {
 
@@ -198,6 +233,7 @@
 
     markers[pinID].off('click');
     markers[pinID].on('click', function() {
+
       tempMarker.remove();
       markers[pinID].openPopup();
 
@@ -214,6 +250,7 @@
       $('#pin-delete').on('click', function() {
 
         delPin(markerData[pinID]); // The below functions ignore edge cases where server deletion failed. But good enought for the demo.
+
         $('#pin-title').val('');
         $('#pin-descript').val('');
         $('#pin-img').val('');
@@ -222,13 +259,14 @@
       });
 
       $('.add-pin').off('submit');
-
+      
       // EDIT BUTTON SUBMIT
       $('.add-pin').submit(function(event) {
         event.preventDefault();
         $('#pin-longitude').val(longitude)
         $('#pin-latitude').val(latitude);
         $('#pin-mapid').val(mapID);
+
 
         const pinArr = $(this).serializeArray();
         const pinObj = {};
