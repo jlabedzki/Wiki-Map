@@ -18,6 +18,25 @@ router.get('/', (req, res) => {
     });
 });
 
+// Get /maps/mymaps/:userID (the maps a user has created)
+router.get('/mymaps', (req, res) => {
+  const userID = req.session.user_id;
+
+  queries.listMyMaps(userID)
+    .then((maps) => {
+      res.send({ maps });
+    })
+})
+
+router.get('/contributions', (req, res) => {
+  const userID = req.session.user_id;
+
+  queries.listMyContributions(userID)
+    .then((maps) => {
+      res.send({ maps })
+    });
+})
+
 // GET /maps/:id
 router.get('/:id', (req, res) => {
   const id = req.params.id;
