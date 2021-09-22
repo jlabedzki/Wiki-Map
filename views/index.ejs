@@ -111,24 +111,25 @@
           <button class="add-pin" id="pin-submit" type="submit">Add Pin</button>
         </form>
       </div>
+
+      <div class="new-map-footer">
+        <button class='locate-current'>Jump to my location</button>
+        <form action="/maps/" method="POST" id="new-map-form">
+          <input type="hidden" name="creator_id" value="<%= userID %>" required>
+          <input type="text" placeholder="Title" name="title" required>
+          <input id="form1" type="hidden" name="longitude_1" required>
+          <input id="form2" type="hidden" name="latitude_1" required>
+          <input id="form3" type="hidden" name="longitude_2" required>
+          <input id="form4" type="hidden" name="latitude_2" required>
+          <input type="text" placeholder="Category" name="category">
+          <button type="submit">Submit</button>
+        </form>
+      </div>
     </div>
   </div>
-  <div class="new-map">
+  <!-- <div class="new-map">
     <div id="mapid"></div>
-    <div class="new-map-footer">
-      <button class='locate-current'>Jump to my location</button>
-      <form action="/maps/" method="POST" id="new-map-form">
-        <input type="hidden" name="creator_id" value="<%= userID %>" required>
-        <input type="text" placeholder="Title" name="title" required>
-        <input id="form1" type="hidden" name="longitude_1" required>
-        <input id="form2" type="hidden" name="latitude_1" required>
-        <input id="form3" type="hidden" name="longitude_2" required>
-        <input id="form4" type="hidden" name="latitude_2" required>
-        <input type="text" placeholder="Category" name="category">
-        <button type="submit">Submit</button>
-      </form>
-    </div>
-  </div>
+  </div> -->
 </body>
 
 </html>
