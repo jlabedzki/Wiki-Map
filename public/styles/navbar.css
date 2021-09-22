@@ -27,7 +27,6 @@ nav .nav-left {
   flex-direction: row;
   justify-self: flex-end;
   align-self: flex-end;
-  overflow: hidden;
 }
 nav .dropdown {
   display: flex;

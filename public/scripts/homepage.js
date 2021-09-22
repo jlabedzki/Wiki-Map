@@ -50,6 +50,8 @@
 
 
 
+
+
   const removeMapFromFavorites = function (e) {
     e.preventDefault();
 
@@ -68,6 +70,7 @@
     })
       .then(() => {
         displayListOfMaps('/favorites/');
+        $('#remove-from-favorites').slideUp('slow');
       });
   }
 
@@ -84,10 +87,20 @@
 
   const displayListOfMaps = (route) => {
 
-    // if (route === '/favorites/') {
-    //   $('removefromfavorites').show()
-    //   $('addtofavroties').hide()
-    // }
+    if (route === '/maps') $('.map-list-title').text('Discover');
+    if (route === '/maps/mymaps') $('.map-list-title').text('My Maps');
+    if (route === '/maps/contributions') $('.map-list-title').text('Contributions');
+
+
+    if (route === '/favorites/') {
+      $('.map-list-title').text('Favorites')
+      $('#remove-from-favorites').show();
+      $('#add-to-favroties').hide();
+    } else {
+      $('#remove-from-favorites').hide();
+      $('#add-to-favroties').show();
+    }
+
 
     $.get(route, data => {
       $('#list-of-maps').hide();
@@ -106,12 +119,12 @@
           $(`#list-item-${counter}`).click(function () {
 
             //show favourite button if it's hidden (as a result of being clicked previously)
-            if ($('#add-to-favorites').is(':hidden')) {
-              $('#add-to-favorites').show();
-              $('#heart')
-                .removeClass('fas')
-                .addClass('far');
-            }
+            // if ($('#add-to-favorites').is(':hidden')) {
+            //   $('#add-to-favorites').show();
+            //   $('#heart')
+            //     .removeClass('fas')
+            //     .addClass('far');
+            // }
 
             //replace "Map of the day" with the map title
             $('.current-map h2').text(`${map.title}`);
