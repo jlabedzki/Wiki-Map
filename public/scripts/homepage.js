@@ -47,6 +47,14 @@
     $(this).slideUp('slow');
   };
 
+
+
+  // const removeMapFromFavorites = function (e) {
+  //   displayListOfMaps('/favorites/')
+  // }
+
+
+
   const injectMapIDToForm = (currentMapID) => {
     $('#favorites-mapid').val(`${currentMapID}`);
   };
@@ -57,7 +65,13 @@
 
   const displayListOfMaps = (route) => {
 
+    // if (route === '/favorites/') {
+    //   $('removefromfavorites').show()
+    //   $('addtofavroties').hide()
+    // }
+
     $.get(route, data => {
+      $('#list-of-maps').hide();
       $('#list-of-maps').empty();
       console.log(data);
       let counter = 1;
@@ -91,7 +105,10 @@
           });
           counter++;
         }
-      });
+      })
+      .then(() => {
+        $('#list-of-maps').slideDown('slow');
+      })
   };
 
   const displayMapByID = (mapID) => {

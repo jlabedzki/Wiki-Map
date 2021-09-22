@@ -13,12 +13,16 @@ router.get('/', (req, res) => {
 
 router.post('/', (req, res) => {
   const favorite = req.body;
-  console.log(req.body);
+
 
   queries.addMapToFavorites(favorite)
     .then((favorite) => {
       res.send({ favorite })
     });
+})
+
+router.delete('/delete', (req, res) => {
+  console.log(req.body);
 })
 
 module.exports = router;

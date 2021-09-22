@@ -47,9 +47,20 @@
 
 <body>
   <nav>
-    <div class="nav-right">
+    <div class="nav-left">
       <h1 class="logo">Wiki Map</h1>
       <% if (userID) { %>
+        <div class="dropdown">
+          <button class="dropdown-button">Maps
+            <i class="fa fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <button id="favorites">Favorites</button>
+            <button id="my-maps">My Maps</button>
+            <button id="my-contributions">Contributions</button>
+            <button id="discover">Discover</button>
+          </div>
+        </div>
         <button id="create-new-map"><strong>Create</strong> new map
           <i class="fas fa-map-marker-alt"></i></button>
         <% } %>
@@ -79,10 +90,10 @@
       <ul id="list-of-maps"></ul>
       <!-- </div> -->
       <div class="map-list-buttons">
-        <button id="favorites">Favorites</button>
+        <!-- <button id="favorites">Favorites</button>
         <button id="my-maps">My Maps</button>
         <button id="my-contributions">Contributions</button>
-        <button id="discover">Discover</button>
+        <button id="discover">Discover</button> -->
       </div>
     </div>
 
@@ -90,13 +101,23 @@
       <h2>Map of the day</h2>
       <div id="current-mapid"></div>
       <div class="current-map-footer">
+
         <form action="/favorites/:id" method="POST" id="add-to-favorites">
           <input type="hidden" name="user_id" value="<%= userID %>" required>
           <input type="hidden" name="map_id" id="favorites-mapid" required>
           <button type="submit">
-            <i id="heart" class="far fa-heart"></i>
+            <i class="far fa-heart"></i>
           </button>
         </form>
+
+        <form action="/favorites/delete" method="POST" id="remove-from-favorites">
+          <input type="hidden" name="user_id" value="<%= userID %>" required>
+          <input type="hidden" name="map_id" id="remove-from-favorites-mapid" required>
+          <button type="submit">
+            <i class="fas fa-heart"></i>
+          </button>
+        </form>
+
         <form class="add-pin" action="/pins/" method="POST" data-pin-id="">
           <input type="hidden" name="creator_id" value="<%= userID %>">
           <input type="hidden" name="map_id" id="pin-mapid">

@@ -34,6 +34,48 @@ nav {
     flex-direction: row;
     justify-self: flex-end;
     align-self: flex-end;
+    overflow:hidden;
+  }
+
+  .dropdown {
+    display: flex;
+    overflow: hidden;
+    margin-left: 1rem;
+    margin-right: 2rem;
+  }
+
+  .dropdown-button:hover {
+    transform: scale(1);
+  }
+
+  .dropdown-content{
+    display:none;
+    flex-direction: column;
+    align-items: flex-start;
+    position: absolute;
+    z-index: 1;
+    margin-top: 2rem;
+    background-color: rgb(218, 218, 218);
+
+
+    button {
+      width: 100%;
+      padding-top: 0.2rem;
+      padding-bottom: 0.2rem;
+      color: rgb(70, 70, 70);
+      font-size: 0.8rem;
+    }
+
+    button:hover {
+      background-color: rgb(201, 201, 201);
+      transform: scale(1);
+    }
+  }
+
+  .dropdown:hover {
+    .dropdown-content {
+      display: flex;
+    }
   }
 
   #create-new-map {
