@@ -28,8 +28,7 @@ router.post('/', (req, res) => {
 router.post('/edit/:id', (req, res) => {
   const userID = req.session.user_id;
   const pin = req.body;
-  console.log('userID: ', userID);
-  console.log('pini: ', pin);
+  console.log('pin req.body', pin);
   queries.editPin(pin, userID)
     .then((pin) => {
       res.send({pin});
@@ -37,6 +36,14 @@ router.post('/edit/:id', (req, res) => {
 })
 
 //delete
-// router.post();
+router.post('/delete/:id', (req, res) => {
+  const userID = req.session.user_id;
+  const pin = req.body;
+  console.log('ROUTES DELETE', pin);
+  queries.deletePin(pin, userID)
+    .then((pin) => {
+      res.send({pin});
+    });
+})
 
 module.exports = router;

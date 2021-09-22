@@ -1,14 +1,11 @@
 (function ($) {
   $(() => {
-    console.log(currentMapID);
 
     $('.new-map').hide();
     displayMapByID(currentMapID);
     displayListOfMaps();
-    // displayPinsByMapID(currentMapID);
     injectMapIDToForm(currentMapID);
 
-    // mymap.on('click', onMapClick);
 
     $('#add-to-favorites').on('submit', function (e) {
       e.preventDefault();
@@ -26,6 +23,9 @@
   let mymap;
   let currentMapID = 1;
   let firstLoad = true;
+
+  let markerData = {};
+  let markers = {};
 
   const injectMapIDToForm = (currentMapID) => {
     $('#favorites-mapid').val(`${currentMapID}`);
@@ -89,7 +89,7 @@
 
   const displayPinsByMapID = pinMapID => {
     $.get(`/pins/${pinMapID}`, data => {
-      console.log(data.pins);
+
       const pinArr = data.pins;
       for (const pin of pinArr) {
         pinSubmit(pin);
@@ -128,7 +128,7 @@
 
       const pinArr = $(this).serializeArray();
       const pinObj = {};
-      console.log(pinArr);
+
       for (const pin of pinArr) {
         pinObj[pin.name] = pin.value;
       }
@@ -136,90 +136,70 @@
         .done(function(returnedPin) {
           pinSubmit(returnedPin.pin);
         })
-
-      // pinSubmit($('form .add-pin').data('pin-id'), e.latlng, currentMapID);
     });
   };
 
-  let markerData = {};
-  let markers = {};
-  let markerCount = 1;
-  // const currentMapID = 1;
-  const userID = 1;
 
-  // const marked = function(data) {
-  //   tempMarker.remove();
-  //   markers[data.id] = new L.marker([data.latitude, data.longitude], { draggable: true })
-  //     .addTo(mymap)
-  //     .bindPopup(`<h1>${data.title}</h1><h2>${data.description}</h2><img width="100%" src ="${data.image_url}" />`).openPopup();
-  // };
 
   const generateMarker = function (data) {
     tempMarker.remove();
-    markers[data.pinID] = new L.marker([data.latitude, data.longitude], { draggable: true })
+    markers[data.pinID] = new L.marker([data.latitude, data.longitude])
       .addTo(mymap)
       .bindPopup(`<h1>${data.pinTitle}</h1><h2>${data.pinDescription}</h2><img width="100%" src ="${data.pinImg}" />`).openPopup();
-    console.log(markers[data.pinID]);
-    // tempMarker.remove();
-    // markers[data.pinID] = new L.marker([data.latitude, data.longitude], { draggable: true })
-    //   .addTo(mymap)
-    //   .bindPopup(`<h1>${data.pinTitle}</h1><h2>${data.pinDescript}</h2><img width="100%" src ="${data.pinImg}" />`).openPopup();
-    // console.log(markers[data.pinID]);
   };
 
 
-  const delPin = function(pinID) {
-    markers[pinID].remove();
-    delete markers[pinID];    // In case of an error or inaccessibility, these will be run?
-    delete markerData[pinID];
+  const delPin = function(pin) {
+
+    const pinObj = pin;
+
+    $.post(`/pins/delete/${pin.pinID}`, pinObj)
+      .done(function(data) {
+        markers[pin.pinID].remove();
+        delete markers[pin.pinID];
+        delete markerData[pin.pinID];
+      })
   }
 
   const pinSubmit = function(pinObject) {
-    console.log('pinSubmit: ', pinObject);
-    const pinID = pinObject.id; // To be replaced with an if
-    const mapID = pinObject.map_id; // !!VARIABLE TO BE REPLACED WITH SOMETHING
-    const creatorID = pinObject.creator_id; // !!VARIABLE TO BE REPLACED WITH A COOKIE ID
+    const pinID = pinObject.id;
+    const mapID = pinObject.map_id;
+    const creatorID = pinObject.creator_id;
     const pinTitle = pinObject.title;
     const pinDescript = pinObject.description;
     const pinImg = pinObject.image_url;
     const longitude = pinObject.longitude;
     const latitude = pinObject.latitude;
-    console.log('pinObject__', pinObject);
 
-    markerData[pinID] = { // ??Keep for backup?
-      // pinID,
-      mapID,
-      creatorID,
-      pinTitle,
-      pinDescript,
-      pinImg,
-      longitude,
-      latitude
-    };
+    if (!markerData[pinID]) {
+
+      markerData[pinID] = {
+        mapID,
+        creatorID,
+        pinTitle,
+        pinDescript,
+        pinImg,
+        longitude,
+        latitude
+      };
+    }
 
     $('#pin-title').val('');
     $('#pin-descript').val('');
     $('#pin-img').val('');
     $('.add-pin').prop('disabled', true);
 
-    console.log('markerData: ', markerData[pinID]);
-    console.log(firstLoad, markerData[pinID]);
     if (firstLoad || !markerData[pinID].pinID) {
-      // console.log('pinSubmit: ', pinObject);
       markerData[pinID].pinID = pinID;
-      console.log('markerData2: ', markerData[pinID]);
       generateMarker(markerData[pinID]);
     }
-
     markers[pinID].bindPopup(`<h1>${pinTitle}</h1><h2>${pinDescript}</h2><img width="100%" src ="${pinImg}" />`).openPopup();
 
-    // EDIT
+
     markers[pinID].off('click');
     markers[pinID].on('click', function() {
       tempMarker.remove();
       markers[pinID].openPopup();
-      console.log('marked: ', pinTitle);
-      console.log('bigining');
 
       $('.add-pin').prop('disabled', false);
       $('.add-pin button').text('Edit Pin');
@@ -230,8 +210,10 @@
       $('#pin-delete').remove();
       $('<button class="add-pin" id="pin-delete" type="button">Delete Pin</button>').insertAfter('#pin-submit');
 
+      // DELETE BUTTON
       $('#pin-delete').on('click', function() {
-        delPin(pinID);
+
+        delPin(markerData[pinID]); // The below functions ignore edge cases where server deletion failed. But good enought for the demo.
         $('#pin-title').val('');
         $('#pin-descript').val('');
         $('#pin-img').val('');
@@ -250,37 +232,19 @@
 
         const pinArr = $(this).serializeArray();
         const pinObj = {};
-        console.log('EDIT:', pinArr);
 
         for (const pin of pinArr) {
           pinObj[pin.name] = pin.value;
         }
         pinObj.id = $('form .add-pin').data('pin-id');
-        console.log('pinObj.id', pinObj.id);
         $.post(`/pins/edit/${pinObj.id}`, pinObj)
           .done(function(returnedPin) {
-            console.log("hello pinSubmit", returnedPin);
+
             pinSubmit(returnedPin.pin);
           })
-          console.log('end');
-        // pinSubmit($('form .add-pin').data('pin-id'), e.latlng, currentMapID);
+          $('#pin-delete').remove();
       });
-
-        // pinSubmit($('form .add-pin').data('pin-id'), { lat: latitude, lng: longitude });
-        // $('#pin-delete').remove();
-      // });
-      // $('#pin-submit').on('click', function(e) {
-      //     pinSubmit($('form .add-pin').data('pin-id'), e.latlng, currentMapID);
-      //     $('#pin-delete').remove();
-      //   });
     });
-
-    markers[pinID].on('moveend', function(e) {
-      markerData[pinID].latitude = e.target._latlng.lat;
-      markerData[pinID].longitude = e.target._latlng.lng;
-    });
-    console.log(markerData);
-    console.log(markers);
   };
 
 })(jQuery);
