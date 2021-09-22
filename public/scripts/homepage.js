@@ -6,43 +6,45 @@
     displayMapByID(currentMapID);
     displayListOfMaps('/maps');
     injectMapIDToForm(currentMapID);
-
-    // mymap.on('click', onMapClick);
-
-    $('#add-to-favorites').on('submit', function (e) {
-      e.preventDefault();
-      $('#heart')
-        .removeClass('far')
-        .addClass('fas');
-
-      const favArr = $(this).serializeArray();
-      const favObj = {};
-
-      for (const favorite of favArr) {
-        favObj[favorite.name] = favorite.value;
-      }
-
-      $.post('/favorites/', favObj)
-
-
-      // setTimeout(() => {
-      $(this).slideUp('slow');
-      // }, 200)
-    })
+    $('#add-to-favorites').on('submit', addMapToFavorites);
+    $('#favorites').click(() => {
+      displayListOfMaps('/favorites/');
+    });
+    // $('#')
   });
 
   let mymap;
   let currentMapID = 1;
 
+  const addMapToFavorites = function (e) {
+    e.preventDefault();
+    $('#heart')
+      .removeClass('far')
+      .addClass('fas');
+
+    const favArr = $(this).serializeArray();
+    const favObj = {};
+
+    for (const favorite of favArr) {
+      favObj[favorite.name] = favorite.value;
+    }
+
+    $.post('/favorites/', favObj)
+    $(this).slideUp('slow');
+  };
+
   const injectMapIDToForm = (currentMapID) => {
     $('#favorites-mapid').val(`${currentMapID}`);
-  }
+  };
 
   //accept route parameter, use template literal to change route in get request
   //favorites.onclick( displaylistofmaps(/favorites)
 
   const displayListOfMaps = (route) => {
+
     $.get(route, data => {
+      $('#list-of-maps').empty();
+      console.log(data);
       let counter = 1;
       for (const map of data.maps) {
         $('#list-of-maps').append(`<li value="${map.id}" id="list-item-${counter}">${map.title}</li>`);
