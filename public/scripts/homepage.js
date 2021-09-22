@@ -21,12 +21,30 @@
     $('#discover').click(() => {
       displayListOfMaps('/maps');
     });
+
+    $(() => {
+      const $createMap = $('#create-new-map');
+      $createMap.click(() => {
+        // $('.new-map').show();
+        $('.current-map-footer').hide();
+        $('.map-list').hide();
+        $createMap.hide();
+        markers = {};
+        markerData = {};
+        markerGroup.clearLayers();
+        currentMapID = undefined;
+        $('.current-map').css('border-left-style', 'none');
+        $('.current-map h2').text("Create a new map")
+      })
+    });
+
+
   });
 
   let mymap;
   let currentMapID = 1;
   let firstLoad = true;
-
+  let markerGroup;
   let markerData = {};
   let markers = {};
 
@@ -110,7 +128,7 @@
 
   const loadMapByCoords = (coords) => {
     mymap = L.map('current-mapid');
-
+    markerGroup = L.layerGroup().addTo(mymap);
     L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: 'Map data, imagery &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors</a>',
       maxZoom: 18,
@@ -180,8 +198,11 @@
   const generateMarker = function (data) {
     tempMarker.remove();
     markers[data.pinID] = new L.marker([data.latitude, data.longitude])
-      .addTo(mymap)
-      .bindPopup(`<h1>${data.pinTitle}</h1><h2>${data.pinDescription}</h2><img width="100%" src ="${data.pinImg}" />`).openPopup();
+      .addTo(markerGroup)
+      .bindPopup(`<h1>${data.pinTitle}</h1><h2>${data.pinDescription}</h2><img width="100%" src ="${data.pinImg}" />`).openPopup()
+    // markers[data.pinID].addTo(markerGroup);
+    // markerGroup.addLayer(markers[data.pinID]);
+
   };
 
   const delPin = function (pin) {
