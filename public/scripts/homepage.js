@@ -6,6 +6,7 @@
     displayListOfMaps('/maps');
     injectMapIDToForm(currentMapID);
     $('#add-to-favorites').on('submit', addMapToFavorites);
+    $('#remove-from-favorites').on('submit', removeMapFromFavorites);
 
     //map list buttons
     $('#favorites').click(() => {
@@ -32,9 +33,9 @@
 
   const addMapToFavorites = function (e) {
     e.preventDefault();
-    $('#heart')
-      .removeClass('far')
-      .addClass('fas');
+    // $('#heart')
+    //   .removeClass('far')
+    //   .addClass('fas');
 
     const favArr = $(this).serializeArray();
     const favObj = {};
@@ -49,14 +50,32 @@
 
 
 
-  // const removeMapFromFavorites = function (e) {
-  //   displayListOfMaps('/favorites/')
-  // }
+  const removeMapFromFavorites = function (e) {
+    e.preventDefault();
+
+    const favArr = $(this).serializeArray()
+    const favObj = {};
+
+    for (const favorite of favArr) {
+      favObj[favorite.name] = favorite.value;
+    }
+
+    // $.delete('/favorites/', favObj)
+    $.ajax({
+      url: '/favorites/',
+      type: 'DELETE',
+      data: favObj
+    })
+      .then(() => {
+        displayListOfMaps('/favorites/');
+      });
+  }
 
 
 
   const injectMapIDToForm = (currentMapID) => {
     $('#favorites-mapid').val(`${currentMapID}`);
+    $('#remove-from-favorites-mapid').val(`${currentMapID}`);
   };
 
   //accept route parameter, use template literal to change route in get request
