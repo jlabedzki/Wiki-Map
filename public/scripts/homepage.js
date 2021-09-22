@@ -7,10 +7,21 @@
     displayListOfMaps('/maps');
     injectMapIDToForm(currentMapID);
     $('#add-to-favorites').on('submit', addMapToFavorites);
+
+    //map list buttons
     $('#favorites').click(() => {
       displayListOfMaps('/favorites/');
     });
-    // $('#')
+    $('#my-maps').click(() => {
+      displayListOfMaps('/maps/mymaps');
+    });
+    $('#my-contributions').click(() => {
+      console.log('clicked')
+      displayListOfMaps('/maps/contributions');
+    });
+    $('#discover').click(() => {
+      displayListOfMaps('/maps');
+    });
   });
 
   let mymap;
