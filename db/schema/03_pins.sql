@@ -7,7 +7,7 @@ CREATE TABLE pins (
   creator_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
   title VARCHAR(255) NOT NULL,
   description TEXT,
-  image_url VARCHAR(255),
+  image_url TEXT,
   longitude DECIMAL NOT NULL,
   latitude DECIMAL NOT NULL
 );

@@ -1,6 +1,6 @@
 (function ($) {
   $(() => {
-
+    // $('.add-pin').prop('disabled', true);
     $('.new-map').hide();
     displayMapByID(currentMapID);
     displayListOfMaps('/maps');
@@ -95,6 +95,7 @@
   };
 
   const displayMapByID = (mapID) => {
+    $('.add-pin').prop('disabled', true);
 
     markerData = {};
     markers = {};
@@ -102,7 +103,7 @@
 
     $.get(`/maps/${mapID}`, data => {
       const coordinates = [data.map[0].longitude_1, data.map[0].latitude_1, data.map[0].longitude_2, data.map[0].latitude_2];
-;
+      ;
       loadMapByCoords(coordinates);
     });
   }
@@ -139,7 +140,6 @@
   const myIcon = L.divIcon({ iconAnchor: [9, 32], className: 'fas fa-hand-point-down' });
   let tempMarker = L.marker(null, { icon: myIcon });
 
-  $('.add-pin').prop('disabled', true);
 
   function onMapClick(e) {
 
@@ -157,7 +157,7 @@
     $('#pin-submit').off('click');
     $('.add-pin').off('submit');
 
-    $('.add-pin').on('submit', function(event) {
+    $('.add-pin').on('submit', function (event) {
       event.preventDefault();
       $('#pin-longitude').val(e.latlng.lng)
       $('#pin-latitude').val(e.latlng.lat);
@@ -170,7 +170,7 @@
         pinObj[pin.name] = pin.value;
       }
       $.post('/pins/', pinObj)
-        .done(function(returnedPin) {
+        .done(function (returnedPin) {
           pinSubmit(returnedPin.pin);
         })
     });
@@ -184,19 +184,19 @@
       .bindPopup(`<h1>${data.pinTitle}</h1><h2>${data.pinDescription}</h2><img width="100%" src ="${data.pinImg}" />`).openPopup();
   };
 
-  const delPin = function(pin) {
+  const delPin = function (pin) {
 
     const pinObj = pin;
 
     $.post(`/pins/delete/${pin.pinID}`, pinObj)
-      .done(function(data) {
+      .done(function (data) {
         markers[pin.pinID].remove();
         delete markers[pin.pinID];
         delete markerData[pin.pinID];
       })
   }
 
-  const pinSubmit = function(pinObject) {
+  const pinSubmit = function (pinObject) {
     const pinID = pinObject.id;
     const mapID = pinObject.map_id;
     const creatorID = pinObject.creator_id;
@@ -232,7 +232,7 @@
 
 
     markers[pinID].off('click');
-    markers[pinID].on('click', function() {
+    markers[pinID].on('click', function () {
 
       tempMarker.remove();
       markers[pinID].openPopup();
@@ -247,7 +247,7 @@
       $('<button class="add-pin" id="pin-delete" type="button">Delete Pin</button>').insertAfter('#pin-submit');
 
       // DELETE BUTTON
-      $('#pin-delete').on('click', function() {
+      $('#pin-delete').on('click', function () {
 
         delPin(markerData[pinID]); // The below functions ignore edge cases where server deletion failed. But good enought for the demo.
 
@@ -259,9 +259,9 @@
       });
 
       $('.add-pin').off('submit');
-      
+
       // EDIT BUTTON SUBMIT
-      $('.add-pin').submit(function(event) {
+      $('.add-pin').submit(function (event) {
         event.preventDefault();
         $('#pin-longitude').val(longitude)
         $('#pin-latitude').val(latitude);
@@ -276,11 +276,11 @@
         }
         pinObj.id = $('form .add-pin').data('pin-id');
         $.post(`/pins/edit/${pinObj.id}`, pinObj)
-          .done(function(returnedPin) {
+          .done(function (returnedPin) {
 
             pinSubmit(returnedPin.pin);
           })
-          $('#pin-delete').remove();
+        $('#pin-delete').remove();
       });
     });
   };
