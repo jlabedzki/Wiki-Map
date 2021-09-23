@@ -4,7 +4,6 @@
     $('.logo').click(() => {
       window.location.replace('/');
     })
-
     $('.new-map-footer').hide();
 
     $('.new-map').hide();
@@ -19,17 +18,21 @@
     //map list buttons
     $('#favorites').click(() => {
       $('.map-list-title').text('Favorites');
+      $('#categories').hide();
       displayListOfMaps('/favorites/');
     });
     $('#my-maps').click(() => {
       $('.map-list-title').text('My Maps');
+      $('#categories').hide();
       displayListOfMaps('/maps/mymaps');
     });
     $('#my-contributions').click(() => {
       $('.map-list-title').text('Contributions');
+      $('#categories').hide();
       displayListOfMaps('/maps/contributions');
     });
     $('#discover').click(() => {
+      $('#categories').show();
       $('.map-list-title').text('Discover');
       displayListOfMaps('/maps');
     });
