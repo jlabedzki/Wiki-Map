@@ -1,61 +1,111 @@
 body {
   background-color: #EEE;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
 .main-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  width: 90%;
+  width: 100%;
   height: 100%;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  z-index: 0;
 }
 .main-container .map-list {
-  width: 30%;
-}
-.main-container .current-map {
-  width: 70%;
+  display: none;
 }
 
 .current-map {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin-left: 1rem;
-  padding-top: 0.5rem;
-  border-left: 2px solid #464646;
-  font-family: "Source Sans Pro", sans-serif;
-  color: #373737;
+  width: 100%;
 }
 .current-map h2 {
-  margin-top: 0;
-  font-family: "Bangers", cursive;
-  padding-left: 0.3rem;
-  padding-right: 0.3rem;
-  padding-top: 0.1rem;
-  padding-bottom: 0.1rem;
-  letter-spacing: 0.1rem;
+  display: none;
 }
 .current-map #current-mapid {
-  height: 200px;
-  width: 90%;
-  resize: vertical;
+  height: 100vh;
+  width: 100vw;
+  z-index: 5;
 }
-.current-map #add-to-favorites {
+.current-map .current-map-footer {
+  position: fixed;
+  margin: auto;
+  width: fit-content;
+  top: 77vh;
+  left: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  flex-direction: column;
+}
+.current-map .current-map-footer #add-to-favorites {
   font-size: 1.5rem;
   border: none;
   background-color: none;
+  display: none;
 }
-.current-map #add-to-favorites:hover {
+.current-map .current-map-footer #add-to-favorites:hover {
   transform: scale(1.05);
   cursor: pointer;
 }
-.current-map #add-to-favorites:active {
+.current-map .current-map-footer #add-to-favorites:active {
   transform: scale(1);
+}
+.current-map .current-map-footer .add-pin {
+  width: fit-content;
+  margin: auto;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+}
+.current-map .current-map-footer .add-pin #pin-title, .current-map .current-map-footer .add-pin #pin-descript, .current-map .current-map-footer .add-pin #pin-img {
+  font-size: 1.2em;
+  width: 12em;
+  margin-bottom: 0.6em;
+  opacity: 0.8;
+  background-color: rgba(212, 232, 221, 0.832);
+  border-style: none;
+  resize: none;
+  overflow: hidden;
+}
+.current-map .current-map-footer .add-pin #pin-title:focus, .current-map .current-map-footer .add-pin #pin-descript:focus, .current-map .current-map-footer .add-pin #pin-img:focus {
+  background-color: white;
+  opacity: 0.8;
+  border-style: none;
+  overflow: auto;
+}
+.current-map .current-map-footer .add-pin #pin-title, .current-map .current-map-footer .add-pin #pin-img {
+  height: 2em;
+}
+.current-map .current-map-footer .add-pin #pin-descript {
+  height: 4em;
+}
+.current-map .current-map-footer .add-pin #pin-title {
+  font-weight: bold;
+}
+.current-map .current-map-footer .add-pin #pin-title::placeholder {
+  font-weight: normal;
+}
+.current-map .current-map-footer .add-pin .submit-buttons {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+.current-map .current-map-footer .add-pin .submit-buttons button {
+  color: #FFFFFF;
+  background: #48900a;
+  opacity: 0.9;
+  border: solid transparent;
+  border-radius: 2px;
+}
+.current-map .current-map-footer .add-pin .submit-buttons button#pin-delete {
+  background: #dc0d0d;
+}
+.current-map .current-map-footer .add-pin .submit-buttons button:hover {
+  outline: none;
+  border-color: #9ecaed;
+  box-shadow: 0 0 5px #9ecaed;
+  border-radius: 2px;
+  cursor: pointer;
 }
