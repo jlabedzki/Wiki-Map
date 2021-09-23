@@ -1,6 +1,10 @@
 (function ($) {
   $(() => {
-    // $('.add-pin').prop('disabled', true);
+    //back to home
+    $('.logo').click(() => {
+      window.location.replace('/');
+    })
+
     $('.new-map').hide();
     displayMapByID(currentMapID);
     displayListOfMaps('/maps');

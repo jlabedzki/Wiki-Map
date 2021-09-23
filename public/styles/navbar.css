@@ -1,66 +1,74 @@
-nav {
+.nav-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
   height: auto;
   width: 100vw;
-  background-image: url("/images/black-linen-2.png");
-  background-color: #2dab46;
+  background-color: #464646;
   box-shadow: 0 4px 4px -1px #646464;
 }
-nav .logo {
+.nav-container .logo {
   font-family: "Bangers", cursive;
   letter-spacing: 0.1em;
   color: #EEE;
   margin-top: 0;
   margin-bottom: 0;
 }
-nav .nav-right {
+.nav-container .logo:hover {
+  cursor: pointer;
+}
+.nav-container .nav-right {
   padding: 0.5rem;
   display: flex;
   flex-direction: row;
 }
-nav .nav-left {
+.nav-container .nav-left {
   padding: 0.5rem;
   display: flex;
   flex-direction: row;
   justify-self: flex-end;
   align-self: flex-end;
 }
-nav .dropdown {
+.nav-container .dropdown {
   display: flex;
   overflow: hidden;
   margin-left: 1rem;
   margin-right: 2rem;
 }
-nav .dropdown-button:hover {
+.nav-container .dropdown:hover .dropdown-content {
+  display: flex;
+}
+.nav-container .dropdown-button:hover {
   transform: scale(1);
 }
-nav .dropdown-content {
+.nav-container .dropdown-content {
   display: none;
   flex-direction: column;
   align-items: flex-start;
   position: absolute;
   z-index: 1;
   margin-top: 2rem;
-  background-color: #dadada;
+  background-color: #6a6a6a;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+  box-shadow: 0 4px 4px -1px #646464;
 }
-nav .dropdown-content button {
+.nav-container .dropdown-content button {
+  display: block;
   width: 100%;
-  padding-top: 0.2rem;
-  padding-bottom: 0.2rem;
-  color: #464646;
+  padding: 0.8rem;
+  color: #EEE;
   font-size: 0.8rem;
+  font-weight: 300;
+  text-align: left;
 }
-nav .dropdown-content button:hover {
+.nav-container .dropdown-content button:hover {
   background-color: #c9c9c9;
   transform: scale(1);
+  color: #464646;
 }
-nav .dropdown:hover .dropdown-content {
-  display: flex;
-}
-nav #create-new-map {
+.nav-container #create-new-map {
   align-self: center;
   height: 1.5rem;
   margin-left: 1rem;
@@ -69,19 +77,20 @@ nav #create-new-map {
   color: #464646;
   font-size: 0.8rem;
 }
-nav #create-new-map .fa-map-marker-alt {
+.nav-container #create-new-map .fa-map-marker-alt {
   margin-left: 0.2rem;
 }
-nav button {
+.nav-container button {
   border: none;
   background-color: transparent;
   color: #EEE;
   font-family: "Source Sans Pro", sans-serif;
+  font-weight: bold;
 }
-nav button:hover {
+.nav-container button:hover {
   transform: scale(1.05);
   cursor: pointer;
 }
-nav button:active {
+.nav-container button:active {
   transform: scale(1);
 }

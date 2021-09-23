@@ -47,32 +47,35 @@
 
 <body>
   <nav>
-    <div class="nav-left">
-      <h1 class="logo">Wiki Map</h1>
-      <% if (userID) { %>
-        <div class="dropdown">
-          <button class="dropdown-button">Maps
-            <i class="fa fa-caret-down"></i>
-          </button>
-          <div class="dropdown-content">
-            <button id="favorites">Favorites</button>
-            <button id="my-maps">My Maps</button>
-            <button id="my-contributions">Contributions</button>
-            <button id="discover">Discover</button>
+    <div class="nav-container">
+      <div class="nav-left">
+        <h1 class="logo">Wiki Map</h1>
+        <% if (userID) { %>
+          <button id="create-new-map"><strong>Create</strong> new map
+            <i class="fas fa-map-marker-alt"></i></button>
+          <!-- </div> -->
+          <div class="dropdown">
+            <button class="dropdown-button">MAPS
+              <i class="fa fa-caret-down"></i>
+            </button>
+            <div class="dropdown-content">
+              <button id="discover">Discover</button>
+              <button id="favorites">Favorites</button>
+              <button id="my-maps">My Maps</button>
+              <button id="my-contributions">Contributions</button>
+            </div>
           </div>
-        </div>
-        <button id="create-new-map"><strong>Create</strong> new map
-          <i class="fas fa-map-marker-alt"></i></button>
-        <% } %>
-    </div>
-    <div class="nav-right">
-      <% if (!userID) { %>
-        <button id="register">Register</button>
-        <button id="login">Login</button>
-        <% } %>
-          <% if (userID) { %>
-            <button id="logout">Logout</button>
-            <% } %>
+          <% } %>
+      </div>
+      <div class="nav-right">
+        <% if (!userID) { %>
+          <button id="register">REGISTER</button>
+          <button id="login">LOGIN</button>
+          <% } %>
+            <% if (userID) { %>
+              <button id="logout">LOGOUT</button>
+              <% } %>
+      </div>
     </div>
   </nav>
 
