@@ -5,6 +5,7 @@
       window.location.replace('/');
     })
     $('.new-map-footer').hide();
+    $('.add-pin').hide();
 
     $('.new-map').hide();
     displayMapByID(currentMapID);
@@ -50,6 +51,7 @@
     const $createMap = $('#create-new-map');
     $createMap.click(() => {
       $('.new-map-footer').show();
+      $('.add-pin').hide();
       $('.dropdown').hide();
       $('.current-map-footer').hide();
       $('.map-list').hide();
@@ -122,7 +124,6 @@
       currentMapID = data.maps[0].id;
       injectMapIDToForm(currentMapID);
       displayMapByID(currentMapID);
-      displayPinsByMapID(currentMapID);
       $('.current-map h2').text(`${data.maps[0].title}`)
     })
   }
@@ -257,6 +258,7 @@
     ]);
     displayPinsByMapID(currentMapID);
     mymap.on('click', onMapClick);
+    mymap.off('click');
   }
 
 

@@ -101,7 +101,6 @@
     <div class="current-map">
       <h2>Map of the day</h2>
       <div class="new-map-footer">
-        <button class='locate-current'>Jump to my location</button>
         <form action="/maps/" method="POST" id="new-map-form">
           <input type="hidden" name="creator_id" value="<%= userID %>" required>
           <input type="text" placeholder="Title" name="title" required>
@@ -109,7 +108,8 @@
           <input id="form2" type="hidden" name="latitude_1" required>
           <input id="form3" type="hidden" name="longitude_2" required>
           <input id="form4" type="hidden" name="latitude_2" required>
-          <select name="category" required>
+
+          <select name="category" data-dropup-auto="false" required>
             <option value="" disabled selected>Select a category</option>
             <option value="entertainment">Entertainment</option>
             <option value="food_and_drink">Food & Drink</option>
@@ -118,6 +118,7 @@
             <option value="outdoor_activites">Outdoor Activities</option>
             <option value="other">Other</option>
           </select>
+
           <button type="submit">Create</button>
         </form>
       </div>
@@ -142,7 +143,7 @@
           </form>
         </div>
 
-        <button>Edit</button>
+        <button id="edit">Edit</button>
 
       </div>
       <form class="add-pin" action="/pins/" method="POST" data-pin-id="">

@@ -51,3 +51,18 @@ body {
   justify-content: flex-start;
   align-items: flex-start;
 }
+.new-map-footer #new-map-form input,
+.new-map-footer #new-map-form select,
+.new-map-footer #new-map-form button {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  border: 2px solid #464646;
+}
+.new-map-footer #new-map-form button:hover {
+  cursor: pointer;
+  background-color: #548fa59b;
+  color: #eee;
+}
+.new-map-footer #new-map-form button:active {
+  transform: scale(0.98);
+}
