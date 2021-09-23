@@ -64,6 +64,12 @@
       $('.main-container').css('margin-top', '1rem');
     })
 
+    $('#edit').on('click', () => {
+      mymap.on('click', onMapClick);
+      $('.add-pin').show();
+      $('#edit').hide();
+    })
+    //document ready ends
   });
 
   let mymap;
@@ -120,6 +126,7 @@
   //display newly created map after submission
   const displayNewlyCreatedMap = () => {
     $.get('/maps/mymaps', data => {
+      $('#add-to-favorites').hide();
       mymap.remove();
       currentMapID = data.maps[0].id;
       injectMapIDToForm(currentMapID);
@@ -257,8 +264,6 @@
       [coords[2], coords[3]]
     ]);
     displayPinsByMapID(currentMapID);
-    mymap.on('click', onMapClick);
-    mymap.off('click');
   }
 
 
@@ -337,6 +342,10 @@
   }
 
   const pinSubmit = function (pinObject) {
+    mymap.off('click');
+    $('.add-pin').hide();
+
+    $('#edit').show();
     const pinID = pinObject.id;
     const mapID = pinObject.map_id;
     const creatorID = pinObject.creator_id;
