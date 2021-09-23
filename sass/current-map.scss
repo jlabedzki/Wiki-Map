@@ -7,7 +7,7 @@
   align-items: center;
   margin-left: 1rem;
   padding-top: 0.5rem;
-  border-left: 2px solid rgb(70,70,70);
+  // border-left: 2px solid rgb(70,70,70);
   font-family: l.$mainFont;
   color: l.$fontColor;
 
@@ -20,16 +20,13 @@
     padding-top: 0.1rem;
     padding-bottom: 0.1rem;
     letter-spacing: 0.1rem;
-    // background-color: rgb(200, 84, 84);
-    // color: #eee;
-    // border-radius: 3px;
-    // box-shadow: 2px 3px 3px -1px rgb(100, 100, 100);
   }
 
   #current-mapid {
-    height: 200px;
+    height: 398px;
     width: 90%;
-    resize: vertical;
+    // resize: vertical;
+    border: 2px solid rgb(70,70,70);
   }
 
   #add-to-favorites {

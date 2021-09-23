@@ -52,21 +52,30 @@
   }
 
   ul {
+    list-style: none;
     padding-left: 0;
     height: 150px;
-    width: 100%;
+    width: 90%;
     overflow: auto;
   }
 
   li {
     font-size: 14px;
-    color: blue;
-    text-decoration: underline;
+    color: rgb(70, 70, 70);
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
+    margin-right: 0.5rem;
+    padding: 0.5rem;
+    border: solid 2px rgb(70, 70, 70);
+    // background-color: rgb(225, 225, 225);
   }
 
   li:hover {
     cursor: pointer;
+    box-shadow: 3px 3px 0 0 #548fa59b;
+  }
+
+  li:active {
+    transform: scale(0.95);
   }
 }
