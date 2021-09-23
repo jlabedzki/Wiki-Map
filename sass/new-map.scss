@@ -1,12 +1,13 @@
 @use 'layout' as l;
 
-.new-map {
+.new-map-footer {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
   align-items: center;
   width: 90%;
-  margin-top: 2rem;
+  margin-bottom: 1rem;
   padding-top: 0.5rem;
   font-family: l.$mainFont;
   color: l.$fontColor;
@@ -19,8 +20,9 @@
 
   #new-map-form {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
     align-items: flex-start;
   }
 }

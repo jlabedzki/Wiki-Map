@@ -2,7 +2,7 @@ $fontColor: #EEE;
 $logoFont: 'Bangers', cursive;
 $buttonFont: 'Source Sans Pro', sans-serif;
 
-nav {
+.nav-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -10,7 +10,7 @@ nav {
   height: auto;
   width: 100vw;
   background-image: url('/images/black-linen-2.png');
-  background-color: rgb(45, 171, 70);
+  background-color: rgb(70, 70, 70);
   box-shadow: 0 4px 4px -1px rgb(100, 100, 100);
 
   .logo {
@@ -19,13 +19,18 @@ nav {
     color: $fontColor;
     margin-top: 0;
     margin-bottom: 0;
+    margin-left: 1rem;
+  }
+
+  .logo:hover {
+    cursor:pointer;
   }
 
   .nav-right {
     padding: 0.5rem;
     display: flex;
     flex-direction: row;
-
+    margin-right: 1rem;
   }
 
   .nav-left {
@@ -33,7 +38,7 @@ nav {
     display: flex;
     flex-direction: row;
     justify-self: flex-end;
-    align-self: flex-end;
+    align-self: center;
   }
 
   .dropdown {
@@ -41,6 +46,26 @@ nav {
     overflow: hidden;
     margin-left: 1rem;
     margin-right: 2rem;
+  }
+
+  .dropdown:hover {
+    .fa-caret-down {
+      animation: bob 1s linear infinite;
+    }
+
+    @keyframes bob {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(2px);
+      }
+    }
+
+    .dropdown-content {
+      display: flex;
+    }
   }
 
   .dropdown-button:hover {
@@ -53,29 +78,64 @@ nav {
     align-items: flex-start;
     position: absolute;
     z-index: 1;
+    width: 200px;
     margin-top: 2rem;
-    background-color: rgb(218, 218, 218);
+    background-color: #eee;
+    box-shadow: 0 4px 4px -1px rgb(100, 100, 100);
+
 
 
     button {
+      display:block;
       width: 100%;
-      padding-top: 0.2rem;
-      padding-bottom: 0.2rem;
+      // padding-top: 0.5rem;
+      // padding-bottom: 0.5rem;
+      padding: 0.8rem;
       color: rgb(70, 70, 70);
       font-size: 0.8rem;
+      font-weight: 300;
+      text-align: left;
     }
 
     button:hover {
-      background-color: rgb(201, 201, 201);
+      background-color: #548fa59b;
       transform: scale(1);
+      color: #eee;
+    }
+
+    button:active {
+      font-size: 0.75rem;
+    }
+
+    #discover {
+      border-right: 3px solid rgb(70, 70, 70);
+      border-left: 3px solid rgb(70, 70, 70);
+      border-top: 3px solid rgb(70, 70, 70);
+      border-bottom: 0px solid rgb(70, 70, 70);
+    }
+
+    #favorites {
+      border-right: 3px solid rgb(70, 70, 70);
+      border-left: 3px solid rgb(70, 70, 70);
+      border-top: 3px solid rgb(70, 70, 70);
+      border-bottom: 0px solid rgb(70, 70, 70);
+    }
+
+    #my-maps {
+      border-right: 3px solid rgb(70, 70, 70);
+      border-left: 3px solid rgb(70, 70, 70);
+      border-top: 3px solid rgb(70, 70, 70);
+      border-bottom: 0px solid rgb(70, 70, 70);
+    }
+
+    #my-contributions {
+      border-right: 3px solid rgb(70, 70, 70);
+      border-left: 3px solid rgb(70, 70, 70);
+      border-top: 3px solid rgb(70, 70, 70);
+      border-bottom: 3px solid rgb(70, 70, 70);
     }
   }
 
-  .dropdown:hover {
-    .dropdown-content {
-      display: flex;
-    }
-  }
 
   #create-new-map {
     align-self: center;
@@ -96,6 +156,7 @@ nav {
     background-color: transparent;
     color: $fontColor;
     font-family: $buttonFont;
+    font-weight: bold;
   }
 
   button:hover {
