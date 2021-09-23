@@ -6,11 +6,14 @@
   justify-content: flex-start;
   align-items: flex-start;
   height: 100%;
-  // border: 2px solid rgb(70, 70, 70);
   border-radius: 2px;
   padding: 0.5rem;
   color: l.$fontColor;
   font-family: l.$mainFont;
+
+  #categories {
+    border: 2px solid rgb(70, 70, 70);
+  }
 
   h2 {
     margin-top: 0;
@@ -18,11 +21,6 @@
     font-family: 'Bangers', cursive;
     letter-spacing: 0.1rem;
   }
-
-  // .list-of-maps {
-  //   height: 200px;
-  //   overflow: auto;
-  // }
 
   .map-list-buttons {
     display: flex;
@@ -56,7 +54,7 @@
     list-style: none;
     padding-left: 0;
     height: 600px;
-    width: auto;
+    width: 100%;
     overflow: auto;
   }
 
