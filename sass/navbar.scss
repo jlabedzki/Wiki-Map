@@ -9,6 +9,7 @@ $buttonFont: 'Source Sans Pro', sans-serif;
   align-items: center;
   height: auto;
   width: 100vw;
+  background-image: url('/images/black-linen-2.png');
   background-color: rgb(70, 70, 70);
   box-shadow: 0 4px 4px -1px rgb(100, 100, 100);
 
@@ -18,6 +19,7 @@ $buttonFont: 'Source Sans Pro', sans-serif;
     color: $fontColor;
     margin-top: 0;
     margin-bottom: 0;
+    margin-left: 1rem;
   }
 
   .logo:hover {
@@ -28,7 +30,7 @@ $buttonFont: 'Source Sans Pro', sans-serif;
     padding: 0.5rem;
     display: flex;
     flex-direction: row;
-
+    margin-right: 1rem;
   }
 
   .nav-left {
@@ -36,7 +38,7 @@ $buttonFont: 'Source Sans Pro', sans-serif;
     display: flex;
     flex-direction: row;
     justify-self: flex-end;
-    align-self: flex-end;
+    align-self: center;
   }
 
   .dropdown {
@@ -47,13 +49,26 @@ $buttonFont: 'Source Sans Pro', sans-serif;
   }
 
   .dropdown:hover {
+    .fa-caret-down {
+      animation: bob 1s linear infinite;
+    }
+
+    @keyframes bob {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(2px);
+      }
+    }
+
     .dropdown-content {
       display: flex;
     }
   }
 
   .dropdown-button:hover {
-    // background-color: salmon;
     transform: scale(1);
   }
 
@@ -63,10 +78,9 @@ $buttonFont: 'Source Sans Pro', sans-serif;
     align-items: flex-start;
     position: absolute;
     z-index: 1;
+    width: 200px;
     margin-top: 2rem;
-    background-color: rgb(106, 106, 106);
-    border-bottom-left-radius: 3px;
-    border-bottom-right-radius: 3px;
+    background-color: #eee;
     box-shadow: 0 4px 4px -1px rgb(100, 100, 100);
 
 
@@ -77,16 +91,48 @@ $buttonFont: 'Source Sans Pro', sans-serif;
       // padding-top: 0.5rem;
       // padding-bottom: 0.5rem;
       padding: 0.8rem;
-      color: #EEE;
+      color: rgb(70, 70, 70);
       font-size: 0.8rem;
       font-weight: 300;
       text-align: left;
     }
 
     button:hover {
-      background-color: rgb(201, 201, 201);
+      background-color: #548fa59b;
       transform: scale(1);
-      color: rgb(70, 70, 70);
+      color: #eee;
+    }
+
+    button:active {
+      font-size: 0.75rem;
+    }
+
+    #discover {
+      border-right: 3px solid rgb(70, 70, 70);
+      border-left: 3px solid rgb(70, 70, 70);
+      border-top: 3px solid rgb(70, 70, 70);
+      border-bottom: 0px solid rgb(70, 70, 70);
+    }
+
+    #favorites {
+      border-right: 3px solid rgb(70, 70, 70);
+      border-left: 3px solid rgb(70, 70, 70);
+      border-top: 3px solid rgb(70, 70, 70);
+      border-bottom: 0px solid rgb(70, 70, 70);
+    }
+
+    #my-maps {
+      border-right: 3px solid rgb(70, 70, 70);
+      border-left: 3px solid rgb(70, 70, 70);
+      border-top: 3px solid rgb(70, 70, 70);
+      border-bottom: 0px solid rgb(70, 70, 70);
+    }
+
+    #my-contributions {
+      border-right: 3px solid rgb(70, 70, 70);
+      border-left: 3px solid rgb(70, 70, 70);
+      border-top: 3px solid rgb(70, 70, 70);
+      border-bottom: 3px solid rgb(70, 70, 70);
     }
   }
 

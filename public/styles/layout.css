@@ -1,3 +1,7 @@
+html {
+  font-size: 30px;
+}
+
 body {
   background-color: #EEE;
   display: flex;
@@ -14,6 +18,7 @@ body {
   height: 100%;
   margin-top: 2rem;
   margin-bottom: 1rem;
+  z-index: 0;
 }
 .main-container .map-list {
   width: 30%;

@@ -5,6 +5,7 @@
   align-items: center;
   height: auto;
   width: 100vw;
+  background-image: url("/images/black-linen-2.png");
   background-color: #464646;
   box-shadow: 0 4px 4px -1px #646464;
 }
@@ -14,6 +15,7 @@
   color: #EEE;
   margin-top: 0;
   margin-bottom: 0;
+  margin-left: 1rem;
 }
 .nav-container .logo:hover {
   cursor: pointer;
@@ -22,19 +24,31 @@
   padding: 0.5rem;
   display: flex;
   flex-direction: row;
+  margin-right: 1rem;
 }
 .nav-container .nav-left {
   padding: 0.5rem;
   display: flex;
   flex-direction: row;
   justify-self: flex-end;
-  align-self: flex-end;
+  align-self: center;
 }
 .nav-container .dropdown {
   display: flex;
   overflow: hidden;
   margin-left: 1rem;
   margin-right: 2rem;
+}
+.nav-container .dropdown:hover .fa-caret-down {
+  animation: bob 1s linear infinite;
+}
+@keyframes bob {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(2px);
+  }
 }
 .nav-container .dropdown:hover .dropdown-content {
   display: flex;
@@ -48,25 +62,51 @@
   align-items: flex-start;
   position: absolute;
   z-index: 1;
+  width: 200px;
   margin-top: 2rem;
-  background-color: #6a6a6a;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
+  background-color: #eee;
   box-shadow: 0 4px 4px -1px #646464;
 }
 .nav-container .dropdown-content button {
   display: block;
   width: 100%;
   padding: 0.8rem;
-  color: #EEE;
+  color: #464646;
   font-size: 0.8rem;
   font-weight: 300;
   text-align: left;
 }
 .nav-container .dropdown-content button:hover {
-  background-color: #c9c9c9;
+  background-color: #548fa59b;
   transform: scale(1);
-  color: #464646;
+  color: #eee;
+}
+.nav-container .dropdown-content button:active {
+  font-size: 0.75rem;
+}
+.nav-container .dropdown-content #discover {
+  border-right: 3px solid #464646;
+  border-left: 3px solid #464646;
+  border-top: 3px solid #464646;
+  border-bottom: 0px solid #464646;
+}
+.nav-container .dropdown-content #favorites {
+  border-right: 3px solid #464646;
+  border-left: 3px solid #464646;
+  border-top: 3px solid #464646;
+  border-bottom: 0px solid #464646;
+}
+.nav-container .dropdown-content #my-maps {
+  border-right: 3px solid #464646;
+  border-left: 3px solid #464646;
+  border-top: 3px solid #464646;
+  border-bottom: 0px solid #464646;
+}
+.nav-container .dropdown-content #my-contributions {
+  border-right: 3px solid #464646;
+  border-left: 3px solid #464646;
+  border-top: 3px solid #464646;
+  border-bottom: 3px solid #464646;
 }
 .nav-container #create-new-map {
   align-self: center;

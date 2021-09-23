@@ -5,6 +5,8 @@
       window.location.replace('/');
     })
 
+    $('.new-map-footer').hide();
+
     $('.new-map').hide();
     displayMapByID(currentMapID);
     displayListOfMaps('/maps');
@@ -34,7 +36,8 @@
 
     const $createMap = $('#create-new-map');
     $createMap.click(() => {
-      // $('.new-map').show();
+      $('.new-map-footer').show();
+      $('.dropdown').hide();
       $('.current-map-footer').hide();
       $('.map-list').hide();
       $createMap.hide();
@@ -43,7 +46,8 @@
       markerGroup.clearLayers();
       currentMapID = undefined;
       $('.current-map').css('border-left-style', 'none');
-      $('.current-map h2').text("Create a new map")
+      $('.current-map h2').hide();
+      $('.main-container').css('margin-top', '1rem');
     })
 
   });
