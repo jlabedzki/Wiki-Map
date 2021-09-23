@@ -1,72 +1,131 @@
 @use 'layout' as l;
 
 .map-list {
+//   display: flex;
+//   flex-direction: column;
+//   justify-content: flex-start;
+//   align-items: center;
+//   height: 100%;
+//   border: 2px solid rgb(70, 70, 70);
+//   border-radius: 2px;
+//   padding: 0.5rem;
+//   color: l.$fontColor;
+//   font-family: l.$mainFont;
+//   background-color: orange;
+//   position: fixed;
+//   z-index: 10;
+
+  h2 {
+    // margin-top: 0;
+    // margin-bottom: 0.5rem;
+    // font-family: 'Bangers', cursive;
+    // letter-spacing: 0.1rem;
+  }
+
+  .list-of-maps {
+    // height: 200px;
+    // overflow: auto;
+  }
+
+  .map-list-buttons {
+    // display: flex;
+    // flex-wrap: wrap;
+    // justify-content: flex-start;
+    // align-items: center;
+    // align-self: flex-start;
+  }
+
+  button {
+    // padding: 0.3rem;
+    // border: none;
+    // background-color: none;
+    // font-family: l.$mainFont;
+    // color: rgb(65, 110, 246);
+    // font-weight: bold;
+    // font-size: 14px;
+  }
+
+  button:hover {
+    // transform: scale(1.05);
+    // cursor: pointer;
+  }
+
+  button:active {
+    // transform: scale(1);
+  }
+
+  ul {
+    // padding-left: 0;
+    // height: 150px;
+    // width: 100%;
+    // overflow: auto;
+    padding: 0;
+  }
+
+  li {
+    // font-size: 14px;
+    // color: blue;
+    // text-decoration: underline;
+    // margin-top: 0.5rem;
+    // margin-bottom: 0.5rem;
+  }
+
+  li:hover {
+    // cursor: pointer;
+  }
+}
+
+.map-list {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
+
   height: 100%;
-  // border: 2px solid rgb(70, 70, 70);
-  border-radius: 2px;
-  padding: 0.5rem;
-  color: l.$fontColor;
-  font-family: l.$mainFont;
+  width: 0;
 
-  h2 {
-    margin-top: 0;
-    margin-bottom: 0.5rem;
-    font-family: 'Bangers', cursive;
-    letter-spacing: 0.1rem;
-  }
+  top: 0;
+  left: 0;
+  background-color: rgb(247, 180, 55);
+  opacity: 0.9;
+  overflow-x: hidden;
+  transition: 1s;
+  padding-top: 60px;
+  position: fixed;
+  z-index: 10;
 
-  // .list-of-maps {
-  //   height: 200px;
-  //   overflow: auto;
-  // }
+  border-radius: 0 25px 0 0;
+}
 
-  .map-list-buttons {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: flex-start;
-    align-items: center;
-    align-self: flex-start;
-  }
+h2 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-family: 'Bangers', cursive;
+  letter-spacing: 0.1rem;
+}
 
-  button {
-    padding: 0.3rem;
-    border: none;
-    background-color: none;
-    font-family: l.$mainFont;
-    color: rgb(65, 110, 246);
-    font-weight: bold;
-    font-size: 14px;
-  }
+.map-list li {
+  // padding: 8px 8px 8px 32px;
+  text-decoration: none;
+  font-size: 25px;
+  color: #818181;
+  display: block;
+  transition: 0.1s;
+}
 
-  button:hover {
-    transform: scale(1.05);
-    cursor: pointer;
-  }
+.map-list li:hover {
+  color: #f1f1f1;
+}
 
-  button:active {
-    transform: scale(1);
-  }
+.map-list .closebtn {
+  position: absolute;
+  top: 0;
+  right: 25px;
+  font-size: 36px;
+  margin-left: 50px;
+}
 
-  ul {
-    padding-left: 0;
-    height: 150px;
-    width: 100%;
-    overflow: auto;
-  }
-
-  li {
-    font-size: 14px;
-    color: blue;
-    text-decoration: underline;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
-  }
-
-  li:hover {
-    cursor: pointer;
-  }
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 15px;}
+  .sidenav a {font-size: 18px;}
 }

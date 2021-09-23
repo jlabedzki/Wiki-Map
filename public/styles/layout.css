@@ -10,6 +10,3 @@ body {
   height: 100%;
   z-index: 0;
 }
-.main-container .map-list {
-  display: none;
-}

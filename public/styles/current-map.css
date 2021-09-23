@@ -10,16 +10,13 @@ body {
   height: 100%;
   z-index: 0;
 }
-.main-container .map-list {
-  display: none;
-}
 
 .current-map {
   display: flex;
   flex-direction: column;
   width: 100%;
 }
-.current-map h2 {
+.current-map h2#map-title {
   display: none;
 }
 .current-map #current-mapid {
@@ -63,8 +60,8 @@ body {
   width: 12em;
   margin-bottom: 0.6em;
   opacity: 0.8;
-  background-color: rgba(212, 232, 221, 0.832);
-  border-style: none;
+  background-color: rgba(149, 235, 162, 0.832);
+  border-radius: 5px;
   resize: none;
   overflow: hidden;
 }
@@ -73,6 +70,7 @@ body {
   opacity: 0.8;
   border-style: none;
   overflow: auto;
+  outline-color: green;
 }
 .current-map .current-map-footer .add-pin #pin-title, .current-map .current-map-footer .add-pin #pin-img {
   height: 2em;

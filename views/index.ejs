@@ -77,9 +77,9 @@
   </nav>
 
   <div class="main-container">
-    <div class="map-list">
+    <div id="map-sidenav" class="map-list">
+      <a class="closebtn">&times;</a>
       <h2 class="map-list-title">Discover</h2>
-
       <select name="categories" id="categories">
         <option value="" disabled selected>Filter by category</option>
         <option value="Most recent">Most Recent</option>
@@ -92,7 +92,7 @@
     </div>
 
     <div class="current-map">
-      <h2>Map of the day</h2>
+      <h2 id="map-title">Map of the day</h2>
       <div id="current-mapid"></div>
       <div class="current-map-footer">
 

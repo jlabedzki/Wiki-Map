@@ -14,23 +14,31 @@
     $('#favorites').click(() => {
       $('.map-list-title').text('Favorites');
       displayListOfMaps('/favorites/');
+      openNav();
     });
     $('#my-maps').click(() => {
       $('.map-list-title').text('My Maps');
-      displayListOfMaps('/maps/mymaps');
+      $("#map-sidenav").on("transitionend", function(e) {
+        $('.map-list-title, #categories').fadeIn(100);
+        displayListOfMaps('/maps/mymaps');
+        $(this).off(e);
+     });
+      openNav();
     });
     $('#my-contributions').click(() => {
       $('.map-list-title').text('Contributions');
       displayListOfMaps('/maps/contributions');
+      openNav();
     });
     $('#discover').click(() => {
       $('.map-list-title').text('Discover');
       displayListOfMaps('/maps');
+      openNav();
     });
 
-    $('.dropdown-content button').click(() => {
-
-    })
+    $('.closebtn').on('click', function() {
+      closeNav();
+    });
 
     const $createMap = $('#create-new-map');
     $createMap.click(() => {
@@ -55,6 +63,17 @@
   let markerData = {};
   let markers = {};
   const coordDatabase = { url: undefined };
+
+
+  const openNav = function() {
+    $('.map-list-title, #categories').hide();
+    $('#map-sidenav').css('width', '25em')
+  }
+  const closeNav = function() {
+    $('.map-list-title, #categories').hide();
+    $('ul').empty();
+    $('#map-sidenav').css('width', '0px')
+  }
 
 
   const createNewMap = function (e) {
@@ -355,7 +374,7 @@
         $('#pin-img').val('');
         $('.add-pin').fadeOut(500);
         $('.add-pin').prop('disabled', true);
-        $(this).remove();
+        // $(this).remove();
       });
 
       $('.add-pin').off('submit');
