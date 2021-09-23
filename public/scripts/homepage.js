@@ -186,7 +186,14 @@
             if (route === '/favorites/') {
               $('#add-to-favorites').hide();
               $('#remove-from-favorites').show();
-
+            }
+            if (route === '/maps/mymaps') {
+              $('#add-to-favorites').hide();
+              $('#remove-from-favorites').hide();
+            }
+            if (route === '/maps/contributions') {
+              $('#add-to-favorites').hide();
+              $('#remove-from-favorites').hide();
             }
 
             //replace "Map of the day" with the map title
