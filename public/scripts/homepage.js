@@ -4,7 +4,6 @@
     $('.logo').click(() => {
       window.location.replace('/');
     })
-
     $('.new-map-footer').hide();
 
     $('.new-map').hide();
@@ -19,21 +18,35 @@
     //map list buttons
     $('#favorites').click(() => {
       $('.map-list-title').text('Favorites');
+      $('#categories').hide();
       displayListOfMaps('/favorites/');
     });
     $('#my-maps').click(() => {
       $('.map-list-title').text('My Maps');
+      $('#categories').hide();
       displayListOfMaps('/maps/mymaps');
     });
     $('#my-contributions').click(() => {
       $('.map-list-title').text('Contributions');
+      $('#categories').hide();
       displayListOfMaps('/maps/contributions');
     });
     $('#discover').click(() => {
+      $('#categories').show();
       $('.map-list-title').text('Discover');
       displayListOfMaps('/maps');
     });
 
+    //filter discover page by category feature
+    $('#categories').on('change', (e) => {
+      console.log(e);
+      e.preventDefault();
+      const category = $('#categories option:selected').val()
+
+      displayListOfMaps(`/maps/categories/${category}`);
+    })
+
+    // $('#categories option:selected').text();
     const $createMap = $('#create-new-map');
     $createMap.click(() => {
       $('.new-map-footer').show();
@@ -71,6 +84,8 @@
       mapObj[keyValue.name] = keyValue.value;
     }
 
+    console.log(mapObj);
+
     // add ajax post request to maps and redirect to homepage
     $.post(`/maps/`, mapObj)
       .then(() => {
@@ -83,6 +98,7 @@
         $('.current-map h2').show();
         $('#create-new-map').show();
         $('.map-list-title').text('My Maps');
+        $('#categories').hide();
         displayListOfMaps('/maps/mymaps');
       })
       .then(() => {

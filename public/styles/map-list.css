@@ -68,10 +68,11 @@ body {
   transform: scale(1);
 }
 .map-list ul {
+  margin-top: 0.5rem;
   list-style: none;
   padding-left: 0;
   height: 600px;
-  width: 90%;
+  width: auto;
   overflow: auto;
 }
 .map-list li {

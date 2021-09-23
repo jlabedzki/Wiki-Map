@@ -85,9 +85,13 @@
 
       <select name="categories" id="categories">
         <option value="" disabled selected>Filter by category</option>
-        <option value="Most recent">Most Recent</option>
-        <option value="pets">Pets</option>
-        <option value="Outdoor activities">Outdoor Activities</option>
+        <option value="entertainment">Entertainment</option>
+        <option value="food_and_drink">Food & Drink</option>
+        <option value="shopping">Shopping</option>
+        <option value="services">Services</option>
+        <option value="outdoor_activites">Outdoor Activities</option>
+        <option value="most_recent">Most Recent</option>
+        <option value="other">Other</option>
       </select>
       <ul id="list-of-maps"></ul>
       <div class="map-list-buttons">
@@ -105,7 +109,15 @@
           <input id="form2" type="hidden" name="latitude_1" required>
           <input id="form3" type="hidden" name="longitude_2" required>
           <input id="form4" type="hidden" name="latitude_2" required>
-          <input type="text" placeholder="Category" name="category">
+          <select name="category" required>
+            <option value="" disabled selected>Select a category</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="food_and_drink">Food & Drink</option>
+            <option value="shopping">Shopping</option>
+            <option value="services">Services</option>
+            <option value="outdoor_activites">Outdoor Activities</option>
+            <option value="other">Other</option>
+          </select>
           <button type="submit">Create</button>
         </form>
       </div>
