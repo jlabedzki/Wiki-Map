@@ -13,25 +13,67 @@
     //map list buttons
     $('#favorites').click(() => {
       $('.map-list-title').text('Favorites');
-      displayListOfMaps('/favorites/');
+
+      $('ul').empty();
+      if ($('#map-sidenav').css('width') !== '0px') {
+        displayListOfMaps('/favorites');
+      }
+
+      $("#map-sidenav").on("transitionend", function() {
+        $('.map-list-title, #categories').fadeIn(100);
+        displayListOfMaps('/favorites');
+        $(this).off();
+     });
+
       openNav();
     });
+
     $('#my-maps').click(() => {
       $('.map-list-title').text('My Maps');
-      $("#map-sidenav").on("transitionend", function(e) {
+
+      $('ul').empty();
+      if ($('#map-sidenav').css('width') !== '0px') {
+        displayListOfMaps('/maps/mymaps');
+
+      }
+      $("#map-sidenav").on("transitionend", function() {
         $('.map-list-title, #categories').fadeIn(100);
         displayListOfMaps('/maps/mymaps');
-        $(this).off(e);
+        $(this).off();
      });
+
       openNav();
     });
     $('#my-contributions').click(() => {
       $('.map-list-title').text('Contributions');
-      displayListOfMaps('/maps/contributions');
+
+      $('ul').empty();
+      if ($('#map-sidenav').css('width') !== '0px') {
+        displayListOfMaps('/maps/contributions');
+
+      }
+      $("#map-sidenav").on("transitionend", function() {
+        $('.map-list-title, #categories').fadeIn(100);
+        displayListOfMaps('/maps/contributions');
+        $(this).off();
+      });
+
       openNav();
     });
     $('#discover').click(() => {
       $('.map-list-title').text('Discover');
+
+      $('ul').empty();
+      if ($('#map-sidenav').css('width') !== '0px') {
+        displayListOfMaps('/maps');
+
+      }
+      $("#map-sidenav").on("transitionend", function() {
+        $('.map-list-title, #categories').fadeIn(100);
+        displayListOfMaps('/maps');
+        $(this).off();
+      });
+
       displayListOfMaps('/maps');
       openNav();
     });
@@ -66,8 +108,7 @@
 
 
   const openNav = function() {
-    $('.map-list-title, #categories').hide();
-    $('#map-sidenav').css('width', '25em')
+    $('#map-sidenav').css('width', '30em')
   }
   const closeNav = function() {
     $('.map-list-title, #categories').hide();

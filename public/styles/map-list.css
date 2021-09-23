@@ -32,28 +32,30 @@ body {
   z-index: 9;
 }
 .map-list h2 {
-  margin-top: 0;
+  margin-top: 1em;
   margin-bottom: 0.5rem;
   font-family: "Bangers", cursive;
   letter-spacing: 0.1rem;
+}
+.map-list .closebtn {
+  align-self: flex-end;
+  margin-top: 4em;
+  margin-right: 2em;
+  position: absolute;
+  top: 0;
 }
 .map-list ul {
   list-style-type: none;
 }
 .map-list ul li {
+  padding: 0.5em 1em 0em 1em;
   text-decoration: none;
-  font-size: 25px;
-  color: #818181;
+  font-size: 1.2em;
+  color: #223172;
   display: block;
   transition: 0.1s;
+  font-family: arial;
 }
 .map-list ul li:hover {
   color: #f1f1f1;
-}
-.map-list ul .closebtn {
-  position: absolute;
-  top: 0;
-  right: 25px;
-  font-size: 36px;
-  margin-left: 50px;
 }
