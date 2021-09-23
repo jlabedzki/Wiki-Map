@@ -300,7 +300,7 @@
     tempMarker.remove();
     markers[data.pinID] = new L.marker([data.latitude, data.longitude])
       .addTo(markerGroup)
-      .bindPopup(`<h1>${data.pinTitle}</h1><h2>${data.pinDescription}</h2><img width="100%" src ="${data.pinImg}" />`).openPopup()
+      .bindPopup(`<h1>${data.pinTitle}</h1><h2 "marker-popup-h2">${data.pinDescription}</h2><img width="100%" src ="${data.pinImg}" />`).openPopup()
     // markers[data.pinID].addTo(markerGroup);
     // markerGroup.addLayer(markers[data.pinID]);
 
@@ -350,7 +350,7 @@
       markerData[pinID].pinID = pinID;
       generateMarker(markerData[pinID]);
     }
-    markers[pinID].bindPopup(`<h1>${pinTitle}</h1><h2>${pinDescript}</h2><img width="100%" src ="${pinImg}" />`).openPopup();
+    markers[pinID].bindPopup(`<h1>${pinTitle}</h1><h2 class="marker-popup-h2">${pinDescript}</h2><img width="100%" src ="${pinImg}" />`).openPopup();
 
 
     markers[pinID].off('click');

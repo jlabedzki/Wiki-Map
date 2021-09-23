@@ -46,6 +46,11 @@ body {
   padding-bottom: 0.1rem;
   letter-spacing: 0.1rem;
 }
+.current-map h2.marker-popup-h2 {
+  font-family: Helvetica;
+  letter-spacing: 0;
+  padding: 0;
+}
 .current-map #current-mapid {
   height: 550px;
   width: 90%;
