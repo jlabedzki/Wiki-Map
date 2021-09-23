@@ -20,7 +20,7 @@ router.get('/', (req, res) => {
     });
 });
 
-// Get /maps/mymaps/:userID (the maps a user has created)
+// Get /maps/mymaps/
 router.get('/mymaps', (req, res) => {
   const userID = req.session.user_id;
 
@@ -30,12 +30,23 @@ router.get('/mymaps', (req, res) => {
     })
 })
 
+// get /maps/contributions
 router.get('/contributions', (req, res) => {
   const userID = req.session.user_id;
 
   queries.listMyContributions(userID)
     .then((maps) => {
-      res.send({ maps })
+      res.send({ maps });
+    });
+})
+
+//GET /maps/categories/:category (filter list of maps by category)
+router.get('/categories/:category', (req, res) => {
+  const category = req.params.category
+
+  queries.listMapsByCategory(category)
+    .then((maps) => {
+      res.send({ maps });
     });
 })
 
