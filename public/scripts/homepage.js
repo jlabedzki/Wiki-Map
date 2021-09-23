@@ -48,6 +48,7 @@
     })
 
     // $('#categories option:selected').text();
+
     const $createMap = $('#create-new-map');
     $createMap.click(() => {
       $('.new-map-footer').show();
@@ -292,6 +293,9 @@
       .addTo(mymap);
 
     $('.add-pin').prop('disabled', false);
+    $('.add-pin').fadeIn(500);
+    $('.add-pin').attr('style', 'display:flex');
+    $('#pin-title').focus();
     $('#pin-title').val('');
     $('#pin-descript').val('');
     $('#pin-img').val('');
@@ -373,6 +377,7 @@
     $('#pin-title').val('');
     $('#pin-descript').val('');
     $('#pin-img').val('');
+    $('.add-pin').fadeOut(500);
     $('.add-pin').prop('disabled', true);
 
     if (firstLoad || !markerData[pinID].pinID) {
@@ -387,15 +392,20 @@
 
       tempMarker.remove();
       markers[pinID].openPopup();
-
-      $('.add-pin').prop('disabled', false);
+      $('#pin-delete').remove();
       $('.add-pin button').text('Edit Pin');
+      $('<button class="add-pin" id="pin-delete" type="button">Delete Pin</button>').insertBefore('#pin-submit');
+      $('.add-pin').prop('disabled', false);
+      $('.add-pin').fadeIn(500);
+      $('.add-pin').attr('style', 'display:flex');
+      $('#pin-title').focus();
+
       $('form .add-pin').data('pin-id', `${pinID}`)
       $('#pin-title').val(`${pinTitle}`);
       $('#pin-descript').val(`${pinDescript}`);
       $('#pin-img').val(`${pinImg}`);
-      $('#pin-delete').remove();
-      $('<button class="add-pin" id="pin-delete" type="button">Delete Pin</button>').insertAfter('#pin-submit');
+
+
 
       // DELETE BUTTON
       $('#pin-delete').on('click', function () {
@@ -405,6 +415,7 @@
         $('#pin-title').val('');
         $('#pin-descript').val('');
         $('#pin-img').val('');
+        $('.add-pin').fadeOut(500);
         $('.add-pin').prop('disabled', true);
         $(this).remove();
       });
@@ -431,7 +442,7 @@
 
             pinSubmit(returnedPin.pin);
           })
-        $('#pin-delete').remove();
+        // $('#pin-delete').remove();
       });
     });
   };
