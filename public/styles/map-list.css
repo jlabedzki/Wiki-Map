@@ -29,43 +29,31 @@ body {
   transition: 1s;
   padding-top: 60px;
   position: fixed;
-  z-index: 10;
-  border-radius: 0 25px 0 0;
+  z-index: 9;
 }
-
-h2 {
+.map-list h2 {
   margin-top: 0;
   margin-bottom: 0.5rem;
   font-family: "Bangers", cursive;
   letter-spacing: 0.1rem;
 }
-
-.map-list li {
+.map-list ul {
+  list-style-type: none;
+}
+.map-list ul li {
   text-decoration: none;
   font-size: 25px;
   color: #818181;
   display: block;
   transition: 0.1s;
 }
-
-.map-list li:hover {
+.map-list ul li:hover {
   color: #f1f1f1;
 }
-
-.map-list .closebtn {
+.map-list ul .closebtn {
   position: absolute;
   top: 0;
   right: 25px;
   font-size: 36px;
   margin-left: 50px;
-}
-
-@media screen and (max-height: 450px) {
-  .sidenav {
-    padding-top: 15px;
-  }
-
-  .sidenav a {
-    font-size: 18px;
-  }
 }
