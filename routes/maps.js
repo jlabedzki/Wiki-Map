@@ -42,7 +42,7 @@ router.get('/contributions', (req, res) => {
 
 //GET /maps/categories/:category (filter list of maps by category)
 router.get('/categories/:category', (req, res) => {
-  const category = req.params.category
+  const category = req.params.category;
 
   queries.listMapsByCategory(category)
     .then((maps) => {

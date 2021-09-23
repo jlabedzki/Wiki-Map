@@ -37,6 +37,16 @@
       displayListOfMaps('/maps');
     });
 
+    //filter discover page by category feature
+    $('#categories').on('change', (e) => {
+      console.log(e);
+      e.preventDefault();
+      const category = $('#categories option:selected').val()
+
+      displayListOfMaps(`/maps/categories/${category}`);
+    })
+
+    // $('#categories option:selected').text();
     const $createMap = $('#create-new-map');
     $createMap.click(() => {
       $('.new-map-footer').show();
@@ -74,6 +84,8 @@
       mapObj[keyValue.name] = keyValue.value;
     }
 
+    console.log(mapObj);
+
     // add ajax post request to maps and redirect to homepage
     $.post(`/maps/`, mapObj)
       .then(() => {
@@ -86,6 +98,7 @@
         $('.current-map h2').show();
         $('#create-new-map').show();
         $('.map-list-title').text('My Maps');
+        $('#categories').hide();
         displayListOfMaps('/maps/mymaps');
       })
       .then(() => {
