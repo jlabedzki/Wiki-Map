@@ -219,7 +219,9 @@
             currentMapID = $(this).val();
             injectMapIDToForm(currentMapID);
             displayMapByID(currentMapID);
-            displayPinsByMapID(currentMapID);
+            mymap.on('load', function() {
+              displayPinsByMapID(currentMapID);
+            });
           });
           counter++;
         }
