@@ -1,6 +1,12 @@
 (function ($) {
   $(() => {
-    // $('.add-pin').prop('disabled', true);
+    //back to home
+    $('.logo').click(() => {
+      window.location.replace('/');
+    })
+    $('.new-map-footer').hide();
+    $('.add-pin').hide();
+
     $('.new-map').hide();
     displayMapByID(currentMapID);
     displayListOfMaps('/maps');
@@ -13,28 +19,41 @@
     //map list buttons
     $('#favorites').click(() => {
       $('.map-list-title').text('Favorites');
+      $('#categories').hide();
       displayListOfMaps('/favorites/');
     });
     $('#my-maps').click(() => {
       $('.map-list-title').text('My Maps');
+      $('#categories').hide();
       displayListOfMaps('/maps/mymaps');
     });
     $('#my-contributions').click(() => {
       $('.map-list-title').text('Contributions');
+      $('#categories').hide();
       displayListOfMaps('/maps/contributions');
     });
     $('#discover').click(() => {
+      $('#categories').show();
       $('.map-list-title').text('Discover');
       displayListOfMaps('/maps');
     });
 
-    $('.dropdown-content button').click(() => {
+    //filter discover page by category feature
+    $('#categories').on('change', (e) => {
+      console.log(e);
+      e.preventDefault();
+      const category = $('#categories option:selected').val()
 
+      displayListOfMaps(`/maps/categories/${category}`);
     })
+
+    // $('#categories option:selected').text();
 
     const $createMap = $('#create-new-map');
     $createMap.click(() => {
-      // $('.new-map').show();
+      $('.new-map-footer').show();
+      $('.add-pin').hide();
+      $('.dropdown').hide();
       $('.current-map-footer').hide();
       $('.map-list').hide();
       $createMap.hide();
@@ -42,10 +61,16 @@
       markerData = {};
       markerGroup.clearLayers();
       currentMapID = undefined;
-      $('.current-map').css('border-left-style', 'none');
-      $('.current-map h2').text("Create a new map")
+      $('.current-map h2').hide();
+      $('.main-container').css('margin-top', '1rem');
     })
 
+    $('#edit').on('click', () => {
+      mymap.on('click', onMapClick);
+      $('.add-pin').show();
+      $('#edit').hide();
+    })
+    //document ready ends
   });
 
   let mymap;
@@ -68,21 +93,47 @@
       mapObj[keyValue.name] = keyValue.value;
     }
 
+    console.log(mapObj);
+
     // add ajax post request to maps and redirect to homepage
     $.post(`/maps/`, mapObj)
-      .done(() => {
-        window.location.replace('/');
+      .then(() => {
+        // window.location.replace('/');
+        console.log('inside post /maps/', mapObj);
+        $('.dropdown').show();
+        $('.current-map-footer').show();
+        $('.map-list').show();
+        $('.new-map-footer').hide();
+        $('.current-map h2').show();
+        $('#create-new-map').show();
+        $('.map-list-title').text('My Maps');
+        $('#categories').hide();
+        displayListOfMaps('/maps/mymaps');
       })
+      .then(() => {
+        displayNewlyCreatedMap();
+      });
   };
 
+  //inject coords into map submit form
   const getCoords = function () {
-    // $('.get-coords').click(function () {
     coordDatabase.url = mymap.getBounds();
     $('#form1').val(coordDatabase.url._northEast.lat);
     $('#form2').val(coordDatabase.url._northEast.lng);
     $('#form3').val(coordDatabase.url._southWest.lat);
     $('#form4').val(coordDatabase.url._southWest.lng);
-    // })
+  };
+
+  //display newly created map after submission
+  const displayNewlyCreatedMap = () => {
+    $.get('/maps/mymaps', data => {
+      $('#add-to-favorites').hide();
+      mymap.remove();
+      currentMapID = data.maps[0].id;
+      injectMapIDToForm(currentMapID);
+      displayMapByID(currentMapID);
+      $('.current-map h2').text(`${data.maps[0].title}`)
+    })
   }
 
   const addMapToFavorites = function (e) {
@@ -139,7 +190,6 @@
     $.get(route, data => {
       $('#list-of-maps').hide();
       $('#list-of-maps').empty();
-      console.log(data);
       let counter = 1;
       for (const map of data.maps) {
         $('#list-of-maps').append(`<li value="${map.id}" id="list-item-${counter}">${map.title}</li>`);
@@ -161,7 +211,14 @@
             if (route === '/favorites/') {
               $('#add-to-favorites').hide();
               $('#remove-from-favorites').show();
-
+            }
+            if (route === '/maps/mymaps') {
+              $('#add-to-favorites').hide();
+              $('#remove-from-favorites').hide();
+            }
+            if (route === '/maps/contributions') {
+              $('#add-to-favorites').hide();
+              $('#remove-from-favorites').hide();
             }
 
             //replace "Map of the day" with the map title
@@ -171,7 +228,9 @@
             currentMapID = $(this).val();
             injectMapIDToForm(currentMapID);
             displayMapByID(currentMapID);
-            displayPinsByMapID(currentMapID);
+            mymap.on('load', function() {
+              displayPinsByMapID(currentMapID);
+            });
           });
           counter++;
         }
@@ -208,7 +267,6 @@
       [coords[2], coords[3]]
     ]);
     displayPinsByMapID(currentMapID);
-    mymap.on('click', onMapClick);
   }
 
 
@@ -271,7 +329,7 @@
     tempMarker.remove();
     markers[data.pinID] = new L.marker([data.latitude, data.longitude])
       .addTo(markerGroup)
-      .bindPopup(`<h1>${data.pinTitle}</h1><h2>${data.pinDescription}</h2><img width="100%" src ="${data.pinImg}" />`).openPopup()
+      .bindPopup(`<h1>${data.pinTitle}</h1><h2 "marker-popup-h2">${data.pinDescription}</h2><img width="100%" src ="${data.pinImg}" />`).openPopup()
     // markers[data.pinID].addTo(markerGroup);
     // markerGroup.addLayer(markers[data.pinID]);
 
@@ -290,6 +348,10 @@
   }
 
   const pinSubmit = function (pinObject) {
+    mymap.off('click');
+    $('.add-pin').hide();
+
+    $('#edit').show();
     const pinID = pinObject.id;
     const mapID = pinObject.map_id;
     const creatorID = pinObject.creator_id;
@@ -322,7 +384,7 @@
       markerData[pinID].pinID = pinID;
       generateMarker(markerData[pinID]);
     }
-    markers[pinID].bindPopup(`<h1>${pinTitle}</h1><h2>${pinDescript}</h2><img width="100%" src ="${pinImg}" />`).openPopup();
+    markers[pinID].bindPopup(`<h1>${pinTitle}</h1><h2 class="marker-popup-h2">${pinDescript}</h2><img width="100%" src ="${pinImg}" />`).openPopup();
 
 
     markers[pinID].off('click');

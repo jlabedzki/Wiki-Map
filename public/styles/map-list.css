@@ -1,3 +1,7 @@
+html {
+  font-size: 30px;
+}
+
 body {
   background-color: #EEE;
   overflow: hidden;
@@ -18,12 +22,15 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  align-items: center;
+  align-items: flex-start;
   height: 100%;
   border-radius: 2px;
   padding: 0.5rem;
   color: #373737;
   font-family: "Source Sans Pro", sans-serif;
+}
+.map-list #categories {
+  border: 2px solid #464646;
 }
 .map-list h2 {
   margin-top: 0;
@@ -55,18 +62,25 @@ body {
   transform: scale(1);
 }
 .map-list ul {
+  margin-top: 0.5rem;
+  list-style: none;
   padding-left: 0;
-  height: 150px;
+  height: 600px;
   width: 100%;
   overflow: auto;
 }
 .map-list li {
-  font-size: 14px;
-  color: blue;
-  text-decoration: underline;
+  color: #464646;
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+  margin-right: 0.5rem;
+  padding: 0.5rem;
+  border: solid 3px #464646;
 }
 .map-list li:hover {
   cursor: pointer;
+  box-shadow: 5px 5px 0 0 #548fa59b;
+}
+.map-list li:active {
+  transform: scale(0.98);
 }

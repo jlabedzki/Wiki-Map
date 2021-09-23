@@ -9,5 +9,5 @@ CREATE TABLE maps (
   latitude_1 DECIMAL NOT NULL,
   longitude_2 DECIMAL NOT NULL,
   latitude_2 DECIMAL NOT NULL,
-  category VARCHAR(255) DEFAULT 'Other'
+  category VARCHAR(255) NOT NULL
 );

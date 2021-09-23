@@ -1,5 +1,6 @@
 @use 'layout' as l;
 
+
 // .new-map {
 //   display: flex;
 //   flex-direction: column;
@@ -11,16 +12,43 @@
 //   font-family: l.$mainFont;
 //   color: l.$fontColor;
 
-//   #mapid {
-//     height: 200px;
-//     width: 90%;
-//     resize: vertical;
-//   }
+.new-map-footer {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  width: 90%;
+  margin-bottom: 1rem;
+  padding-top: 0.5rem;
+  font-family: l.$mainFont;
+  color: l.$fontColor;
 
-//   #new-map-form {
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: flex-start;
-//   }
-// }
+
+  #new-map-form {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: flex-start;
+
+    input,
+    select,
+    button {
+      margin-left: 0.5rem;
+      margin-right: 0.5rem;
+      border: 2px solid rgb(70, 70, 70)
+    }
+
+    button:hover {
+      cursor: pointer;
+      background-color: #548fa59b;
+      color: #eee;
+    }
+
+    button:active {
+      transform: scale(0.98);
+    }
+  }
+}
+
