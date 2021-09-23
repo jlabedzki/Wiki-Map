@@ -12,14 +12,11 @@ body {
 .main-container {
   width: 100%;
   height: 100%;
-
   z-index: 0;
 }
 .main-container .map-list {
   display: none;
-
 }
-
 
 .new-map-footer {
   display: flex;
@@ -33,14 +30,12 @@ body {
   font-family: "Source Sans Pro", sans-serif;
   color: #373737;
 }
-
 .new-map-footer #new-map-form {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
-
 }
 .new-map-footer #new-map-form input,
 .new-map-footer #new-map-form select,

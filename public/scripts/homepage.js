@@ -81,6 +81,15 @@
   let markers = {};
   const coordDatabase = { url: undefined };
 
+  const openNav = function () {
+    $('#map-sidenav').css('width', '30em')
+  };
+  const closeNav = function () {
+    $('.map-list-title, #categories').hide();
+    $('ul').empty();
+    $('#map-sidenav').css('width', '0px')
+  };
+
 
   const createNewMap = function (e) {
     e.preventDefault();
@@ -228,7 +237,7 @@
             currentMapID = $(this).val();
             injectMapIDToForm(currentMapID);
             displayMapByID(currentMapID);
-            mymap.on('load', function() {
+            mymap.on('load', function () {
               displayPinsByMapID(currentMapID);
             });
           });
