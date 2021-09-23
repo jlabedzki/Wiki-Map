@@ -85,9 +85,13 @@
 
       <select name="categories" id="categories">
         <option value="" disabled selected>Filter by category</option>
-        <option value="Most recent">Most Recent</option>
-        <option value="pets">Pets</option>
-        <option value="Outdoor activities">Outdoor Activities</option>
+        <option value="entertainment">Entertainment</option>
+        <option value="food_and_drink">Food & Drink</option>
+        <option value="shopping">Shopping</option>
+        <option value="services">Services</option>
+        <option value="outdoor_activites">Outdoor Activities</option>
+        <option value="most_recent">Most Recent</option>
+        <option value="other">Other</option>
       </select>
       <ul id="list-of-maps"></ul>
       <div class="map-list-buttons">
@@ -97,7 +101,6 @@
     <div class="current-map">
       <h2>Map of the day</h2>
       <div class="new-map-footer">
-        <button class='locate-current'>Jump to my location</button>
         <form action="/maps/" method="POST" id="new-map-form">
           <input type="hidden" name="creator_id" value="<%= userID %>" required>
           <input type="text" placeholder="Title" name="title" required>
@@ -105,7 +108,17 @@
           <input id="form2" type="hidden" name="latitude_1" required>
           <input id="form3" type="hidden" name="longitude_2" required>
           <input id="form4" type="hidden" name="latitude_2" required>
-          <input type="text" placeholder="Category" name="category">
+
+          <select name="category" data-dropup-auto="false" required>
+            <option value="" disabled selected>Select a category</option>
+            <option value="entertainment">Entertainment</option>
+            <option value="food_and_drink">Food & Drink</option>
+            <option value="shopping">Shopping</option>
+            <option value="services">Services</option>
+            <option value="outdoor_activites">Outdoor Activities</option>
+            <option value="other">Other</option>
+          </select>
+
           <button type="submit">Create</button>
         </form>
       </div>
@@ -116,39 +129,44 @@
           <form action="/favorites/" method="POST" id="add-to-favorites">
             <input type="hidden" name="user_id" value="<%= userID %>" required>
             <input type="hidden" name="map_id" id="favorites-mapid" required>
-            <button type="submit">
-              <i class="far fa-heart"></i>
+            <button class="add-to-favorites" type="submit">
+              <i class="far fa-thumbs-up"></i>
             </button>
           </form>
 
           <form action="/favorites/delete" method="POST" id="remove-from-favorites">
             <input type="hidden" name="user_id" value="<%= userID %>" required>
             <input type="hidden" name="map_id" id="remove-from-favorites-mapid" required>
-            <button type="submit">
-              <i class="fas fa-heart"></i>
+            <button class="remove-from-favorites" type="submit">
+              <i class="fas fa-thumbs-up"></i>
             </button>
           </form>
         </div>
+        <a href="#bottom">
+          <button id="edit">Edit</button>
+        </a>
 
-        <button>Edit</button>
+        <form class="add-pin" action="/pins/" method="POST" data-pin-id="">
+          <input type="hidden" name="creator_id" value="<%= userID %>">
+          <input type="hidden" name="map_id" id="pin-mapid">
+          <input type="hidden" name="longitude" id="pin-longitude">
+          <input type="hidden" name="latitude" id="pin-latitude">
+          <input type="text" name="title" class="add-pin" id="pin-title" placeholder="Pin title" required>
+          <input type="url" name="image_url" class="add-pin" id="pin-img" placeholder="Image URL">
+          <textarea class="add-pin" name="description" id="pin-descript" placeholder="Description"></textarea>
+          <div class="add-pin-button-holder">
+            <button class="add-pin" id="pin-submit" type="submit">Add Pin</button>
 
+          </div>
+        </form>
       </div>
-      <form class="add-pin" action="/pins/" method="POST" data-pin-id="">
-        <input type="hidden" name="creator_id" value="<%= userID %>">
-        <input type="hidden" name="map_id" id="pin-mapid">
-        <input type="hidden" name="longitude" id="pin-longitude">
-        <input type="hidden" name="latitude" id="pin-latitude">
-        <input type="text" name="title" class="add-pin" id="pin-title" placeholder="Enter a title" required>
-        <input type="url" name="image_url" class="add-pin" id="pin-img" placeholder="image URL">
-        <textarea class="add-pin" name="description" id="pin-descript" placeholder="and some description"></textarea>
-        <button class="add-pin" id="pin-submit" type="submit">Add Pin</button>
-      </form>
 
     </div>
   </div>
   <!-- <div class="new-map">
     <div id="mapid"></div>
   </div> -->
+  <a id="bottom"></a>
 </body>
 
 </html>

@@ -38,6 +38,9 @@ body {
   color: #373737;
   font-family: "Source Sans Pro", sans-serif;
 }
+.map-list #categories {
+  border: 2px solid #464646;
+}
 .map-list h2 {
   margin-top: 0;
   margin-bottom: 0.5rem;
@@ -68,10 +71,11 @@ body {
   transform: scale(1);
 }
 .map-list ul {
+  margin-top: 0.5rem;
   list-style: none;
   padding-left: 0;
   height: 600px;
-  width: 90%;
+  width: 100%;
   overflow: auto;
 }
 .map-list li {
