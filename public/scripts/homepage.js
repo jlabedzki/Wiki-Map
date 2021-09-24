@@ -8,7 +8,7 @@
     $('.new-map-footer').hide();
     $('.current-map-footer').hide();
 
-    $('.new-map').hide();
+    // $('.new-map').hide();
     displayMapByID(currentMapID);
     displayListOfMaps('/maps');
     injectMapIDToForm(currentMapID);
@@ -59,6 +59,7 @@
       setTimeout(() => {
         $('.current-map-header').show();
       }, 500);
+      mymap.off('click');
     })
 
     //filter discover page by category feature
@@ -83,8 +84,6 @@
       markerData = {};
       markerGroup.clearLayers();
       currentMapID = undefined;
-      $('.map-overlay h2').hide();
-      $('.main-container').css('margin-top', '1rem');
     })
 
     $('#edit').on('click', () => {
@@ -114,25 +113,16 @@
     for (const keyValue of mapArr) {
       mapObj[keyValue.name] = keyValue.value;
     }
-
-    console.log(mapObj);
-
+    // $('#title').text(`${mapObj.title}`)
     // add ajax post request to maps and redirect to homepage
     $.post(`/maps/`, mapObj)
       .then(() => {
-        // window.location.replace('/');
-        console.log('inside post /maps/', mapObj);
         $('.dropdown').show();
-        // $('.current-map-footer').show();
-        // $('.map-list').show();
-        $('current-map-header').show();
+        $('.current-map-header').show();
         $('.new-map-footer').hide();
-        $('.map-overlay h2').show();
+        $('#title').show();
         $('#create-new-map').show();
-        $('.map-list-title').text('My Maps');
         $('#categories').hide();
-        $('.main-container').css('margin-top', '0')
-        // displayListOfMaps('/maps/mymaps');
       })
       .then(() => {
         displayNewlyCreatedMap();
