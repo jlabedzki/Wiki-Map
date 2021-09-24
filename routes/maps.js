@@ -10,6 +10,13 @@ const router = express.Router();
 const queries = require('../lib/queries');
 
 
+router.get('/notloggedin', (req, res) => {
+  queries.listAllMapsNotLoggedIn()
+    .then(maps => {
+      res.send({ maps })
+    });
+})
+
 // GET /maps/
 router.get('/', (req, res) => {
   const userID = req.session.user_id;

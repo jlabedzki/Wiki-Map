@@ -1,19 +1,155 @@
+html {
+  font-size: 25px;
+}
+
+body {
+  background-color: #EEE;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.main-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: auto;
+  z-index: 0;
+}
+
 .map-overlay {
   position: fixed;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
   z-index: 1;
   top: 0;
-  margin-top: 80px;
+  margin-top: 8vh;
+  height: auto;
+  color: #373737;
+  font-family: "Source Sans Pro", sans-serif;
 }
-.map-overlay h2 {
-  color: #464646;
+.map-overlay .current-map-header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
   margin-top: 1rem;
+}
+.map-overlay .current-map-header .add-to-favorites,
+.map-overlay .current-map-header .remove-from-favorites {
+  font-size: 1.5rem;
+  margin-right: 1rem;
+  border: 2px solid #464646;
+  background-color: rgba(238, 238, 238, 0.749);
+  color: #464646;
+}
+.map-overlay .current-map-header .add-to-favorites:hover,
+.map-overlay .current-map-header .remove-from-favorites:hover {
+  transform: scale(1.05);
+  cursor: pointer;
+  background-color: #548fa59b;
+  color: #eee;
+}
+.map-overlay .current-map-header .add-to-favorites:active,
+.map-overlay .current-map-header .remove-from-favorites:active {
+  transform: scale(1);
+}
+.map-overlay #title {
+  margin-top: 0;
+  color: #464646;
   margin-bottom: 0;
   font-family: "Bangers", cursive;
-  padding-left: 0.3rem;
-  padding-right: 0.3rem;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
   padding-top: 0.1rem;
   padding-bottom: 0.1rem;
   letter-spacing: 0.1rem;
-  background-color: #eee;
+  background-color: rgba(238, 238, 238, 0.749);
   border: 2px solid #464646;
+}
+.map-overlay .current-map-footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+  margin-top: 1rem;
+}
+.map-overlay #close-edit-map {
+  border: 2px solid #464646;
+  background-color: transparent;
+  border: none;
+}
+.map-overlay #close-edit-map .fa-window-close {
+  color: #464646;
+  padding-top: -0.2rem;
+}
+.map-overlay #close-edit-map .fa-window-close:hover {
+  cursor: pointer;
+  transform: scale(1.02);
+}
+.map-overlay #edit {
+  font-size: 1.5rem;
+  width: 4rem;
+  margin-left: 1rem;
+  border: 2px solid #464646;
+  background-color: rgba(238, 238, 238, 0.749);
+}
+.map-overlay #edit:hover {
+  cursor: pointer;
+  background-color: #548fa59b;
+  color: #eee;
+}
+.map-overlay #edit:active,
+.map-overlay #close-edit-map:active {
+  transform: scale(0.98);
+}
+.map-overlay .add-pin {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.map-overlay .add-pin .pin-title-image-url {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.map-overlay .add-pin .add-pin-button-holder {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.map-overlay .add-pin input,
+.map-overlay .add-pin textarea,
+.map-overlay .add-pin button {
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
+  background-color: #eee;
+  width: 100%;
+  border: 2px solid #464646;
+}
+.map-overlay .add-pin input {
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+}
+.map-overlay .add-pin textarea {
+  resize: vertical;
+}
+.map-overlay .add-pin button {
+  width: auto;
+  margin-left: 0.2rem;
+  margin-right: 0.2rem;
+}
+.map-overlay .add-pin button:hover {
+  cursor: pointer;
+  background-color: #548fa59b;
+  color: #eee;
+}
+.map-overlay .add-pin button:active {
+  transform: scale(0.98);
 }

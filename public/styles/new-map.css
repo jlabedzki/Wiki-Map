@@ -23,11 +23,10 @@ body {
 .new-map-footer {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  width: 90%;
-  margin-bottom: 1rem;
+  width: 100%;
+  margin-top: 1rem;
   padding-top: 0.5rem;
   font-family: "Source Sans Pro", sans-serif;
   color: #373737;
@@ -40,15 +39,16 @@ body {
 .new-map-footer #new-map-form {
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
 }
 .new-map-footer #new-map-form input,
 .new-map-footer #new-map-form select,
 .new-map-footer #new-map-form button {
+  font-size: 1.5rem;
   margin-left: 0.5rem;
   margin-right: 0.5rem;
+  background-color: rgba(238, 238, 238, 0.749);
   border: 2px solid #464646;
 }
 .new-map-footer #new-map-form button:hover {

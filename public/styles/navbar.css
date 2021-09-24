@@ -89,6 +89,9 @@ nav {
 .nav-container .dropdown-content button:active {
   font-size: 0.75rem;
 }
+.nav-container .dropdown-content #discover-not-logged-in {
+  border: 3px solid #464646;
+}
 .nav-container .dropdown-content #discover {
   border-right: 3px solid #464646;
   border-left: 3px solid #464646;
