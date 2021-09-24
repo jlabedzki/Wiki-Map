@@ -36,7 +36,7 @@ body {
   padding: 0;
 }
 .current-map #current-mapid {
-  height: 100vh;
+  height: 92vh;
   width: 100%;
 }
 .current-map .add-to-favorites,

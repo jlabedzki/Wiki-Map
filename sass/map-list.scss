@@ -8,7 +8,8 @@
   z-index: 9;
   position: fixed;
   left: 0;
-  height: 100%;
+  margin-top: 8vh;
+  height: 92vh;
   width: 20vw;
   border-radius: 2px;
   padding: 0.5rem;
@@ -73,7 +74,7 @@
     margin-top: 0.5rem;
     list-style: none;
     padding-left: 0;
-    height: 600px;
+    height: 90%;
     width: 100%;
     overflow: auto;
   }
