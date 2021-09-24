@@ -78,6 +78,7 @@
     // $('#categories option:selected').text();
     const $createMap = $('#create-new-map');
     $createMap.click(() => {
+      tempMarker.remove();
       $('.new-map-footer').show();
       $('.current-map-footer').hide();
       $('.dropdown').hide();
