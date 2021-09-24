@@ -59,6 +59,7 @@
       setTimeout(() => {
         $('.current-map-header').show();
       }, 500);
+      $('#current-mapid').removeClass('cursor-toggle');
       mymap.off('click');
     })
 
