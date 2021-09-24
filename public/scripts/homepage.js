@@ -87,6 +87,7 @@
     })
 
     $('#edit').on('click', () => {
+      cursorAddToggle();
       mymap.on('click', onMapClick);
       $('.current-map-header').hide();
       $('.current-map-footer').slideDown(450);
@@ -297,11 +298,17 @@
   };
 
 
-  const myIcon = L.divIcon({ iconAnchor: [9, 32], className: 'fas fa-hand-point-down' });
+  const myIcon = L.divIcon({ iconAnchor: [15, 15], className: 'fas fa-crosshairs' });
   let tempMarker = L.marker(null, { icon: myIcon });
 
 
+  const cursorAddToggle = function() {
+      $('#current-mapid').addClass('cursor-toggle');
+  }
+
   function onMapClick(e) {
+
+
 
     tempMarker
       .setLatLng(e.latlng)
@@ -316,6 +323,7 @@
     $('#pin-submit').html('Add Pin');
     $('#pin-submit').off('click');
     $('.add-pin').off('submit');
+
 
     $('.add-pin').on('submit', function (event) {
       event.preventDefault();
@@ -360,11 +368,15 @@
   }
 
   const pinSubmit = function (pinObject) {
+
+    $('#current-mapid').removeClass('cursor-toggle');
+
     mymap.off('click');
     $('.current-map-footer').hide();
 
     $('.current-map-header').show();
     $('.map-overlay h2').show();
+
     const pinID = pinObject.id;
     const mapID = pinObject.map_id;
     const creatorID = pinObject.creator_id;
@@ -424,6 +436,7 @@
         $('#pin-img').val('');
         $('.add-pin').prop('disabled', true);
         $(this).remove();
+
       });
 
       $('.add-pin').off('submit');
@@ -434,6 +447,7 @@
         $('#pin-longitude').val(longitude)
         $('#pin-latitude').val(latitude);
         $('#pin-mapid').val(mapID);
+
 
 
         const pinArr = $(this).serializeArray();
