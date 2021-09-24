@@ -75,7 +75,7 @@
     const $createMap = $('#create-new-map');
     $createMap.click(() => {
       $('.new-map-footer').show();
-      $('current-map-footer').hide();
+      $('.current-map-footer').hide();
       $('.dropdown').hide();
       $('.current-map-header').hide();
       $('.map-list').hide();
@@ -302,8 +302,8 @@
   let tempMarker = L.marker(null, { icon: myIcon });
 
 
-  const cursorAddToggle = function() {
-      $('#current-mapid').addClass('cursor-toggle');
+  const cursorAddToggle = function () {
+    $('#current-mapid').addClass('cursor-toggle');
   }
 
   function onMapClick(e) {
