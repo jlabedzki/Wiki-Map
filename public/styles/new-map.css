@@ -1,5 +1,5 @@
 html {
-  font-size: 30px;
+  font-size: 25px;
 }
 
 body {
@@ -13,18 +13,11 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: flex-start;
-  width: 90%;
-  height: 100%;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: auto;
   z-index: 0;
-}
-.main-container .map-list {
-  width: 30%;
-}
-.main-container .current-map {
-  width: 70%;
 }
 
 .new-map-footer {
