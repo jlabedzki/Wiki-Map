@@ -94,7 +94,8 @@ body {
 }
 .map-list li:hover {
   cursor: pointer;
-  box-shadow: 5px 5px 0 0 #548fa59b;
+  background-color: #548fa59b;
+  color: #eee;
 }
 .map-list li:active {
   transform: scale(0.98);
