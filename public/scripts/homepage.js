@@ -167,9 +167,9 @@
     }
 
     $.post('/favorites/', favObj)
-    // .then(() => {
-    //   // displayListOfMaps('/maps');
-    // })
+      .then(() => {
+        displayListOfMaps('/maps');
+      })
     $(this).slideUp('slow');
   };
 
