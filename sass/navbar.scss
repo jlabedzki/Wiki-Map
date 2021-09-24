@@ -2,7 +2,13 @@ $fontColor: #EEE;
 $logoFont: 'Bangers', cursive;
 $buttonFont: 'Source Sans Pro', sans-serif;
 
+
 .nav-container {
+
+nav {
+  position: fixed;
+  z-index: 10;
+
   display: flex;
   flex-direction: row;
   justify-content: space-between;
@@ -30,7 +36,10 @@ $buttonFont: 'Source Sans Pro', sans-serif;
     padding: 0.5rem;
     display: flex;
     flex-direction: row;
+
     margin-right: 1rem;
+
+
   }
 
   .nav-left {

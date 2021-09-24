@@ -1,5 +1,6 @@
 @use 'layout' as l;
 
+
 .new-map-footer {
   display: flex;
   flex-direction: row;
@@ -12,11 +13,12 @@
   font-family: l.$mainFont;
   color: l.$fontColor;
 
-  #mapid {
-    height: 200px;
-    width: 90%;
-    resize: vertical;
-  }
+
+//   #mapid {
+//     height: 200px;
+//     width: 90%;
+//     resize: vertical;
+//   }
 
   #new-map-form {
     display: flex;

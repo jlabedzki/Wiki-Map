@@ -4,18 +4,15 @@ html {
 
 body {
   background-color: #EEE;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
 .main-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  width: 90%;
+  width: 100%;
   height: 100%;
+
   margin-top: 2rem;
   margin-bottom: 1rem;
   z-index: 0;
@@ -50,6 +47,9 @@ body {
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: flex-start;
+
+  z-index: 0;
+
 }
 .new-map-footer #new-map-form input,
 .new-map-footer #new-map-form select,

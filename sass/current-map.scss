@@ -1,8 +1,11 @@
 @use 'layout' as l;
 
 .current-map {
+
   display: flex;
   flex-direction: column;
+
+/*
   justify-content: center;
   align-items: center;
   margin-left: 1rem;
@@ -122,7 +125,180 @@
 
     button:active {
       transform: scale(0.98);
+
+*/
+  
+  width: 100%;
+
+  h2#map-title {
+    display: none;
+  }
+
+  #current-mapid {
+    height: 100vh;
+    width: 100vw;
+    z-index: 5;
+    // display: none;
+  }
+
+  .current-map-footer {
+    position: fixed;
+    margin: auto;
+    width: fit-content;
+    top: 77vh;
+    left: 0;
+    right: 0;
+    z-index: 20;
+    display: flex;
+    flex-direction: column;
+    // width: auto;
+
+    #add-to-favorites {
+      font-size: 1.5rem;
+      border: none;
+      background-color: none;
+      display: none;
+    }
+    #add-to-favorites:hover {
+      transform: scale(1.05);
+      cursor: pointer;
+    }
+    #add-to-favorites:active {
+      transform: scale(1);
+    }
+
+    .add-pin {
+      width: fit-content;
+      margin: auto;
+      display: none;
+      flex-direction: column;
+      align-items: center;
+
+        #pin-title, #pin-descript, #pin-img {
+          font-size: 1.2em;
+          width: 12em;
+          margin-bottom: 0.6em;
+          opacity: 0.80;
+          background-color: rgba(149, 235, 162, 0.832);
+          border-style: none;
+          border-radius: 5px;
+          resize: none;
+          overflow: hidden;
+        }
+
+        #pin-title:focus, #pin-descript:focus, #pin-img:focus {
+          background-color: white;
+          opacity: 0.8;
+          border-style: none;
+          overflow: auto;
+          outline-color: green;
+        }
+
+        #pin-title, #pin-img {
+          height: 2em;
+        }
+        #pin-descript {
+          height: 4em;
+        }
+
+        #pin-title {
+          font-weight: bold;
+        }
+
+        #pin-title::placeholder {
+          font-weight: normal;
+        }
+
+        .submit-buttons {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          justify-content: space-evenly;
+
+          button {
+            color: #FFFFFF;
+            background: #48900a;
+            opacity: 0.9;
+            border: solid transparent;
+            border-radius: 2px;
+          }
+
+          button#pin-delete {
+            background: #dc0d0d;
+          }
+
+          button:hover {
+            outline: none;
+            border-color: #9ecaed;
+            box-shadow: 0 0 5px #9ecaed;
+            border-radius: 2px;
+            cursor: pointer;
+          }
+        }
+
     }
   }
 }
 
+// @use 'layout' as l;
+
+// .current-map {
+
+//   display: flex;
+//   flex-direction: column;
+//   align-items: center;
+//   border-left: 2px solid rgb(70,70,70);
+//   font-family: l.$mainFont;
+//   color: l.$fontColor;
+//   width: 100vw;
+//   height: 100vh;
+
+//   h2 {
+//     margin-top: 0;
+//     font-family: 'Bangers', cursive;
+//     padding-left: 0.3rem;
+//     padding-right: 0.3rem;
+//     padding-top: 0.1rem;
+//     padding-bottom: 0.1rem;
+//     letter-spacing: 0.1rem;
+//     display: hidden;
+//   }
+
+//   #current-mapid {
+//     height: 100vh;
+//     width: 100vw;
+//     z-index: 5;
+//   }
+
+//   .current-map-footer {
+//     position: fixed;
+//     z-index: 20;
+//     // display: none;
+
+//     #add-to-favorites {
+//       font-size: 1.5rem;
+//       border: none;
+//       background-color: none;
+//     }
+
+//     #add-to-favorites:hover {
+//       transform: scale(1.05);
+//       cursor: pointer;
+//     }
+
+//     #add-to-favorites:active {
+//       transform: scale(1);
+//     }
+
+//     .add-pin {
+//       bottom: 100px;
+//       position: fixed;
+//       display: flex;
+//       flex-direction: column;
+
+//       .add-pin-form {
+//         z-index: 30;
+//       }
+//     }
+//   }
+// }

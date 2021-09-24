@@ -4,18 +4,15 @@ html {
 
 body {
   background-color: #EEE;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
+  overflow: hidden;
+  width: 100%;
+  height: 100%;
 }
 
 .main-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: flex-start;
-  width: 90%;
+  width: 100%;
   height: 100%;
+
   margin-top: 2rem;
   margin-bottom: 1rem;
   z-index: 0;
@@ -25,52 +22,49 @@ body {
 }
 .main-container .current-map {
   width: 70%;
+
+  z-index: 0;
+
 }
 
+.map-list ul {
+  padding: 0;
+}
 .map-list {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
   height: 100%;
-  border-radius: 2px;
-  padding: 0.5rem;
-  color: #373737;
-  font-family: "Source Sans Pro", sans-serif;
+  width: 0;
+  top: 0;
+  left: 0;
+  background-color: #f7b437;
+  opacity: 0.9;
+  overflow-x: hidden;
+  transition: 1s;
+  padding-top: 60px;
+  position: fixed;
+  z-index: 9;
 }
 .map-list #categories {
   border: 2px solid #464646;
 }
 .map-list h2 {
-  margin-top: 0;
+  margin-top: 1em;
   margin-bottom: 0.5rem;
   font-family: "Bangers", cursive;
   letter-spacing: 0.1rem;
 }
-.map-list .map-list-buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  align-items: center;
-  align-self: flex-start;
-}
-.map-list button {
-  padding: 0.3rem;
-  border: none;
-  background-color: none;
-  font-family: "Source Sans Pro", sans-serif;
-  color: #416ef6;
-  font-weight: bold;
-  font-size: 14px;
-}
-.map-list button:hover {
-  transform: scale(1.05);
-  cursor: pointer;
-}
-.map-list button:active {
-  transform: scale(1);
+.map-list .closebtn {
+  align-self: flex-end;
+  margin-top: 4em;
+  margin-right: 2em;
+  position: absolute;
+  top: 0;
 }
 .map-list ul {
+
   margin-top: 0.5rem;
   list-style: none;
   padding-left: 0;
@@ -92,4 +86,19 @@ body {
 }
 .map-list li:active {
   transform: scale(0.98);
+
+  list-style-type: none;
+}
+.map-list ul li {
+  padding: 0.5em 1em 0em 1em;
+  text-decoration: none;
+  font-size: 1.2em;
+  color: #223172;
+  display: block;
+  transition: 0.1s;
+  font-family: arial;
+}
+.map-list ul li:hover {
+  color: #f1f1f1;
+
 }

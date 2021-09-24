@@ -80,9 +80,9 @@
   </nav>
 
   <div class="main-container">
-    <div class="map-list">
+    <div id="map-sidenav" class="map-list">
+      <a class="closebtn">&times;</a>
       <h2 class="map-list-title">Discover</h2>
-
       <select name="categories" id="categories">
         <option value="" disabled selected>Filter by category</option>
         <option value="entertainment">Entertainment</option>
@@ -99,7 +99,8 @@
     </div>
 
     <div class="current-map">
-      <h2>Map of the day</h2>
+
+      <h2 id="map-title">Map of the day</h2>
       <div class="new-map-footer">
         <form action="/maps/" method="POST" id="new-map-form">
           <input type="hidden" name="creator_id" value="<%= userID %>" required>
@@ -151,22 +152,20 @@
           <input type="hidden" name="map_id" id="pin-mapid">
           <input type="hidden" name="longitude" id="pin-longitude">
           <input type="hidden" name="latitude" id="pin-latitude">
-          <input type="text" name="title" class="add-pin" id="pin-title" placeholder="Pin title" required>
-          <input type="url" name="image_url" class="add-pin" id="pin-img" placeholder="Image URL">
-          <textarea class="add-pin" name="description" id="pin-descript" placeholder="Description"></textarea>
-          <div class="add-pin-button-holder">
-            <button class="add-pin" id="pin-submit" type="submit">Add Pin</button>
 
+          <div class="add-pin-form add-pin-button-holder"></div>
+            <input type="text" name="title" class="add-pin" id="pin-title" placeholder="Enter a title" required>
+            <textarea class="add-pin" name="description" id="pin-descript" placeholder="Description"></textarea>
+            <input type="url" name="image_url" class="add-pin" id="pin-img" placeholder="Image link">
+            <div class="submit-buttons">
+              <button class="add-pin" id="pin-submit" type="submit">Add Pin</button>
+            </div>
           </div>
         </form>
       </div>
-
     </div>
   </div>
-  <!-- <div class="new-map">
-    <div id="mapid"></div>
-  </div> -->
-  <a id="bottom"></a>
+
 </body>
 
 </html>

@@ -19,23 +19,74 @@
     //map list buttons
     $('#favorites').click(() => {
       $('.map-list-title').text('Favorites');
-      $('#categories').hide();
-      displayListOfMaps('/favorites/');
+
+      $('ul').empty();
+      if ($('#map-sidenav').css('width') !== '0px') {
+        displayListOfMaps('/favorites');
+      }
+
+      $("#map-sidenav").on("transitionend", function() {
+        $('.map-list-title, #categories').fadeIn(100);
+        displayListOfMaps('/favorites');
+        $(this).off();
+     });
+
+      openNav();
     });
+
     $('#my-maps').click(() => {
       $('.map-list-title').text('My Maps');
-      $('#categories').hide();
-      displayListOfMaps('/maps/mymaps');
+      $('ul').empty();
+      if ($('#map-sidenav').css('width') !== '0px') {
+        displayListOfMaps('/maps/mymaps');
+
+      }
+      $("#map-sidenav").on("transitionend", function() {
+        $('.map-list-title, #categories').fadeIn(100);
+        displayListOfMaps('/maps/mymaps');
+        $(this).off();
+     });
+
+      openNav();
     });
     $('#my-contributions').click(() => {
       $('.map-list-title').text('Contributions');
-      $('#categories').hide();
-      displayListOfMaps('/maps/contributions');
+
+      $('ul').empty();
+      if ($('#map-sidenav').css('width') !== '0px') {
+        displayListOfMaps('/maps/contributions');
+
+      }
+      $("#map-sidenav").on("transitionend", function() {
+        $('.map-list-title, #categories').fadeIn(100);
+        displayListOfMaps('/maps/contributions');
+        $(this).off();
+      });
+
+      openNav();
+
     });
     $('#discover').click(() => {
       $('#categories').show();
       $('.map-list-title').text('Discover');
+
+      $('ul').empty();
+      if ($('#map-sidenav').css('width') !== '0px') {
+        displayListOfMaps('/maps');
+
+      }
+      $("#map-sidenav").on("transitionend", function() {
+        $('.map-list-title, #categories').fadeIn(100);
+        displayListOfMaps('/maps');
+        $(this).off();
+      });
+
       displayListOfMaps('/maps');
+      openNav();
+    });
+
+    $('.closebtn').on('click', function() {
+      closeNav();
     });
 
     //filter discover page by category feature
@@ -79,6 +130,16 @@
   let markerData = {};
   let markers = {};
   const coordDatabase = { url: undefined };
+
+
+  const openNav = function() {
+    $('#map-sidenav').css('width', '30em')
+  }
+  const closeNav = function() {
+    $('.map-list-title, #categories').hide();
+    $('ul').empty();
+    $('#map-sidenav').css('width', '0px')
+  }
 
 
   const createNewMap = function (e) {
@@ -229,7 +290,9 @@
             displayMapByID(currentMapID);
             mymap.on('load', function() {
               displayPinsByMapID(currentMapID);
+
             });
+
           });
           counter++;
         }
@@ -292,6 +355,9 @@
       .addTo(mymap);
 
     $('.add-pin').prop('disabled', false);
+    $('.add-pin').fadeIn(500);
+    $('.add-pin').attr('style', 'display:flex');
+    $('#pin-title').focus();
     $('#pin-title').val('');
     $('#pin-descript').val('');
     $('#pin-img').val('');
@@ -373,6 +439,7 @@
     $('#pin-title').val('');
     $('#pin-descript').val('');
     $('#pin-img').val('');
+    $('.add-pin').fadeOut(500);
     $('.add-pin').prop('disabled', true);
 
     if (firstLoad || !markerData[pinID].pinID) {
@@ -387,15 +454,20 @@
 
       tempMarker.remove();
       markers[pinID].openPopup();
-
-      $('.add-pin').prop('disabled', false);
+      $('#pin-delete').remove();
       $('.add-pin button').text('Edit Pin');
+      $('<button class="add-pin" id="pin-delete" type="button">Delete Pin</button>').insertBefore('#pin-submit');
+      $('.add-pin').prop('disabled', false);
+      $('.add-pin').fadeIn(500);
+      $('.add-pin').attr('style', 'display:flex');
+      $('#pin-title').focus();
+
       $('form .add-pin').data('pin-id', `${pinID}`)
       $('#pin-title').val(`${pinTitle}`);
       $('#pin-descript').val(`${pinDescript}`);
       $('#pin-img').val(`${pinImg}`);
-      $('#pin-delete').remove();
-      $('<button class="add-pin" id="pin-delete" type="button">Delete Pin</button>').insertAfter('#pin-submit');
+
+
 
       // DELETE BUTTON
       $('#pin-delete').on('click', function () {
@@ -405,8 +477,9 @@
         $('#pin-title').val('');
         $('#pin-descript').val('');
         $('#pin-img').val('');
+        $('.add-pin').fadeOut(500);
         $('.add-pin').prop('disabled', true);
-        $(this).remove();
+        // $(this).remove();
       });
 
       $('.add-pin').off('submit');
@@ -431,7 +504,7 @@
 
             pinSubmit(returnedPin.pin);
           })
-        $('#pin-delete').remove();
+        // $('#pin-delete').remove();
       });
     });
   };
