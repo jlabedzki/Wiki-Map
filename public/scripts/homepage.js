@@ -59,6 +59,9 @@
       setTimeout(() => {
         $('.current-map-header').show();
       }, 500);
+      ///////// Bug Fix #1
+      tempMarker.remove();
+      /////////
       $('#current-mapid').removeClass('cursor-toggle');
       mymap.off('click');
     })
