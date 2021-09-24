@@ -1,5 +1,5 @@
 html {
-  font-size: 30px;
+  font-size: 25px;
 }
 
 body {
@@ -13,18 +13,11 @@ body {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: flex-start;
-  width: 90%;
-  height: 100%;
-  margin-top: 2rem;
-  margin-bottom: 1rem;
+  align-items: center;
+  position: relative;
+  width: 100%;
+  height: auto;
   z-index: 0;
-}
-.main-container .map-list {
-  width: 30%;
-}
-.main-container .current-map {
-  width: 70%;
 }
 
 .map-list {
@@ -32,11 +25,29 @@ body {
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  z-index: 9;
+  position: fixed;
+  left: 0;
   height: 100%;
+  width: 20vw;
   border-radius: 2px;
   padding: 0.5rem;
   color: #373737;
   font-family: "Source Sans Pro", sans-serif;
+  background-color: #eee;
+  box-shadow: 4px 4px 4px -1px #646464;
+}
+.map-list .map-list-header {
+  display: flex;
+  flex-direction: row;
+  width: 100%;
+  justify-content: space-between;
+}
+.map-list .map-list-header button {
+  align-self: flex-start;
+  color: #464646;
+  padding-top: 0;
+  font-size: 1rem;
 }
 .map-list #categories {
   border: 2px solid #464646;

@@ -2,12 +2,16 @@ $fontColor: #EEE;
 $logoFont: 'Bangers', cursive;
 $buttonFont: 'Source Sans Pro', sans-serif;
 
+nav {
+  z-index: 2;
+}
+
 .nav-container {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  height: auto;
+  height: 80px;
   width: 100vw;
   background-image: url('/images/black-linen-2.png');
   background-color: rgb(70, 70, 70);

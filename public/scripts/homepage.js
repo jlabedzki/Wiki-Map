@@ -4,6 +4,7 @@
     $('.logo').click(() => {
       window.location.replace('/');
     })
+    $('.map-list').hide();
     $('.new-map-footer').hide();
     $('.add-pin').hide();
 
@@ -20,23 +21,32 @@
     $('#favorites').click(() => {
       $('.map-list-title').text('Favorites');
       $('#categories').hide();
+      $('.map-list').fadeIn('fast');
       displayListOfMaps('/favorites/');
     });
     $('#my-maps').click(() => {
       $('.map-list-title').text('My Maps');
       $('#categories').hide();
+      $('.map-list').fadeIn('fast');
       displayListOfMaps('/maps/mymaps');
     });
     $('#my-contributions').click(() => {
       $('.map-list-title').text('Contributions');
       $('#categories').hide();
+      $('.map-list').fadeIn('fast');
       displayListOfMaps('/maps/contributions');
     });
     $('#discover').click(() => {
       $('#categories').show();
       $('.map-list-title').text('Discover');
+      $('.map-list').fadeIn('fast');
       displayListOfMaps('/maps');
     });
+
+    //close map-list button
+    $('#close-map-list').click(() => {
+      $('.map-list').fadeOut('fast');
+    })
 
     //filter discover page by category feature
     $('#categories').on('change', (e) => {
@@ -60,7 +70,7 @@
       markerData = {};
       markerGroup.clearLayers();
       currentMapID = undefined;
-      $('.current-map h2').hide();
+      $('.map-overlay h2').hide();
       $('.main-container').css('margin-top', '1rem');
     })
 
@@ -101,13 +111,14 @@
         console.log('inside post /maps/', mapObj);
         $('.dropdown').show();
         $('.current-map-footer').show();
-        $('.map-list').show();
+        // $('.map-list').show();
         $('.new-map-footer').hide();
-        $('.current-map h2').show();
+        $('.map-overlay h2').show();
         $('#create-new-map').show();
         $('.map-list-title').text('My Maps');
         $('#categories').hide();
-        displayListOfMaps('/maps/mymaps');
+        $('.main-container').css('margin-top', '0')
+        // displayListOfMaps('/maps/mymaps');
       })
       .then(() => {
         displayNewlyCreatedMap();
@@ -131,7 +142,7 @@
       currentMapID = data.maps[0].id;
       injectMapIDToForm(currentMapID);
       displayMapByID(currentMapID);
-      $('.current-map h2').text(`${data.maps[0].title}`)
+      $('.map-overlay h2').text(`${data.maps[0].title}`)
     })
   }
 
@@ -221,13 +232,13 @@
             }
 
             //replace "Map of the day" with the map title
-            $('.current-map h2').text(`${map.title}`);
+            $('.map-overlay h2').text(`${map.title}`);
 
             mymap.remove();
             currentMapID = $(this).val();
             injectMapIDToForm(currentMapID);
             displayMapByID(currentMapID);
-            mymap.on('load', function() {
+            mymap.on('load', function () {
               displayPinsByMapID(currentMapID);
             });
           });

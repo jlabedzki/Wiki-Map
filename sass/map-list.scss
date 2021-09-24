@@ -5,11 +5,31 @@
   flex-direction: column;
   justify-content: flex-start;
   align-items: flex-start;
+  z-index: 9;
+  position: fixed;
+  left: 0;
   height: 100%;
+  width: 20vw;
   border-radius: 2px;
   padding: 0.5rem;
   color: l.$fontColor;
   font-family: l.$mainFont;
+  background-color: #eee;
+  box-shadow: 4px 4px 4px -1px rgb(100, 100, 100);
+
+  .map-list-header{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+
+    button {
+      align-self: flex-start;
+      color: rgb(70, 70, 70);
+      padding-top: 0;
+      font-size: 1rem;
+    }
+  }
 
   #categories {
     border: 2px solid rgb(70, 70, 70);
