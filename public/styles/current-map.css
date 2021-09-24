@@ -39,6 +39,13 @@ body {
   height: 92vh;
   width: 100%;
 }
+.current-map #current-mapid .leaflet-marker-icon {
+  font-size: 2.5em;
+  color: #226a87;
+}
+.current-map .cursor-toggle:hover {
+  cursor: default;
+}
 .current-map .add-to-favorites,
 .current-map .remove-from-favorites {
   font-size: 1.5rem;
