@@ -54,19 +54,23 @@
         <% if (userID) { %>
           <button id="create-new-map"><strong>Create</strong> new map
             <i class="fas fa-map-marker-alt"></i></button>
-          <!-- </div> -->
-          <div class="dropdown">
-            <button class="dropdown-button">MAPS
-              <i class="fa fa-caret-down"></i>
-            </button>
-            <div class="dropdown-content">
-              <button id="discover">Discover</button>
-              <button id="favorites">Favorites</button>
-              <button id="my-maps">My Maps</button>
-              <button id="my-contributions">Contributions</button>
-            </div>
-          </div>
           <% } %>
+            <div class="dropdown">
+              <button class="dropdown-button">MAPS
+                <i class="fa fa-caret-down"></i>
+              </button>
+              <div class="dropdown-content">
+                <% if (!userID) { %>
+                  <button id="discover-not-logged-in">Discover</button>
+                  <% } %>
+                    <% if (userID) { %>
+                      <button id="discover">Discover</button>
+                      <button id="favorites">Favorites</button>
+                      <button id="my-maps">My Maps</button>
+                      <button id="my-contributions">Contributions</button>
+                      <% } %>
+              </div>
+            </div>
       </div>
       <div class="nav-right">
         <% if (!userID) { %>
@@ -104,31 +108,40 @@
   </div>
   <div class="main-container">
     <div class="current-map">
-      <div class="new-map-footer">
-        <form action="/maps/" method="POST" id="new-map-form">
-          <input type="hidden" name="creator_id" value="<%= userID %>" required>
-          <input type="text" placeholder="Title" name="title" required>
-          <input id="form1" type="hidden" name="longitude_1" required>
-          <input id="form2" type="hidden" name="latitude_1" required>
-          <input id="form3" type="hidden" name="longitude_2" required>
-          <input id="form4" type="hidden" name="latitude_2" required>
-
-          <select name="category" data-dropup-auto="false" required>
-            <option value="" disabled selected>Select a category</option>
-            <option value="entertainment">Entertainment</option>
-            <option value="food_and_drink">Food & Drink</option>
-            <option value="shopping">Shopping</option>
-            <option value="services">Services</option>
-            <option value="outdoor_activites">Outdoor Activities</option>
-            <option value="other">Other</option>
-          </select>
-
-          <button type="submit">Create</button>
-        </form>
-      </div>
       <div id="current-mapid"></div>
-      <!-- <div class="current-map-footer">
+    </div>
+  </div>
 
+
+  <div class="map-overlay">
+    <div class="new-map-footer">
+      <form action="/maps/" method="POST" id="new-map-form">
+        <input type="hidden" name="creator_id" value="<%= userID %>" required>
+        <input type="text" placeholder="Title" name="title" required>
+        <input id="form1" type="hidden" name="longitude_1" required>
+        <input id="form2" type="hidden" name="latitude_1" required>
+        <input id="form3" type="hidden" name="longitude_2" required>
+        <input id="form4" type="hidden" name="latitude_2" required>
+
+        <select name="category" data-dropup-auto="false" required>
+          <option value="" disabled selected>Select a category</option>
+          <option value="entertainment">Entertainment</option>
+          <option value="food_and_drink">Food & Drink</option>
+          <option value="shopping">Shopping</option>
+          <option value="services">Services</option>
+          <option value="outdoor_activites">Outdoor Activities</option>
+          <option value="other">Other</option>
+        </select>
+
+        <button type="submit">Create</button>
+      </form>
+    </div>
+
+
+
+
+    <div class="current-map-header">
+      <% if (userID) { %>
         <div class="favorites-wrapper">
           <form action="/favorites/" method="POST" id="add-to-favorites">
             <input type="hidden" name="user_id" value="<%= userID %>" required>
@@ -146,64 +159,33 @@
             </button>
           </form>
         </div>
-        <button id="edit">Edit</button>
-
-        <form class="add-pin" action="/pins/" method="POST" data-pin-id="">
-          <input type="hidden" name="creator_id" value="<%= userID %>">
-          <input type="hidden" name="map_id" id="pin-mapid">
-          <input type="hidden" name="longitude" id="pin-longitude">
-          <input type="hidden" name="latitude" id="pin-latitude">
-          <input type="text" name="title" class="add-pin" id="pin-title" placeholder="Pin title" required>
-          <input type="url" name="image_url" class="add-pin" id="pin-img" placeholder="Image URL">
-          <textarea class="add-pin" name="description" id="pin-descript" placeholder="Description"></textarea>
-          <div class="add-pin-button-holder">
-            <button class="add-pin" id="pin-submit" type="submit">Add Pin</button>
-
-          </div>
-        </form>
-      </div> -->
-
+        <% } %>
+          <h2>Map of the day: Best Groomers In Town</h2>
+          <% if (userID) { %>
+            <button id="edit">Edit</button>
     </div>
-  </div>
 
-
-  <div class="map-overlay">
-    <h2>Map of the day</h2>
     <div class="current-map-footer">
-
-      <div class="favorites-wrapper">
-        <form action="/favorites/" method="POST" id="add-to-favorites">
-          <input type="hidden" name="user_id" value="<%= userID %>" required>
-          <input type="hidden" name="map_id" id="favorites-mapid" required>
-          <button class="add-to-favorites" type="submit">
-            <i class="far fa-thumbs-up"></i>
-          </button>
-        </form>
-
-        <form action="/favorites/delete" method="POST" id="remove-from-favorites">
-          <input type="hidden" name="user_id" value="<%= userID %>" required>
-          <input type="hidden" name="map_id" id="remove-from-favorites-mapid" required>
-          <button class="remove-from-favorites" type="submit">
-            <i class="fas fa-thumbs-up"></i>
-          </button>
-        </form>
-      </div>
-      <button id="edit">Edit</button>
-
       <form class="add-pin" action="/pins/" method="POST" data-pin-id="">
         <input type="hidden" name="creator_id" value="<%= userID %>">
         <input type="hidden" name="map_id" id="pin-mapid">
         <input type="hidden" name="longitude" id="pin-longitude">
         <input type="hidden" name="latitude" id="pin-latitude">
-        <input type="text" name="title" class="add-pin" id="pin-title" placeholder="Pin title" required>
-        <input type="url" name="image_url" class="add-pin" id="pin-img" placeholder="Image URL">
+        <div class="pin-title-image-url">
+          <input type="text" name="title" class="add-pin" id="pin-title" placeholder="Pin title" required>
+          <input type="url" name="image_url" class="add-pin" id="pin-img" placeholder="Image URL">
+        </div>
         <textarea class="add-pin" name="description" id="pin-descript" placeholder="Description"></textarea>
         <div class="add-pin-button-holder">
           <button class="add-pin" id="pin-submit" type="submit">Add Pin</button>
-
         </div>
       </form>
+      <button id="close-edit-map">
+        <i class="far fa-window-close"></i>
+      </button>
+      <% } %>
     </div>
+
   </div>
 
 

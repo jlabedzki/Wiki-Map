@@ -6,7 +6,7 @@
     })
     $('.map-list').hide();
     $('.new-map-footer').hide();
-    $('.add-pin').hide();
+    $('.current-map-footer').hide();
 
     $('.new-map').hide();
     displayMapByID(currentMapID);
@@ -42,10 +42,23 @@
       $('.map-list').fadeIn('fast');
       displayListOfMaps('/maps');
     });
+    $('#discover-not-logged-in').click(() => {
+      $('#categories').show();
+      $('.map-list-title').text('Discover');
+      $('.map-list').fadeIn('fast');
+      displayListOfMaps('/maps/notloggedin');
+    });
 
     //close map-list button
     $('#close-map-list').click(() => {
       $('.map-list').fadeOut('fast');
+    })
+
+    $('#close-edit-map').click(() => {
+      $('.current-map-footer').slideUp(450);
+      setTimeout(() => {
+        $('.current-map-header').show();
+      }, 500);
     })
 
     //filter discover page by category feature
@@ -61,9 +74,9 @@
     const $createMap = $('#create-new-map');
     $createMap.click(() => {
       $('.new-map-footer').show();
-      $('.add-pin').hide();
+      $('current-map-footer').hide();
       $('.dropdown').hide();
-      $('.current-map-footer').hide();
+      $('.current-map-header').hide();
       $('.map-list').hide();
       $createMap.hide();
       markers = {};
@@ -76,8 +89,8 @@
 
     $('#edit').on('click', () => {
       mymap.on('click', onMapClick);
-      $('.add-pin').show();
-      $('#edit').hide();
+      $('.current-map-header').hide();
+      $('.current-map-footer').slideDown(450);
     })
     //document ready ends
   });
@@ -110,8 +123,9 @@
         // window.location.replace('/');
         console.log('inside post /maps/', mapObj);
         $('.dropdown').show();
-        $('.current-map-footer').show();
+        // $('.current-map-footer').show();
         // $('.map-list').show();
+        $('current-map-header').show();
         $('.new-map-footer').hide();
         $('.map-overlay h2').show();
         $('#create-new-map').show();
@@ -157,9 +171,9 @@
     }
 
     $.post('/favorites/', favObj)
-      .then(() => {
-        displayListOfMaps('/maps');
-      })
+    // .then(() => {
+    //   // displayListOfMaps('/maps');
+    // })
     $(this).slideUp('slow');
   };
 
@@ -180,6 +194,7 @@
     })
       .then(() => {
         displayListOfMaps('/favorites/');
+        // $('.map-list').hide();
         $('#remove-from-favorites').slideUp('slow');
       });
   }
@@ -356,9 +371,10 @@
 
   const pinSubmit = function (pinObject) {
     mymap.off('click');
-    $('.add-pin').hide();
+    $('.current-map-footer').hide();
 
-    $('#edit').show();
+    $('.current-map-header').show();
+    $('.map-overlay h2').show();
     const pinID = pinObject.id;
     const mapID = pinObject.map_id;
     const creatorID = pinObject.creator_id;
