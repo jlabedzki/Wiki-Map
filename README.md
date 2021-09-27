@@ -1,6 +1,6 @@
 # Wiki Map
 
-Wiki Map is a single-page application where users can create, edit, share, and favorite maps. They can categorize a map and place descriptive pins on their favorite locations. Users can also collaborate and add/edit pins on maps they didn't creat themselves.
+Wiki Map is a single-page application where users can create, edit, share, and favorite maps. They can categorize a map and place descriptive pins on their favorite locations. Users can also collaborate and add/edit pins on maps that other users created.
 
 This project was made using:
   - Front end:
@@ -54,3 +54,13 @@ This project was created and published for our midterm project as part of our le
 - Add a favorited counter for each map.
 
 ## Final Product
+
+!["Screenshot of creating a map"](https://github.com/jlabedzki/Wiki-Map/blob/master/docs/create%20map.gif?raw=true)
+
+!["Screenshot of creating a pin"](https://github.com/jlabedzki/Wiki-Map/blob/master/docs/Create%20pin.gif?raw=true)
+
+!["Screenshot of removing a pin"](https://github.com/jlabedzki/Wiki-Map/blob/master/docs/remove%20pin.gif?raw=true)
+
+!["Screenshot of filtering by category"](https://github.com/jlabedzki/Wiki-Map/blob/master/docs/filter%20by%20category.gif?raw=true)
+
+!["Screenshot favoriting"](https://github.com/jlabedzki/Wiki-Map/blob/master/docs/favoriting.gif?raw=true)
