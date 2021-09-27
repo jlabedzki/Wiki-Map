@@ -1,7 +1,8 @@
 {
   "name": "node-skeleton",
   "version": "1.0.0",
-  "description": "",
+  "description": "A collaborative map building website where authenticated users can place and edit pins on any given map.",
+  "authors": "Yuan Daniel Li, Ricky Darke, Johnny Labedzki",
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

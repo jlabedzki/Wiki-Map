@@ -76,29 +76,4 @@ router.post('/', (req, res) => {
     .then(res.redirect('/'));
 });
 
-// //GET /maps/:id/pins
-// router.get('/:id/pins', (req, res) => {
-//   queries.loadPins(mapID)
-//     .then(pins => res.json(pins));
-// });
-
-// // POST /maps/:id/pin
-// router.post('/:id/pin', (req, res) => {
-//   const userID = 1; // !!VALUE TO BE REPLACED WITH A COOKIE
-//   const pin = { // !!OBJECT TO BE REPLACED WITH req.body
-//     map_id: 1,
-//     creator_id: userID,
-//     title: 'Hello World',
-//     description: "Welcome to Vancouver!",
-//     image_url: null,
-//     longitude: 49.2827,
-//     latitude: -123.1207
-//   }
-
-//   queries.addPin(pin, userId)
-//     .then(res.send('Pin dropped successfully!'))
-//     .then(console.log(pin));
-
-// });
-
 module.exports = router;

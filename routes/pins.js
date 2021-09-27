@@ -7,7 +7,7 @@ router.get('/:id', (req, res) => {
 
   queries.loadPins(mapID)
     .then((pins) => {
-      res.send({pins});
+      res.send({ pins });
     });
 });
 
@@ -15,12 +15,10 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
   const userID = req.session.user_id;
   const pin = req.body;
-  console.log('userID: ', userID);
-  console.log('pini: ', pin);
 
   queries.addPin(pin, userID)
     .then((pin) => {
-      res.send({pin});
+      res.send({ pin });
     });
 })
 
@@ -28,10 +26,9 @@ router.post('/', (req, res) => {
 router.post('/edit/:id', (req, res) => {
   const userID = req.session.user_id;
   const pin = req.body;
-  console.log('pin req.body', pin);
   queries.editPin(pin, userID)
     .then((pin) => {
-      res.send({pin});
+      res.send({ pin });
     });
 })
 
@@ -39,10 +36,9 @@ router.post('/edit/:id', (req, res) => {
 router.post('/delete/:id', (req, res) => {
   const userID = req.session.user_id;
   const pin = req.body;
-  console.log('ROUTES DELETE', pin);
   queries.deletePin(pin, userID)
     .then((pin) => {
-      res.send({pin});
+      res.send({ pin });
     });
 })
 
